@@ -9,40 +9,40 @@ function populate(data) {
 	var topcountries = countries.filter(function findtop(c) {
 		return c.chinaexportsovergdp > .02;
 	})
-	drawgraph('graph1',topcountries,'chinaexports');
-	drawgraph('graph2',topcountries,'chinaexportsovergdp');
+	drawtopcountriesgraph(topcountries);
 };
 
-function drawgraph(graphname,listname,propname) {
+function drawtopcountriesgraph(topcountries) {
 	
 	var width = 420, barHeight = 20;
 
 	var x = d3.scale.linear()
-		.domain([0, d3.max(listname,function(d){return d[propname]})])
+		.domain([0, d3.max(topcountries,function(d){return d.chinaexports})])
 		.range([0, width]);
 
-	var chart = d3.select('#' + graphname)
+	var chart = d3.select('.chart')
 		.attr('width', width)
-		.attr('height', barHeight * listname.length);
+		.attr('height', barHeight * topcountries.length);
 
 	var bar = chart.selectAll('g')
-		.data(listname.sort(function(a,b){return b[propname]-a[propname]}))
+		.data(topcountries.sort(function(a,b){return b.chinaexports-a.chinaexports}))
 		.enter().append('g')
 		.attr("transform", function (d, i) { return "translate(0," + i * barHeight + ")"; });
 
 	bar.append("rect")
 		.attr("width", function(d){
-			return x(d[propname]);
+			return x(d.chinaexports);
 		})
 		.attr("height", barHeight - 1);
 
 	bar.append("text")
-		//.attr("x", function (d) { return x(d[propname]) - 3; })
+		.attr("x", function (d) { return x(d.chinaexports) - 3; })
 		.attr("y", barHeight / 2)
 		.attr("dy", ".35em")
 		.text(function (d) { return d.country; });
 
 };
+
 
 function boot(el) {
 	el.innerHTML = template;
