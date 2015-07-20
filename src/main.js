@@ -24,19 +24,10 @@ function populate(data) {
 	graph1.list = topcountries;
 	graph2.list = topcountries;
 	graph3.list = countries;
-//	drawgraphs(topcountries);
-//	drawgraph('graph1',topcountries,'chinaexports');
-//	drawgraph('graph2',topcountries,'chinaexportsovergdp');
 	drawnewgraph(graph1);	
 	drawnewgraph(graph2);
 	drawnewgraph(graph3);
 };
-
-//function drawgraphs (topcountries){
-	
-//	drawnewgraph(graph3);
-	
-//};
 
 function drawnewgraph(graph) {
 	console.log(graph);
