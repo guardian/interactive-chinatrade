@@ -63,6 +63,11 @@ body {
     @include fs-textSans(3);
 }
 
+h2 {
+    clear:all;
+    bottom-margin: 25px;
+}
+
 g {
   @include fs-textSans(3);
 }

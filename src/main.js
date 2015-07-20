@@ -31,6 +31,8 @@ function populate(data) {
 
 function drawnewgraph(graph) {
 	var property = graph.property;
+	
+	var header = d3.select('.wrapper' + graph.name + '> h2').insert('h2').text(graph.title);
 		
 	var width = 420, barHeight = 20;
 
@@ -42,7 +44,9 @@ function drawnewgraph(graph) {
 	var chart = d3.select('#' + graph.name)
 		.attr('width', width)
 		.attr('height', barHeight * graph.list.length);
-
+		
+	//var header = chart.insert('h2').text(graph.title);
+	
 	var bar = chart.selectAll('g')
 		.data(graph.list.sort(function(a,b){return b[graph.property]-a[graph.property]}))
 		.enter().append('g')
