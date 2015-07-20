@@ -2,11 +2,14 @@ var getJSON = require('./js/utils/getjson');
 var template = require('./html/base.html');
 var d3 = require('d3');
 //var _ = require('lodash');
-var countries;
-var topcountries =[];
+var countries, topcountries, africa, europe, samerica;
+
 var graph1 = new Graph ('graph1','Exports to China - dollar value, most vulnerable',topcountries,'chinaexports','Current US dollars');
 var graph2 = new Graph ('graph2','Exports to China as a percentage of GDP',topcountries,'chinaexportsovergdp','%');
 var graph3 = new Graph ('graph3','Exports to China - dollar value, all countries',countries,'chinaexports','Current US dollars');
+var graph4 = new Graph ('graph4','Exports to China as a percentage of GDP, Africa',africa,'chinaexportsovergdp','%');
+var graph5 = new Graph ('graph5','Exports to China as a percentage of GDP, Europe',europe,'chinaexportsovergdp','%');
+var graph6 = new Graph ('graph6','Exports to China as a percentage of GDP, South America',samerica,'chinaexportsovergdp','%');
 
 function Graph(name, title, list, property, units) {
     this.name = name;
@@ -20,13 +23,29 @@ function populate(data) {
 	countries = data.sheets.Exports;
 	var topcountries = countries.filter(function findtop(c) {
 		return c.chinaexportsovergdp > .02;
-	})
+	});
+	var africa = countries.filter(function justafrica(c) {
+		return c.continent == 'Africa';
+	});
+		var europe = countries.filter(function justeurope(c) {
+		return c.continent == 'Europe';
+	});
+	var samerica = countries.filter(function justsamerica(c) {
+		return c.continent == 'SAmerica';
+	});
+	console.log(samerica);
 	graph1.list = topcountries;
 	graph2.list = topcountries;
 	graph3.list = countries;
+	graph4.list = africa;
+	graph5.list = europe;
+	graph6.list = samerica;
 	drawnewgraph(graph1);	
 	drawnewgraph(graph2);
 	drawnewgraph(graph3);
+	drawnewgraph(graph4);
+	drawnewgraph(graph5);
+	drawnewgraph(graph6);
 };
 
 function drawnewgraph(graph) {
@@ -60,7 +79,7 @@ function drawnewgraph(graph) {
 		.attr("height", barHeight - 1);
 
 	bar.append("text")
-		//.attr("x", function (d) { return x(d[propname]) - 3; })
+		.attr("x", "325")
 		.attr("y", barHeight / 2)
 		.attr("dy", ".35em")
 		.text(function (d) { return d.country; });
