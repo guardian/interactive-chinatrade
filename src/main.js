@@ -3,36 +3,67 @@ var template = require('./html/base.html');
 var d3 = require('d3');
 //var _ = require('lodash');
 var countries;
+var topcountries =[];
+var graph1 = new Graph ('graph1','Exports to China - dollar value, most vulnerable',topcountries,'chinaexports','Current US dollars');
+var graph2 = new Graph ('graph2','Exports to China as a percentage of GDP',topcountries,'chinaexportsovergdp','%');
+var graph3 = new Graph ('graph3','Exports to China - dollar value, all countries',countries,'chinaexports','Current US dollars');
+
+function Graph(name, title, list, property, units) {
+    this.name = name;
+    this.title = title;
+    this.list = list;
+    this.property = property;
+	this.units = units;	
+}
 
 function populate(data) {
 	countries = data.sheets.Exports;
 	var topcountries = countries.filter(function findtop(c) {
 		return c.chinaexportsovergdp > .02;
 	})
-	drawgraph('graph1',topcountries,'chinaexports');
-	drawgraph('graph2',topcountries,'chinaexportsovergdp');
+	graph1.list = topcountries;
+	graph2.list = topcountries;
+	graph3.list = countries;
+//	drawgraphs(topcountries);
+//	drawgraph('graph1',topcountries,'chinaexports');
+//	drawgraph('graph2',topcountries,'chinaexportsovergdp');
+	drawnewgraph(graph1);	
+	drawnewgraph(graph2);
+	drawnewgraph(graph3);
 };
 
-function drawgraph(graphname,listname,propname) {
+//function drawgraphs (topcountries){
 	
+//	drawnewgraph(graph3);
+	
+//};
+
+function drawnewgraph(graph) {
+	console.log(graph);
+	console.log(graph.list);
+	var property = graph.property;
+		
 	var width = 420, barHeight = 20;
 
 	var x = d3.scale.linear()
-		.domain([0, d3.max(listname,function(d){return d[propname]})])
+		.domain([0, d3.max(graph.list,function(d){
+			console.log(d[graph.property]);
+			return d[graph.property]})])
 		.range([0, width]);
 
-	var chart = d3.select('#' + graphname)
+	var chart = d3.select('#' + graph.name)
 		.attr('width', width)
-		.attr('height', barHeight * listname.length);
+		.attr('height', barHeight * graph.list.length);
 
 	var bar = chart.selectAll('g')
-		.data(listname.sort(function(a,b){return b[propname]-a[propname]}))
+		.data(graph.list.sort(function(a,b){return b[graph.list[graph.property]]-a[graph.list[graph.property]]}))
 		.enter().append('g')
 		.attr("transform", function (d, i) { return "translate(0," + i * barHeight + ")"; });
 
 	bar.append("rect")
 		.attr("width", function(d){
-			return x(d[propname]);
+			var amount = +d[graph.property];
+			return x(amount);
 		})
 		.attr("height", barHeight - 1);
 
