@@ -1,80 +1,43 @@
 var getJSON = require('./js/utils/getjson');
-var template = require('./html/base.html');
+var template = require('./html/tool.html');
 var d3 = require('d3');
 //var _ = require('lodash');
-var countries, topcountries, africa, europe, samerica;
 
-var graph1 = new Graph ('graph1','Exports to China - dollar value, most vulnerable',topcountries,'chinaexports','Current US dollars');
-var graph2 = new Graph ('graph2','Exports to China as a percentage of GDP',topcountries,'chinaexportsovergdp','%');
-var graph3 = new Graph ('graph3','Exports to China - dollar value, all countries',countries,'chinaexports','Current US dollars');
-var graph4 = new Graph ('graph4','Exports to China as a percentage of GDP, Africa',africa,'chinaexportsovergdp','%');
-var graph5 = new Graph ('graph5','Exports to China as a percentage of GDP, Europe',europe,'chinaexportsovergdp','%');
-var graph6 = new Graph ('graph6','Exports to China as a percentage of GDP, South America',samerica,'chinaexportsovergdp','%');
-
-function Graph(name, title, list, property, units) {
-    this.name = name;
-    this.title = title;
-    this.list = list;
-    this.property = property;
-	this.units = units;	
-}
+var countries,chart;
+var decline = 0.17;
 
 function populate(data) {
-	countries = data.sheets.Exports;
-	var topcountries = countries.filter(function findtop(c) {
-		return c.chinaexportsovergdp > .02;
-	});
-	var africa = countries.filter(function justafrica(c) {
-		return c.continent == 'Africa';
-	});
-		var europe = countries.filter(function justeurope(c) {
-		return c.continent == 'Europe';
-	});
-	var samerica = countries.filter(function justsamerica(c) {
-		return c.continent == 'SAmerica';
-	});
-	console.log(samerica);
-	graph1.list = topcountries;
-	graph2.list = topcountries;
-	graph3.list = countries;
-	graph4.list = africa;
-	graph5.list = europe;
-	graph6.list = samerica;
-	drawnewgraph(graph1);	
-	drawnewgraph(graph2);
-	drawnewgraph(graph3);
-	drawnewgraph(graph4);
-	drawnewgraph(graph5);
-	drawnewgraph(graph6);
+	countries = data.sheets.customsdata;
+	drawgraph(countries);
+	console.dir(countries);
 };
 
-function drawnewgraph(graph) {
-	var property = graph.property;
+
+
+function drawgraph(countries) {
 	
-	var header = d3.select('.wrapper' + graph.name + '> h2').insert('h2').text(graph.title);
-		
 	var width = 420, barHeight = 20;
 
 	var x = d3.scale.linear()
-		.domain([0, d3.max(graph.list,function(d){
-			return d[graph.property]})])
-		.range([0, width]);
+		.domain([0, d3.max(countries,function(d){
+			return d.chinaexports})])
+			.range([0, width]);
 
-	var chart = d3.select('#' + graph.name)
+	var chart = d3.select('#dollarfall')
 		.attr('width', width)
-		.attr('height', barHeight * graph.list.length);
+		.attr('height', barHeight * countries.length);
 		
 	//var header = chart.insert('h2').text(graph.title);
 	
 	var bar = chart.selectAll('g')
-		.data(graph.list.sort(function(a,b){return b[graph.property]-a[graph.property]}))
+		.data(countries.sort(function(a,b){return b.chinaexports-a.chinaexports}))
 		.enter().append('g')
 		.attr("transform", function (d, i) { return "translate(0," + i * barHeight + ")"; });
 
 	bar.append("rect")
 		.attr("width", function(d){
-//			var amount = +d[graph.property];
-			return x(d[graph.property]);
+			var amount = +d.chinaexports;
+			return x(amount);
 		})
 		.attr("height", barHeight - 1);
 
@@ -82,8 +45,61 @@ function drawnewgraph(graph) {
 		.attr("x", "325")
 		.attr("y", barHeight / 2)
 		.attr("dy", ".35em")
-		.text(function (d) { return d.country; });
+		.text(function (d) { return d.country,d.chinaexports; });
+		
+		
+	d3.selectAll(".declinechooser").on("click",(function declineclick() {
+			decline = this.id;
+			console.log(decline);
+			redrawgraph(countries,decline);}));
+		};
+
+
+function redrawgraph(countries,decline) {
+	
+	
+	console.log('running',countries,decline);
+	var width = 420, barHeight = 20;
+
+	var x = d3.scale.linear()
+		.domain([0, d3.max(countries,function(d){
+			return d.chinaexports*(decline*d.averagevariation)})])
+			.range([0, width]);		
+	
+	var chart = d3.select('#dollarfall');
+		
+	var bar = chart.selectAll('g')
+		.data(countries.sort(function(a,b){
+			return (b.chinaexports*(decline*b.averagevariation))-(a.chinaexports*(decline*a.averagevariation));
+				}))
+		.attr("transform", function (d, i) { return "translate(0," + i * barHeight + ")"; });
+
+	bar.select("rect")
+		.attr("width", function(d){
+			var amount = (d.chinaexports*(decline*d.averagevariation));
+			console.log(amount);
+			amount = +amount;
+			return x(amount);
+		})
+		.attr("height", barHeight - 1);
+
+	bar.select("text")
+		.attr("x", "325")
+		.attr("y", barHeight / 2)
+		.attr("dy", ".35em")
+		.text(function (d) { return d.country + " " + (d.chinaexports*(decline*d.averagevariation)); });
+		
+	d3.selectAll(".declinechooser").on("click",(function declineclick() {
+			decline = this.id;
+			console.log('mew',decline);
+			redrawgraph(countries,decline);}));
+
+		
 };
+
+
+
+
 
 function boot(el) {
 	el.innerHTML = template;
