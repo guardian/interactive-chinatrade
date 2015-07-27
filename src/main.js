@@ -45,12 +45,12 @@ function drawgraph(countries) {
 		.attr("x", "325")
 		.attr("y", barHeight / 2)
 		.attr("dy", ".35em")
-		.text(function (d) { return d.country,d.chinaexports; });
+		.text(function (d) { return d.country + " " + d.chinaexports; });
 		
 		
 	d3.selectAll(".declinechooser").on("click",(function declineclick() {
 			decline = this.id;
-			console.log(decline);
+//			console.log(decline);
 			redrawgraph(countries,decline);}));
 		};
 
@@ -63,9 +63,10 @@ function redrawgraph(countries,decline) {
 
 	var x = d3.scale.linear()
 		.domain([0, d3.max(countries,function(d){
+			//console.log('!',decline*d.averagevariation);
 			return d.chinaexports*(decline*d.averagevariation)})])
 			.range([0, width]);		
-	
+				
 	var chart = d3.select('#dollarfall');
 		
 	var bar = chart.selectAll('g')
@@ -91,7 +92,7 @@ function redrawgraph(countries,decline) {
 		
 	d3.selectAll(".declinechooser").on("click",(function declineclick() {
 			decline = this.id;
-			console.log('mew',decline);
+//			console.log('mew',decline);
 			redrawgraph(countries,decline);}));
 
 		
