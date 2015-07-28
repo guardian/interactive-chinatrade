@@ -2,7 +2,7 @@ var getJSON = require('./js/utils/getjson');
 var template = require('./html/base.html');
 var d3 = require('d3');
 //var _ = require('lodash');
-var countries, topcountries, africa, europe, samerica;
+var countries, topcountries, africa, europe, samerica, pacific;
 
 var graph1 = new Graph ('graph1','Exports to China - dollar value, most vulnerable',topcountries,'chinaexports','Current US dollars');
 var graph2 = new Graph ('graph2','Exports to China as a percentage of GDP',topcountries,'chinaexportsovergdp','%');
@@ -10,6 +10,7 @@ var graph3 = new Graph ('graph3','Exports to China - dollar value, all countries
 var graph4 = new Graph ('graph4','Exports to China as a percentage of GDP, Africa',africa,'chinaexportsovergdp','%');
 var graph5 = new Graph ('graph5','Exports to China as a percentage of GDP, Europe',europe,'chinaexportsovergdp','%');
 var graph6 = new Graph ('graph6','Exports to China as a percentage of GDP, South America',samerica,'chinaexportsovergdp','%');
+var graph7 = new Graph ('graph7','Exports to China as a percentage of GDP, Pacific',pacific,'chinaexportsovergdp','%')
 
 function Graph(name, title, list, property, units) {
     this.name = name;
@@ -33,19 +34,25 @@ function populate(data) {
 	var samerica = countries.filter(function justsamerica(c) {
 		return c.continent == 'SAmerica';
 	});
-	console.log(samerica);
+		var pacific = countries.filter(function justpacific(c) {
+		return c.continent == 'Pacific';
+	});
+
+//	console.log(samerica);
 	graph1.list = topcountries;
 	graph2.list = topcountries;
 	graph3.list = countries;
 	graph4.list = africa;
 	graph5.list = europe;
 	graph6.list = samerica;
+	graph7.list = pacific;
 	drawnewgraph(graph1);	
 	drawnewgraph(graph2);
 	drawnewgraph(graph3);
 	drawnewgraph(graph4);
 	drawnewgraph(graph5);
 	drawnewgraph(graph6);
+	drawnewgraph(graph7);
 };
 
 function drawnewgraph(graph) {
