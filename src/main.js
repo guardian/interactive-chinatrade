@@ -1,6 +1,8 @@
 var getJSON = require('./js/utils/getjson');
 var template = require('./html/base.html');
 var d3 = require('d3');
+
+
 //var _ = require('lodash');
 var countries, topcountries, africa, europe, samerica, pacific, lowesttier, tierone, tiertwo,tierthree,tierfour;
 
@@ -54,8 +56,7 @@ function populate(data) {
 		var tierthree = countries.filter(function tierthree(c) {
 		return c.chinaexportsovergdp < .05 && c.chinaexportsovergdp > .02;
 	});
-
-
+	
 
 	console.log(lowesttier);
 	graph1.list = topcountries;
@@ -83,9 +84,59 @@ function populate(data) {
 };
 
 function drawnewgraph(graph) {
+	graph.list.sort(function (a,b) {
+		return b[graph.property] - a[graph.property];
+		});
+	//console.log(graph.list);
+	graph.shortlist = graph.list.slice(0,5);
+	//console.log(graph.list);
 	var property = graph.property;
 	
+var chartdive = d3.select('.wrapper' + graph.name);
+
 	var header = d3.select('.wrapper' + graph.name + '> h2').insert('h2').text(graph.title);
+
+		
+	var width = 700, barHeight = 20;
+
+	var x = d3.scale.linear()
+		.domain([0, d3.max(graph.shortlist,function(d){
+			return d[graph.property]})])
+		.range([0, 420]);
+
+	var chart = d3.select('#' + graph.name)
+		.attr('width', width)
+		.attr('height', barHeight * graph.shortlist.length);
+		
+	var bar = chart.selectAll('g')
+		.data(graph.shortlist.sort(function(a,b){return b[graph.property]-a[graph.property]}))
+		.enter().append('g')
+		.attr("transform", function (d, i) { return "translate(0," + i * barHeight + ")"; });
+
+	bar.append("rect")
+		.attr("width", function(d){
+//			var amount = +d[graph.property];
+			return x(d[graph.property]);
+		})
+		.attr("height", barHeight - 1);
+
+	bar.append("text")
+		.attr("x", "420")
+		.attr("y", barHeight / 2)
+		.attr("dy", ".35em")
+		.text(function (d) { return d.country + ' ' + d[graph.property]; });
+	
+	var morelink = "<a href='#' id='more" + graph.name + "' class='morelink'>Show more</a>";
+	chartdive.append("p").html(morelink);
+	var d3morelink = d3.select("#more" + graph.name);
+		
+	d3morelink.on("click", function()
+		{drawrealgraph(graph)});
+};
+
+
+function drawrealgraph(graph) {
+	var property = graph.property;
 		
 	var width = 700, barHeight = 20;
 
@@ -117,7 +168,8 @@ function drawnewgraph(graph) {
 		.attr("y", barHeight / 2)
 		.attr("dy", ".35em")
 		.text(function (d) { return d.country + ' ' + d[graph.property]; });
-};
+	};
+
 
 function boot(el) {
 	el.innerHTML = template;

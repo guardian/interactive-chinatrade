@@ -66,6 +66,7 @@ body {
 h2 {
     clear:all;
     bottom-margin: 25px;
+    @include fs-textSans(2);
 }
 
 g {
