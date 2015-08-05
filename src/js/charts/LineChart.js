@@ -428,7 +428,7 @@ function LineChart(data,options) {
 			return d.indexOf("atMonth")>=0;
 		})
 		.append("text")
-			.attr("class","status")
+			.attr("class","status date")
 			.attr("rel",__data[__data.length-1].date)
 			.attr("x",function(line){
 				var ___data=__data.filter(function(d){
@@ -467,10 +467,10 @@ function LineChart(data,options) {
 	var projection_data={
 		x1:__data[__data.length-2].date,
 		x2:__data[__data.length-1].date,
-		y1:__data[__data.length-2]["CH"],
-		y2:__data[__data.length-1]["CHatMonth"],
-		o_y1:__data[__data.length-2]["CH"],
-		o_y2:__data[__data.length-1]["CHatMonth"]
+		y1:__data[__data.length-2]["CN"],
+		y2:__data[__data.length-1]["CNatMonth"],
+		o_y1:__data[__data.length-2]["CN"],
+		o_y2:__data[__data.length-1]["CNatMonth"]
 	};
 	console.log("!!!!!!!!!!",projection)
 
@@ -636,31 +636,107 @@ function LineChart(data,options) {
 						return "translate("+x+","+(y-40)+")";
 				});*/
 
-    	period.select("path")
-				.attr("d",function(p){
-					//console.log(p);
-					
-					return line(p.period.map(function(d){
-						//console.log(d)
-						return {
-							date:d.date,
-							value:d[p.line]
-						}
-					}))
+    	period
+		.filter(function(d){
+			//console.log("!!!!!!!!!!",d)
+			return d.line.indexOf("atMonth")<0;
+		})
+		.select("path")
+			.attr("d",function(p){
+				console.log(p);
+				
+				return line(p.period.map(function(d){
+					//console.log(d)
+					return {
+						date:d.date,
+						value:d[p.line]
+					}
+				}).filter(function(d){
+					return d.value;
+				}))
+			});
+
+		bars.attr("transform",function(d){
+					return "translate("+xscale(d.date)+",0)";
 				});
 
-		lines.select("text.status")
+		/*lines.select("text.status")
 				.attr("x",function(d){
 					return xscale(__data[__data.length-1].date)
 				})
 				.attr("y",function(line){
 					return yscale(__data[__data.length-1][line])
-				});
+				});*/
+
+		
+
+		lines.select("text.status")
+				.attr("x",function(line){
+					var ___data=__data.filter(function(d){
+						return d[line];
+					})
+					return xscale(___data[___data.length-1].date)
+				})
+				.attr("y",function(line){
+					var ___data=__data.filter(function(d){
+						return d[line];
+					})
+					return yscale(___data[___data.length-1][line])
+				})
+				
+
+		lines
+			.filter(function(d){
+				return d.indexOf("atMonth")>=0;
+			})
+			.select("text.status.date")
+				.attr("x",function(line){
+					var ___data=__data.filter(function(d){
+						return d[line];
+					})
+					return xscale(___data[___data.length-1].date)
+				})
+				.attr("y",function(line){
+					var ___data=__data.filter(function(d){
+						return d[line];
+					})
+					return yscale(___data[___data.length-1][line])
+				})
+				
+		projection.select("rect.handle")
+			.attr({
+				x:xscale(projection_data.x2),
+				y:0,//yscale(projection_data.y1-projection_data.y1*current_ratio)-15-80,
+				width:margins.right,
+				height:HEIGHT
+			})
+		
+		projection
+			.select("rect")
+			.attr({
+				x:xscale(projection_data.x2)-bar_width/2,
+				y:yscale(projection_data.y1-projection_data.y1*current_ratio),
+				width:bar_width,
+				height:yscale(projection_data.o_y2) -yscale(projection_data.y1-projection_data.y1*current_ratio)
+			})
+			
+		projection
+			.select("line.projection")
+			.attr({
+				x1:xscale(projection_data.x1)+3,
+				y1:yscale(projection_data.y1)+1,
+				x2:xscale(projection_data.x2),
+				y2:yscale(projection_data.y1-projection_data.y1*current_ratio)
+				//y2:yscale(projection.y2/avg_ratio)
+			})
+
+		tooltip.show({
+			percentage:d3.round(-current_ratio*100,2),
+			total:numberFormat(projection_data.y1-projection_data.y1*current_ratio)
+		},xscale(projection_data.x2),yscale(projection_data.y1-projection_data.y1*current_ratio))
+				
 
 		axis.call(xAxis);
-
-
-				
 	}
 
 	/*
