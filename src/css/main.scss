@@ -12,6 +12,8 @@
 @import 'modules/_mq';
 @import 'modules/_side-margins';
 
+@import 'modules/_common';
+
 // Setup page
 body {
     margin: 0;
@@ -76,3 +78,10 @@ g {
 rect {
     fill : colour('news-support-2');      
 }
+
+$CH: colour('news-support-6');
+$CHatMonth: colour('features-main-2');
+
+
+@import 'modules/_linechart';
+@import 'modules/_barchart';

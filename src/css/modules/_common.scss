@@ -1,0 +1,92 @@
+@keyframes bounce {
+    50% {transform: translateY(5px);}
+    //75% {transform: translateY(-15px);}
+}
+@keyframes opacity {
+    0% {
+    	opacity:0;
+    }
+    50% {
+    	opacity:1;
+    }
+    100% {
+    	opacity:0;
+    }
+    //75% {transform: translateY(-15px);}
+}
+
+
+.clearfix:before,
+.clearfix:after {
+    content: ".";    
+    display: block;    
+    height: 0;    
+    overflow: hidden; 
+}
+.clearfix:after { clear: both; }
+.clearfix { zoom: 1; } /* IE < 8 */
+
+button:focus {outline:0 !important;}
+
+a {
+    color: map-get($pasteup-palette, guardian-brand);
+    text-decoration: none;
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+.u-underline {
+    text-decoration: none !important;
+    border-bottom: 0.0625rem solid #dcdcdc;
+    -webkit-transition: border-color 0.15s ease-out;
+    transition: border-color 0.15s ease-out;
+}
+.u-underline:hover {
+    border-bottom-color: #005689;
+}
+
+.share {
+    position: relative;
+    width: 32px;
+    height: 32px;
+    border-radius: 100px;
+    border: 0;
+    outline: 0;
+    cursor: pointer;
+    margin-right: 3px;
+    vertical-align: middle;
+
+    &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 32px;
+        height: 32px;
+    }
+}
+
+.share--twitter {
+    background-color: #03b3ee;
+    &::before {
+        background-image: url('../imgs/twitter.svg');
+    }
+    &:hover {
+        background-color: #028dbc;
+    }
+}
+
+.share--facebook {
+    background-color: #3067a3;
+    &::before {
+        background-image: url('../imgs/facebook.svg');
+    }
+    &:hover {
+        background-color: #244e7c;
+    }
+}
+
+a {
+    text-shadow: none !important; // Override apps
+}

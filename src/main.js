@@ -1,8 +1,13 @@
 var getJSON = require('./js/utils/getjson');
 var template = require('./html/base.html');
 var d3 = require('d3');
+
+var LineChart = require("./js/charts/LineChart");
+var BarChart = require("./js/charts/BarChart");
+
 //var _ = require('lodash');
 var countries, topcountries, africa, europe, samerica;
+
 
 var graph1 = new Graph ('graph1','Exports to China - dollar value, most vulnerable',topcountries,'chinaexports','Current US dollars');
 var graph2 = new Graph ('graph2','Exports to China as a percentage of GDP',topcountries,'chinaexportsovergdp','%');
@@ -12,6 +17,8 @@ var graph5 = new Graph ('graph5','Exports to China as a percentage of GDP, Europ
 var graph6 = new Graph ('graph6','Exports to China as a percentage of GDP, South America',samerica,'chinaexportsovergdp','%');
 
 function Graph(name, title, list, property, units) {
+
+	return;
     this.name = name;
     this.title = title;
     this.list = list;
@@ -20,10 +27,66 @@ function Graph(name, title, list, property, units) {
 }
 
 function populate(data) {
+
+	console.log(data)
+	var dateFormat=d3.time.format("%d/%m/%Y");
+
 	countries = data.sheets.Exports;
 	var topcountries = countries.filter(function findtop(c) {
 		return c.chinaexportsovergdp > .02;
 	});
+
+	var losses=new BarChart(data.sheets["customsdata"],{
+		container:"#losses",
+		field:"loss_normalized"
+	})
+	var gdp=new BarChart(data.sheets["customsdata"],{
+		container:"#gdp",
+		field:"percGDP",
+		numberFormat:d3.format(",.2%")
+	})
+
+	
+
+	var historical_exports=new LineChart(data.sheets["historical exports"].map(function(d){
+		return {
+			date:dateFormat.parse(d.month),
+			"CH":d.imports
+		}
+	}).sort(function(a,b){
+		return +a.date - +b.date;
+	}),{
+		container:"#history",
+		title:"China exports 2000 - 2015",
+		lines:["CH"],
+		dateFormat:dateFormat,
+		filters:{
+			atMonth:function(d){
+				return d.date.getMonth() <= 5
+			},
+			min:function(d){
+				return d.date >= new Date(2000,0,1) ;
+			},
+			max:function(d){
+				return d.date < new Date(2015,0,1) ;
+			}
+		},
+		callback:function(ratio) {
+			//console.log(ratio)
+			losses.update(ratio);
+			gdp.update(ratio)
+		}
+	});
+	
+
+	window.onresize=function(){
+		//historical_exports.update();
+		//losses.update();
+	}
+
+	return;
+
+	
 	var africa = countries.filter(function justafrica(c) {
 		return c.continent == 'Africa';
 	});
@@ -33,7 +96,7 @@ function populate(data) {
 	var samerica = countries.filter(function justsamerica(c) {
 		return c.continent == 'SAmerica';
 	});
-	console.log(samerica);
+	//console.log(samerica);
 	graph1.list = topcountries;
 	graph2.list = topcountries;
 	graph3.list = countries;
