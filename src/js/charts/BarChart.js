@@ -13,11 +13,12 @@ function BarChart(data,options) {
    	console.log(WIDTH,HEIGHT)
 
     var margins={
-    	left:100,
-    	right:50,
+    	left:options.countries?100:0,
+    	right:0,
     	top:10,
-    	bottom:20
+    	bottom:10
     };
+    var bar_width=10;
 
     var RATIO=0.155;
 
@@ -48,7 +49,7 @@ function BarChart(data,options) {
     function setExtents() {
 		
 		extents={
-			index:[0,data.length-1],
+			index:[0,data.length],
 			loss:d3.extent(data,function(d){
 				return d.loss;
 			}),
@@ -68,11 +69,12 @@ function BarChart(data,options) {
 	setExtents();
 	console.log(extents)
 
-	var xscale=d3.time.scale().domain([0,extents[options.field][1]*(0.5/RATIO)]).rangeRound([0,(WIDTH-(margins.right+margins.left))]),
+	var xscale=d3.time.scale().domain([0,extents[options.field][1]*(0.5/RATIO)]).rangeRound([0,(WIDTH-(margins.right+margins.left+30))]),
 		yscale=d3.scale.linear().domain(extents.index).range([0,HEIGHT-(margins.top+margins.bottom)]);
 
 	//console.log("XSCALE",xscale.range())
 
+	bar_width=yscale.range()[1]/extents.index[1]-2;
 
 	var svg=viz.append("svg")
 				.attr("width","100%")
@@ -94,7 +96,20 @@ function BarChart(data,options) {
 							x=0;//(WIDTH-(margins.right+margins.left))/2
 						return "translate("+x+","+y+")";
 					});
-
+	if(options.droplines) {
+		bars
+			.append("line")
+			.attr("class","dropline")
+			.attr("x1",function(d){
+				return xscale(d[options.field]);
+			})
+			.attr("y1",bar_width-1)
+			.attr("x2",function(d){
+				return xscale.range()[1]+30;
+			})
+			.attr("y2",bar_width-1);
+	}
+	
 	bars.append("rect")
 		.attr("x",function(d){
 			if(d[options.field]<0) {
@@ -106,16 +121,21 @@ function BarChart(data,options) {
 		.attr("width",function(d){
 			return xscale(d[options.field]);
 		})
-		.attr("height",10)
-	bars.append("text")
-		.attr("class","country right-aligned")
-		.attr("x",0)
-		.attr("dx","-10px")
-		.attr("y",4)
-		.attr("dy","0.4em")
-		.text(function(d){
-			return d.country;
-		})
+		.attr("height",bar_width)
+
+	if(options.countries) {
+		bars.append("text")
+			.attr("class","country right-aligned")
+			.attr("x",0)
+			.attr("dx","-10px")
+			.attr("y",4)
+			.attr("dy","0.4em")
+			.text(function(d){
+				return d.country;
+			})
+	}
+
+	
 
 	bars.append("text")
 		.attr("class","loss")
@@ -132,7 +152,7 @@ function BarChart(data,options) {
 	this.update=update;
 
 	function update(ratio) {
-		RATIO = ratio || RATIO;
+		RATIO = ratio>=0? ratio : RATIO;
 
 		updateData();
 		setExtents();
@@ -155,11 +175,20 @@ function BarChart(data,options) {
 			.attr("width",function(d){
 				return xscale(d[options.field]);
 			});
+		
+		bars.select("line.dropline")
+			.attr("x1",function(d){
+				return xscale(d[options.field]);
+			})
+			.attr("x2",function(d){
+				return xscale.range()[1]+30;
+			});
+
 		bars.select("text.loss")
 				.attr("x",function(d){
 					return xscale(d[options.field]);
 				})
-		if(ratio) {
+		if(ratio>=0) {
 			
 			bars.select("text.loss")
 				.text(function(d){

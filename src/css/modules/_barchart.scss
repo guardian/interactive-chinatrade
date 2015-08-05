@@ -1,13 +1,23 @@
 #losses,#gdp {
-	width:48%;
-	height:500px;
+	width:50%;
+	height:300px;
 
-	margin-top:50px;
+	margin-top:0px;
 
 	float:left;
 
 	> h3 {
+		@include fs-textSans(1);
 		margin:0 0 0 100px;
+	}
+}
+#losses {
+	width: calc(50% + 100px);
+}
+#gdp {
+	width: calc(50% - 100px);
+	h3 {
+		margin-left:0;
 	}
 }
 .barchart {
@@ -27,6 +37,13 @@
 				fill:#767676;
 				shape-rendering: crispEdges;
 				stroke:none;
+			}
+
+			line.dropline {
+				stroke:#333;
+				stroke-opacity:0.2;
+				stroke-dasharray: 2,2;
+				shape-rendering: crispEdges;
 			}
 
 			text {

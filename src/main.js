@@ -47,7 +47,9 @@ function populate(data) {
 	
 	var losses=new BarChart(data.sheets["customsdata"],{
 		container:"#losses",
-		field:"loss_normalized"
+		field:"loss_normalized",
+		countries:true,
+		droplines:true
 	})
 	var gdp=new BarChart(data.sheets["customsdata"],{
 		container:"#gdp",
@@ -74,7 +76,7 @@ function populate(data) {
 				return d.date.getMonth() <= 5
 			},
 			min:function(d){
-				return d.date >= new Date(2000,0,1) ;
+				return d.date >= new Date(2001,0,1) ;
 			},
 			max:function(d){
 				return d.date < new Date(2015,0,1) ;

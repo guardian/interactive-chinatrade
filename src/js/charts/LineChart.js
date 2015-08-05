@@ -109,7 +109,7 @@ function LineChart(data,options) {
     var margins={
     	left:20,
     	right:260,
-    	top:100,
+    	top:20,
     	bottom:20
     };
 
@@ -291,6 +291,7 @@ function LineChart(data,options) {
 					return "translate("+xscale(d.date)+",0)";
 				});
 	var bar_width=10;
+
 	bars.append("rect")
 		.attr("x",-bar_width/2)
 		.attr("y",function(d){
@@ -528,12 +529,12 @@ function LineChart(data,options) {
 					ratio= y2/yscale.range()[0];
 
 				ratio=(Math.round(ratio*1000) - Math.round(ratio*1000)%5)/1000;
-				//console.log(ratio)
+				
 
-				ratio=ratio<0?0:ratio;
-
+				ratio=ratio<0.005?0:ratio;
+				console.log(ratio)
 				if(ratio<=0.4) {
-					d3.select(this)
+					//d3.select(this)
 						//.attr("y", (ratio>0?d3.event.y:yscale(projection_data.y1))-15);
 
 					projection.select("line.projection")
@@ -588,7 +589,11 @@ function LineChart(data,options) {
 
 	function tickFormat(d){
 		////console.log("tickFormat",d)
-    	return d3.time.format("%Y")(new Date(d));
+		var year=d.getFullYear();
+		if(year%2 === 0) {
+			return "";
+		}
+    	return d3.time.format("%Y")(d);
     }
 
 	var xAxis = d3.svg.axis()
@@ -781,7 +786,7 @@ function LineChart(data,options) {
 			tooltip.classed("visible",false);
 		}
 		this.show=function(data,x,y) {
-			console.log(x,y)
+			//console.log(x,y)
 			percentage.text(data.percentage+"%");
 			projection_value.text(data.total)
 

@@ -1,5 +1,4 @@
 #history {
-	width:60%;
 	height:300px;
 }
 .linechart {
@@ -111,6 +110,7 @@
 				fill:none;
 				shape-rendering: crispEdges;
 				stroke:#ccc;
+				stroke-opacity:0;
 			}
 			path {
 				//display: none;
