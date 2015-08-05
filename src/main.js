@@ -160,9 +160,9 @@ function drawnewgraph(graph) {
 	//console.log(graph.list);
 	var property = graph.property;
 	
-	var chartdive = d3.select(graph.name);
+	var chartdive = d3.select(".wrapper"+graph.name);
 
-	var header = d3.select(graph.name + '> h2').insert('h2').text(graph.title);
+	var header = chartdive.append('h2').text(graph.title);
 
 		
 	var width = 700, barHeight = 20;
@@ -172,7 +172,9 @@ function drawnewgraph(graph) {
 			return d[graph.property]})])
 		.range([0, 420]);
 
-	var chart = d3.select('#' + graph.name)
+	var chart = chartdive
+		.append("svg")
+		.attr("id","#"+graph.name)
 		.attr('width', width)
 		.attr('height', barHeight * graph.shortlist.length);
 		
@@ -198,8 +200,10 @@ function drawnewgraph(graph) {
 	chartdive.append("p").html(morelink);
 	var d3morelink = d3.select("#more" + graph.name);
 		
-	d3morelink.on("click", function()
-		{drawrealgraph(graph)});
+	d3morelink.on("click", function(){
+		d3.event.preventDefault();
+		drawrealgraph(graph)
+	});
 };
 
 

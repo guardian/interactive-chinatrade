@@ -68,7 +68,7 @@ body {
 h2 {
     clear:all;
     bottom-margin: 25px;
-    @include fs-textSans(2);
+    @include fs-header(2);
 }
 
 g {
