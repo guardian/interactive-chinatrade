@@ -1,6 +1,7 @@
 var getJSON = require('./js/utils/getjson');
 var template = require('./html/base.html');
 var d3 = require('d3');
+var formattedproperty;
 
 
 var LineChart = require("./js/charts/LineChart");
@@ -150,8 +151,18 @@ function populate(data) {
 	drawnewgraph(graph10);
 };
 
+var dollarstyle = d3.format("$,.0f");
+
 function drawnewgraph(graph) {
 	console.log("drawnewgraph",graph)
+	
+/*	
+	if (graph.units === 'Current US dollars') {
+		var formattedproperty = dollarstyle(graph[graph.property]);
+	} else {
+		formattedproperty = graph.property;
+	};
+*/	
 	graph.list.sort(function (a,b) {
 		return b[graph.property] - a[graph.property];
 		});
@@ -194,7 +205,19 @@ function drawnewgraph(graph) {
 		.attr("x", "420")
 		.attr("y", barHeight / 2)
 		.attr("dy", ".35em")
-		.text(function (d) { return d.country + ' ' + d[graph.property]; });
+		.text(function (d) { 
+			var dollarstyle = d3.format("$,.0f");
+			var percentstyle = d3.format("$,.0f");
+
+			if (graph.units == 'Current US dollars') {
+			d.formattedproperty = dollarstyle(d[graph.property]);
+			} else {
+				d.rounded = parseFloat((d[graph.property]*100)).toFixed(2);
+				d.formattedproperty = d.rounded + "%";
+			}			
+			return d.country + ' ' + d.formattedproperty; 
+			
+			});
 	
 	var morelink = "<a href='#' id='more" + graph.name + "' class='morelink'>Show more</a>";
 	chartdive.append("p").html(morelink);
