@@ -181,8 +181,8 @@ function BubbleChart(data,options) {
 			}),
 			chinaexports:d3.extent(data,function(d){
 				return d.chinaexports;
-			})
-
+			}),
+			china_exports30:[yearlyData[yearlyData.length-2]["CN"]-yearlyData[yearlyData.length-2]["CN"]*0.3,yearlyData[yearlyData.length-2]["CN"]]
 		};
 
 	};
@@ -198,7 +198,8 @@ function BubbleChart(data,options) {
 		CHINESE_RADIUS=gdp_scale(924000000000)*2,
 		yscale_countries=d3.scale.linear().domain([0,extents.percGDP[1]+extents.percGDP[1]*0.2]).range([0,(HEIGHT-(margins.top+margins.bottom))*SPLIT]),
 		exports_scale=d3.scale.sqrt().domain([extents.chinaexports[0],extents.exports[1]]).range(RADIUS);
-		chinaexports_scale=d3.scale.sqrt().domain(extents.chinaexports).range(RADIUS);
+		chinaexports_scale=d3.scale.sqrt().domain(extents.chinaexports).range(RADIUS),
+		chinacircle_scale=d3.scale.sqrt().domain(extents.china_exports30).range([CHINESE_RADIUS,CHINESE_RADIUS*1.2])
 
 	var svg=viz.append("svg")
 				.attr("width","100%")
@@ -250,7 +251,7 @@ function BubbleChart(data,options) {
 	chineseBubble.append("circle")
 			.attr("cx",0)
 			.attr("cy",0)
-			.attr("r",CHINESE_RADIUS);
+			.attr("r",chinacircle_scale(yearlyData[yearlyData.length-2]["CN"]-yearlyData[yearlyData.length-2]["CN"]*RATIO));
 	
 	var chineseText = chineseBubble.append("text")
 						.attr("class","perc")
@@ -431,6 +432,8 @@ function BubbleChart(data,options) {
 
 					d3.select(this)
 						.attr("transform","translate("+xscale.range()[1]/2+","+yscale_china(RATIO)+")")
+						.select("circle")
+							.attr("r",chinacircle_scale(yearlyData[yearlyData.length-2]["CN"]-yearlyData[yearlyData.length-2]["CN"]*RATIO));
 					chineseText.text(percFormat(RATIO))
 					chineseValue.text(numberFormat(val*1000));
 
