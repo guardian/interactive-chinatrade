@@ -6,7 +6,9 @@ var formattedproperty;
 
 var LineChart = require("./js/charts/LineChart");
 var BarChart = require("./js/charts/BarChart");
+var BubbleChart = require("./js/charts/BubbleChart");
 
+var countriesLatLng = require('./data/countries.json');
 
 //var _ = require('lodash');
 var countries, topcountries, africa, europe, samerica, pacific, lowesttier, tierone, tiertwo,tierthree,tierfour;
@@ -37,7 +39,7 @@ function Graph(name, title, list, property, units) {
 
 function populate(data) {
 
-	//console.log(data)
+	console.log(data)
 	var dateFormat=d3.time.format("%d/%m/%Y");
 
 	countries = data.sheets.Exports;
@@ -45,6 +47,33 @@ function populate(data) {
 		return c.chinaexportsovergdp > .02;
 	});
 	
+	var bubbles=new BubbleChart(data.sheets["customsdata"],{
+		container:"#bubbles",
+		latlng: countriesLatLng,
+		china:data.sheets["historical exports"].map(function(d){
+			return {
+				date:dateFormat.parse(d.month),
+				"CN":d.imports
+			}
+		}).sort(function(a,b){
+			return +a.date - +b.date;
+		}),
+		lines:["CN"],
+		filters:{
+			atMonth:function(d){
+				return d.date.getMonth() <= 6
+			},
+			min:function(d){
+				return d.date >= new Date(2001,0,1) ;
+			},
+			max:function(d){
+				return d.date < new Date(2015,0,1) ;
+			}
+		}
+	})
+
+	
+
 	var losses=new BarChart(data.sheets["customsdata"],{
 		container:"#losses",
 		field:"loss_normalized",
@@ -73,7 +102,7 @@ function populate(data) {
 		dateFormat:dateFormat,
 		filters:{
 			atMonth:function(d){
-				return d.date.getMonth() <= 5
+				return d.date.getMonth() <= 6
 			},
 			min:function(d){
 				return d.date >= new Date(2001,0,1) ;

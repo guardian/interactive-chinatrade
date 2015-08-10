@@ -1,0 +1,59 @@
+#bubbles {
+	width:100%;
+	height:600px;
+}
+.bubblechart {
+	width:100%;
+	height:100%;
+	svg {
+		border:1px solid #ddd;
+
+		line {
+			stroke:#ddd;
+			stroke-width:1;
+		}
+
+		.country {
+			circle.outer {
+				fill:none;
+				stroke:none;
+				stroke-width:2;
+				fill-opacity:0.2;
+			}
+			circle.inner {
+				fill:#fff;
+				stroke:#63717a;
+				stroke-width:1.5;
+			}
+
+			
+
+			text {
+				@include fs-textSans(1);
+				fill: #767676;
+				font-size: 11px;
+				text-anchor:middle;
+			}
+		}
+
+		path.connection {
+			fill:none;
+			stroke:#ddd;
+			stroke-width:1;
+		}
+
+		#china {
+			circle {
+				fill:#AA381E;
+			}
+			text {
+				text-anchor:middle;
+				@include fs-header(4);
+				fill:#fff;
+			}
+			text.title {
+				@include fs-header(1);
+			}
+		}
+	}
+}

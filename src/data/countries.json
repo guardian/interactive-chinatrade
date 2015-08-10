@@ -1,0 +1,1949 @@
+[
+    {
+        "Country": "Afghanistan",
+        "iso": "AF",
+        "iso3": "AFG",
+        "code": "4",
+        "ltd": "33",
+        "lng": "65"
+    },
+    {
+        "Country": "Albania",
+        "iso": "AL",
+        "iso3": "ALB",
+        "code": "8",
+        "ltd": "41",
+        "lng": "20"
+    },
+    {
+        "Country": "Algeria",
+        "iso": "DZ",
+        "iso3": "DZA",
+        "code": "12",
+        "ltd": "28",
+        "lng": "3"
+    },
+    {
+        "Country": "American Samoa",
+        "iso": "AS",
+        "iso3": "ASM",
+        "code": "16",
+        "ltd": "-14.3333",
+        "lng": "-170"
+    },
+    {
+        "Country": "Andorra",
+        "iso": "AD",
+        "iso3": "AND",
+        "code": "20",
+        "ltd": "42.5",
+        "lng": "1.6"
+    },
+    {
+        "Country": "Angola",
+        "iso": "AO",
+        "iso3": "AGO",
+        "code": "24",
+        "ltd": "-12.5",
+        "lng": "18.5"
+    },
+    {
+        "Country": "Anguilla",
+        "iso": "AI",
+        "iso3": "AIA",
+        "code": "660",
+        "ltd": "18.25",
+        "lng": "-63.1667"
+    },
+    {
+        "Country": "Antarctica",
+        "iso": "AQ",
+        "iso3": "ATA",
+        "code": "10",
+        "ltd": "-90",
+        "lng": "0"
+    },
+    {
+        "Country": "Antigua and Barbuda",
+        "iso": "AG",
+        "iso3": "ATG",
+        "code": "28",
+        "ltd": "17.05",
+        "lng": "-61.8"
+    },
+    {
+        "Country": "Argentina",
+        "iso": "AR",
+        "iso3": "ARG",
+        "code": "32",
+        "ltd": "-34",
+        "lng": "-64"
+    },
+    {
+        "Country": "Armenia",
+        "iso": "AM",
+        "iso3": "ARM",
+        "code": "51",
+        "ltd": "40",
+        "lng": "45"
+    },
+    {
+        "Country": "Aruba",
+        "iso": "AW",
+        "iso3": "ABW",
+        "code": "533",
+        "ltd": "12.5",
+        "lng": "-69.9667"
+    },
+    {
+        "Country": "Australia",
+        "iso": "AU",
+        "iso3": "AUS",
+        "code": "36",
+        "ltd": "-27",
+        "lng": "133"
+    },
+    {
+        "Country": "Austria",
+        "iso": "AT",
+        "iso3": "AUT",
+        "code": "40",
+        "ltd": "47.3333",
+        "lng": "13.3333"
+    },
+    {
+        "Country": "Azerbaijan",
+        "iso": "AZ",
+        "iso3": "AZE",
+        "code": "31",
+        "ltd": "40.5",
+        "lng": "47.5"
+    },
+    {
+        "Country": "Bahamas",
+        "iso": "BS",
+        "iso3": "BHS",
+        "code": "44",
+        "ltd": "24.25",
+        "lng": "-76"
+    },
+    {
+        "Country": "Bahrain",
+        "iso": "BH",
+        "iso3": "BHR",
+        "code": "48",
+        "ltd": "26",
+        "lng": "50.55"
+    },
+    {
+        "Country": "Bangladesh",
+        "iso": "BD",
+        "iso3": "BGD",
+        "code": "50",
+        "ltd": "24",
+        "lng": "90"
+    },
+    {
+        "Country": "Barbados",
+        "iso": "BB",
+        "iso3": "BRB",
+        "code": "52",
+        "ltd": "13.1667",
+        "lng": "-59.5333"
+    },
+    {
+        "Country": "Belarus",
+        "iso": "BY",
+        "iso3": "BLR",
+        "code": "112",
+        "ltd": "53",
+        "lng": "28"
+    },
+    {
+        "Country": "Belgium",
+        "iso": "BE",
+        "iso3": "BEL",
+        "code": "56",
+        "ltd": "50.8333",
+        "lng": "4"
+    },
+    {
+        "Country": "Belize",
+        "iso": "BZ",
+        "iso3": "BLZ",
+        "code": "84",
+        "ltd": "17.25",
+        "lng": "-88.75"
+    },
+    {
+        "Country": "Benin",
+        "iso": "BJ",
+        "iso3": "BEN",
+        "code": "204",
+        "ltd": "9.5",
+        "lng": "2.25"
+    },
+    {
+        "Country": "Bermuda",
+        "iso": "BM",
+        "iso3": "BMU",
+        "code": "60",
+        "ltd": "32.3333",
+        "lng": "-64.75"
+    },
+    {
+        "Country": "Bhutan",
+        "iso": "BT",
+        "iso3": "BTN",
+        "code": "64",
+        "ltd": "27.5",
+        "lng": "90.5"
+    },
+    {
+        "Country": "Bolivia, Plurinational State of",
+        "iso": "BO",
+        "iso3": "BOL",
+        "code": "68",
+        "ltd": "-17",
+        "lng": "-65"
+    },
+    {
+        "Country": "Bosnia and Herzegovina",
+        "iso": "BA",
+        "iso3": "BIH",
+        "code": "70",
+        "ltd": "44",
+        "lng": "18"
+    },
+    {
+        "Country": "Botswana",
+        "iso": "BW",
+        "iso3": "BWA",
+        "code": "72",
+        "ltd": "-22",
+        "lng": "24"
+    },
+    {
+        "Country": "Bouvet Island",
+        "iso": "BV",
+        "iso3": "BVT",
+        "code": "74",
+        "ltd": "-54.4333",
+        "lng": "3.4"
+    },
+    {
+        "Country": "Brazil",
+        "iso": "BR",
+        "iso3": "BRA",
+        "code": "76",
+        "ltd": "-10",
+        "lng": "-55"
+    },
+    {
+        "Country": "British Indian Ocean Territory",
+        "iso": "IO",
+        "iso3": "IOT",
+        "code": "86",
+        "ltd": "-6",
+        "lng": "71.5"
+    },
+    {
+        "Country": "Brunei Darussalam",
+        "iso": "BN",
+        "iso3": "BRN",
+        "code": "96",
+        "ltd": "4.5",
+        "lng": "114.6667"
+    },
+    {
+        "Country": "Bulgaria",
+        "iso": "BG",
+        "iso3": "BGR",
+        "code": "100",
+        "ltd": "43",
+        "lng": "25"
+    },
+    {
+        "Country": "Burkina Faso",
+        "iso": "BF",
+        "iso3": "BFA",
+        "code": "854",
+        "ltd": "13",
+        "lng": "-2"
+    },
+    {
+        "Country": "Burundi",
+        "iso": "BI",
+        "iso3": "BDI",
+        "code": "108",
+        "ltd": "-3.5",
+        "lng": "30"
+    },
+    {
+        "Country": "Cambodia",
+        "iso": "KH",
+        "iso3": "KHM",
+        "code": "116",
+        "ltd": "13",
+        "lng": "105"
+    },
+    {
+        "Country": "Cameroon",
+        "iso": "CM",
+        "iso3": "CMR",
+        "code": "120",
+        "ltd": "6",
+        "lng": "12"
+    },
+    {
+        "Country": "Canada",
+        "iso": "CA",
+        "iso3": "CAN",
+        "code": "124",
+        "ltd": "60",
+        "lng": "-95"
+    },
+    {
+        "Country": "Cape Verde",
+        "iso": "CV",
+        "iso3": "CPV",
+        "code": "132",
+        "ltd": "16",
+        "lng": "-24"
+    },
+    {
+        "Country": "Cayman Islands",
+        "iso": "KY",
+        "iso3": "CYM",
+        "code": "136",
+        "ltd": "19.5",
+        "lng": "-80.5"
+    },
+    {
+        "Country": "Central African Republic",
+        "iso": "CF",
+        "iso3": "CAF",
+        "code": "140",
+        "ltd": "7",
+        "lng": "21"
+    },
+    {
+        "Country": "Chad",
+        "iso": "TD",
+        "iso3": "TCD",
+        "code": "148",
+        "ltd": "15",
+        "lng": "19"
+    },
+    {
+        "Country": "Chile",
+        "iso": "CL",
+        "iso3": "CHL",
+        "code": "152",
+        "ltd": "-30",
+        "lng": "-71"
+    },
+    {
+        "Country": "China",
+        "iso": "CN",
+        "iso3": "CHN",
+        "code": "156",
+        "ltd": "35",
+        "lng": "105"
+    },
+    {
+        "Country": "Christmas Island",
+        "iso": "CX",
+        "iso3": "CXR",
+        "code": "162",
+        "ltd": "-10.5",
+        "lng": "105.6667"
+    },
+    {
+        "Country": "Cocos (Keeling) Islands",
+        "iso": "CC",
+        "iso3": "CCK",
+        "code": "166",
+        "ltd": "-12.5",
+        "lng": "96.8333"
+    },
+    {
+        "Country": "Colombia",
+        "iso": "CO",
+        "iso3": "COL",
+        "code": "170",
+        "ltd": "4",
+        "lng": "-72"
+    },
+    {
+        "Country": "Comoros",
+        "iso": "KM",
+        "iso3": "COM",
+        "code": "174",
+        "ltd": "-12.1667",
+        "lng": "44.25"
+    },
+    {
+        "Country": "Congo",
+        "iso": "CG",
+        "iso3": "COG",
+        "code": "178",
+        "ltd": "-1",
+        "lng": "15"
+    },
+    {
+        "Country": "Congo, the Democratic Republic of the",
+        "iso": "CD",
+        "iso3": "COD",
+        "code": "180",
+        "ltd": "0",
+        "lng": "25"
+    },
+    {
+        "Country": "Cook Islands",
+        "iso": "CK",
+        "iso3": "COK",
+        "code": "184",
+        "ltd": "-21.2333",
+        "lng": "-159.7667"
+    },
+    {
+        "Country": "Costa Rica",
+        "iso": "CR",
+        "iso3": "CRI",
+        "code": "188",
+        "ltd": "10",
+        "lng": "-84"
+    },
+    {
+        "Country": "Côte d'Ivoire",
+        "iso": "CI",
+        "iso3": "CIV",
+        "code": "384",
+        "ltd": "8",
+        "lng": "-5"
+    },
+    {
+        "Country": "Croatia",
+        "iso": "HR",
+        "iso3": "HRV",
+        "code": "191",
+        "ltd": "45.1667",
+        "lng": "15.5"
+    },
+    {
+        "Country": "Cuba",
+        "iso": "CU",
+        "iso3": "CUB",
+        "code": "192",
+        "ltd": "21.5",
+        "lng": "-80"
+    },
+    {
+        "Country": "Cyprus",
+        "iso": "CY",
+        "iso3": "CYP",
+        "code": "196",
+        "ltd": "35",
+        "lng": "33"
+    },
+    {
+        "Country": "Czech Republic",
+        "iso": "CZ",
+        "iso3": "CZE",
+        "code": "203",
+        "ltd": "49.75",
+        "lng": "15.5"
+    },
+    {
+        "Country": "Denmark",
+        "iso": "DK",
+        "iso3": "DNK",
+        "code": "208",
+        "ltd": "56",
+        "lng": "10"
+    },
+    {
+        "Country": "Djibouti",
+        "iso": "DJ",
+        "iso3": "DJI",
+        "code": "262",
+        "ltd": "11.5",
+        "lng": "43"
+    },
+    {
+        "Country": "Dominica",
+        "iso": "DM",
+        "iso3": "DMA",
+        "code": "212",
+        "ltd": "15.4167",
+        "lng": "-61.3333"
+    },
+    {
+        "Country": "Dominican Republic",
+        "iso": "DO",
+        "iso3": "DOM",
+        "code": "214",
+        "ltd": "19",
+        "lng": "-70.6667"
+    },
+    {
+        "Country": "Ecuador",
+        "iso": "EC",
+        "iso3": "ECU",
+        "code": "218",
+        "ltd": "-2",
+        "lng": "-77.5"
+    },
+    {
+        "Country": "Egypt",
+        "iso": "EG",
+        "iso3": "EGY",
+        "code": "818",
+        "ltd": "27",
+        "lng": "30"
+    },
+    {
+        "Country": "El Salvador",
+        "iso": "SV",
+        "iso3": "SLV",
+        "code": "222",
+        "ltd": "13.8333",
+        "lng": "-88.9167"
+    },
+    {
+        "Country": "Equatorial Guinea",
+        "iso": "GQ",
+        "iso3": "GNQ",
+        "code": "226",
+        "ltd": "2",
+        "lng": "10"
+    },
+    {
+        "Country": "Eritrea",
+        "iso": "ER",
+        "iso3": "ERI",
+        "code": "232",
+        "ltd": "15",
+        "lng": "39"
+    },
+    {
+        "Country": "Estonia",
+        "iso": "EE",
+        "iso3": "EST",
+        "code": "233",
+        "ltd": "59",
+        "lng": "26"
+    },
+    {
+        "Country": "Ethiopia",
+        "iso": "ET",
+        "iso3": "ETH",
+        "code": "231",
+        "ltd": "8",
+        "lng": "38"
+    },
+    {
+        "Country": "Falkland Islands (Malvinas)",
+        "iso": "FK",
+        "iso3": "FLK",
+        "code": "238",
+        "ltd": "-51.75",
+        "lng": "-59"
+    },
+    {
+        "Country": "Faroe Islands",
+        "iso": "FO",
+        "iso3": "FRO",
+        "code": "234",
+        "ltd": "62",
+        "lng": "-7"
+    },
+    {
+        "Country": "Fiji",
+        "iso": "FJ",
+        "iso3": "FJI",
+        "code": "242",
+        "ltd": "-18",
+        "lng": "175"
+    },
+    {
+        "Country": "Finland",
+        "iso": "FI",
+        "iso3": "FIN",
+        "code": "246",
+        "ltd": "64",
+        "lng": "26"
+    },
+    {
+        "Country": "France",
+        "iso": "FR",
+        "iso3": "FRA",
+        "code": "250",
+        "ltd": "46",
+        "lng": "2"
+    },
+    {
+        "Country": "French Guiana",
+        "iso": "GF",
+        "iso3": "GUF",
+        "code": "254",
+        "ltd": "4",
+        "lng": "-53"
+    },
+    {
+        "Country": "French Polynesia",
+        "iso": "PF",
+        "iso3": "PYF",
+        "code": "258",
+        "ltd": "-15",
+        "lng": "-140"
+    },
+    {
+        "Country": "French Southern Territories",
+        "iso": "TF",
+        "iso3": "ATF",
+        "code": "260",
+        "ltd": "-43",
+        "lng": "67"
+    },
+    {
+        "Country": "Gabon",
+        "iso": "GA",
+        "iso3": "GAB",
+        "code": "266",
+        "ltd": "-1",
+        "lng": "11.75"
+    },
+    {
+        "Country": "Gambia",
+        "iso": "GM",
+        "iso3": "GMB",
+        "code": "270",
+        "ltd": "13.4667",
+        "lng": "-16.5667"
+    },
+    {
+        "Country": "Georgia",
+        "iso": "GE",
+        "iso3": "GEO",
+        "code": "268",
+        "ltd": "42",
+        "lng": "43.5"
+    },
+    {
+        "Country": "Germany",
+        "iso": "DE",
+        "iso3": "DEU",
+        "code": "276",
+        "ltd": "51",
+        "lng": "9"
+    },
+    {
+        "Country": "Ghana",
+        "iso": "GH",
+        "iso3": "GHA",
+        "code": "288",
+        "ltd": "8",
+        "lng": "-2"
+    },
+    {
+        "Country": "Gibraltar",
+        "iso": "GI",
+        "iso3": "GIB",
+        "code": "292",
+        "ltd": "36.1833",
+        "lng": "-5.3667"
+    },
+    {
+        "Country": "Greece",
+        "iso": "GR",
+        "iso3": "GRC",
+        "code": "300",
+        "ltd": "39",
+        "lng": "22"
+    },
+    {
+        "Country": "Greenland",
+        "iso": "GL",
+        "iso3": "GRL",
+        "code": "304",
+        "ltd": "72",
+        "lng": "-40"
+    },
+    {
+        "Country": "Grenada",
+        "iso": "GD",
+        "iso3": "GRD",
+        "code": "308",
+        "ltd": "12.1167",
+        "lng": "-61.6667"
+    },
+    {
+        "Country": "Guadeloupe",
+        "iso": "GP",
+        "iso3": "GLP",
+        "code": "312",
+        "ltd": "16.25",
+        "lng": "-61.5833"
+    },
+    {
+        "Country": "Guam",
+        "iso": "GU",
+        "iso3": "GUM",
+        "code": "316",
+        "ltd": "13.4667",
+        "lng": "144.7833"
+    },
+    {
+        "Country": "Guatemala",
+        "iso": "GT",
+        "iso3": "GTM",
+        "code": "320",
+        "ltd": "15.5",
+        "lng": "-90.25"
+    },
+    {
+        "Country": "Guernsey",
+        "iso": "GG",
+        "iso3": "GGY",
+        "code": "831",
+        "ltd": "49.5",
+        "lng": "-2.56"
+    },
+    {
+        "Country": "Guinea",
+        "iso": "GN",
+        "iso3": "GIN",
+        "code": "324",
+        "ltd": "11",
+        "lng": "-10"
+    },
+    {
+        "Country": "Guinea-Bissau",
+        "iso": "GW",
+        "iso3": "GNB",
+        "code": "624",
+        "ltd": "12",
+        "lng": "-15"
+    },
+    {
+        "Country": "Guyana",
+        "iso": "GY",
+        "iso3": "GUY",
+        "code": "328",
+        "ltd": "5",
+        "lng": "-59"
+    },
+    {
+        "Country": "Haiti",
+        "iso": "HT",
+        "iso3": "HTI",
+        "code": "332",
+        "ltd": "19",
+        "lng": "-72.4167"
+    },
+    {
+        "Country": "Heard Island and McDonald Islands",
+        "iso": "HM",
+        "iso3": "HMD",
+        "code": "334",
+        "ltd": "-53.1",
+        "lng": "72.5167"
+    },
+    {
+        "Country": "Holy See (Vatican City State)",
+        "iso": "VA",
+        "iso3": "VAT",
+        "code": "336",
+        "ltd": "41.9",
+        "lng": "12.45"
+    },
+    {
+        "Country": "Honduras",
+        "iso": "HN",
+        "iso3": "HND",
+        "code": "340",
+        "ltd": "15",
+        "lng": "-86.5"
+    },
+    {
+        "Country": "Hong Kong",
+        "iso": "HK",
+        "iso3": "HKG",
+        "code": "344",
+        "ltd": "22.25",
+        "lng": "114.1667"
+    },
+    {
+        "Country": "Hungary",
+        "iso": "HU",
+        "iso3": "HUN",
+        "code": "348",
+        "ltd": "47",
+        "lng": "20"
+    },
+    {
+        "Country": "Iceland",
+        "iso": "IS",
+        "iso3": "ISL",
+        "code": "352",
+        "ltd": "65",
+        "lng": "-18"
+    },
+    {
+        "Country": "India",
+        "iso": "IN",
+        "iso3": "IND",
+        "code": "356",
+        "ltd": "20",
+        "lng": "77"
+    },
+    {
+        "Country": "Indonesia",
+        "iso": "ID",
+        "iso3": "IDN",
+        "code": "360",
+        "ltd": "-5",
+        "lng": "120"
+    },
+    {
+        "Country": "Iran, Islamic Republic of",
+        "iso": "IR",
+        "iso3": "IRN",
+        "code": "364",
+        "ltd": "32",
+        "lng": "53"
+    },
+    {
+        "Country": "Iraq",
+        "iso": "IQ",
+        "iso3": "IRQ",
+        "code": "368",
+        "ltd": "33",
+        "lng": "44"
+    },
+    {
+        "Country": "Ireland",
+        "iso": "IE",
+        "iso3": "IRL",
+        "code": "372",
+        "ltd": "53",
+        "lng": "-8"
+    },
+    {
+        "Country": "Isle of Man",
+        "iso": "IM",
+        "iso3": "IMN",
+        "code": "833",
+        "ltd": "54.23",
+        "lng": "-4.55"
+    },
+    {
+        "Country": "Israel",
+        "iso": "IL",
+        "iso3": "ISR",
+        "code": "376",
+        "ltd": "31.5",
+        "lng": "34.75"
+    },
+    {
+        "Country": "Italy",
+        "iso": "IT",
+        "iso3": "ITA",
+        "code": "380",
+        "ltd": "42.8333",
+        "lng": "12.8333"
+    },
+    {
+        "Country": "Jamaica",
+        "iso": "JM",
+        "iso3": "JAM",
+        "code": "388",
+        "ltd": "18.25",
+        "lng": "-77.5"
+    },
+    {
+        "Country": "Japan",
+        "iso": "JP",
+        "iso3": "JPN",
+        "code": "392",
+        "ltd": "36",
+        "lng": "138"
+    },
+    {
+        "Country": "Jersey",
+        "iso": "JE",
+        "iso3": "JEY",
+        "code": "832",
+        "ltd": "49.21",
+        "lng": "-2.13"
+    },
+    {
+        "Country": "Jordan",
+        "iso": "JO",
+        "iso3": "JOR",
+        "code": "400",
+        "ltd": "31",
+        "lng": "36"
+    },
+    {
+        "Country": "Kazakhstan",
+        "iso": "KZ",
+        "iso3": "KAZ",
+        "code": "398",
+        "ltd": "48",
+        "lng": "68"
+    },
+    {
+        "Country": "Kenya",
+        "iso": "KE",
+        "iso3": "KEN",
+        "code": "404",
+        "ltd": "1",
+        "lng": "38"
+    },
+    {
+        "Country": "Kiribati",
+        "iso": "KI",
+        "iso3": "KIR",
+        "code": "296",
+        "ltd": "1.4167",
+        "lng": "173"
+    },
+    {
+        "Country": "Korea, Democratic People's Republic of",
+        "iso": "KP",
+        "iso3": "PRK",
+        "code": "408",
+        "ltd": "40",
+        "lng": "127"
+    },
+    {
+        "Country": "Korea, Republic of",
+        "iso": "KR",
+        "iso3": "KOR",
+        "code": "410",
+        "ltd": "37",
+        "lng": "127.5"
+    },
+    {
+        "Country": "Kuwait",
+        "iso": "KW",
+        "iso3": "KWT",
+        "code": "414",
+        "ltd": "29.3375",
+        "lng": "47.6581"
+    },
+    {
+        "Country": "Kyrgyzstan",
+        "iso": "KG",
+        "iso3": "KGZ",
+        "code": "417",
+        "ltd": "41",
+        "lng": "75"
+    },
+    {
+        "Country": "Lao People's Democratic Republic",
+        "iso": "LA",
+        "iso3": "LAO",
+        "code": "418",
+        "ltd": "18",
+        "lng": "105"
+    },
+    {
+        "Country": "Latvia",
+        "iso": "LV",
+        "iso3": "LVA",
+        "code": "428",
+        "ltd": "57",
+        "lng": "25"
+    },
+    {
+        "Country": "Lebanon",
+        "iso": "LB",
+        "iso3": "LBN",
+        "code": "422",
+        "ltd": "33.8333",
+        "lng": "35.8333"
+    },
+    {
+        "Country": "Lesotho",
+        "iso": "LS",
+        "iso3": "LSO",
+        "code": "426",
+        "ltd": "-29.5",
+        "lng": "28.5"
+    },
+    {
+        "Country": "Liberia",
+        "iso": "LR",
+        "iso3": "LBR",
+        "code": "430",
+        "ltd": "6.5",
+        "lng": "-9.5"
+    },
+    {
+        "Country": "Libyan Arab Jamahiriya",
+        "iso": "LY",
+        "iso3": "LBY",
+        "code": "434",
+        "ltd": "25",
+        "lng": "17"
+    },
+    {
+        "Country": "Liechtenstein",
+        "iso": "LI",
+        "iso3": "LIE",
+        "code": "438",
+        "ltd": "47.1667",
+        "lng": "9.5333"
+    },
+    {
+        "Country": "Lithuania",
+        "iso": "LT",
+        "iso3": "LTU",
+        "code": "440",
+        "ltd": "56",
+        "lng": "24"
+    },
+    {
+        "Country": "Luxembourg",
+        "iso": "LU",
+        "iso3": "LUX",
+        "code": "442",
+        "ltd": "49.75",
+        "lng": "6.1667"
+    },
+    {
+        "Country": "Macao",
+        "iso": "MO",
+        "iso3": "MAC",
+        "code": "446",
+        "ltd": "22.1667",
+        "lng": "113.55"
+    },
+    {
+        "Country": "Macedonia, the former Yugoslav Republic of",
+        "iso": "MK",
+        "iso3": "MKD",
+        "code": "807",
+        "ltd": "41.8333",
+        "lng": "22"
+    },
+    {
+        "Country": "Madagascar",
+        "iso": "MG",
+        "iso3": "MDG",
+        "code": "450",
+        "ltd": "-20",
+        "lng": "47"
+    },
+    {
+        "Country": "Malawi",
+        "iso": "MW",
+        "iso3": "MWI",
+        "code": "454",
+        "ltd": "-13.5",
+        "lng": "34"
+    },
+    {
+        "Country": "Malaysia",
+        "iso": "MY",
+        "iso3": "MYS",
+        "code": "458",
+        "ltd": "2.5",
+        "lng": "112.5"
+    },
+    {
+        "Country": "Maldives",
+        "iso": "MV",
+        "iso3": "MDV",
+        "code": "462",
+        "ltd": "3.25",
+        "lng": "73"
+    },
+    {
+        "Country": "Mali",
+        "iso": "ML",
+        "iso3": "MLI",
+        "code": "466",
+        "ltd": "17",
+        "lng": "-4"
+    },
+    {
+        "Country": "Malta",
+        "iso": "MT",
+        "iso3": "MLT",
+        "code": "470",
+        "ltd": "35.8333",
+        "lng": "14.5833"
+    },
+    {
+        "Country": "Marshall Islands",
+        "iso": "MH",
+        "iso3": "MHL",
+        "code": "584",
+        "ltd": "9",
+        "lng": "168"
+    },
+    {
+        "Country": "Martinique",
+        "iso": "MQ",
+        "iso3": "MTQ",
+        "code": "474",
+        "ltd": "14.6667",
+        "lng": "-61"
+    },
+    {
+        "Country": "Mauritania",
+        "iso": "MR",
+        "iso3": "MRT",
+        "code": "478",
+        "ltd": "20",
+        "lng": "-12"
+    },
+    {
+        "Country": "Mauritius",
+        "iso": "MU",
+        "iso3": "MUS",
+        "code": "480",
+        "ltd": "-20.2833",
+        "lng": "57.55"
+    },
+    {
+        "Country": "Mayotte",
+        "iso": "YT",
+        "iso3": "MYT",
+        "code": "175",
+        "ltd": "-12.8333",
+        "lng": "45.1667"
+    },
+    {
+        "Country": "Mexico",
+        "iso": "MX",
+        "iso3": "MEX",
+        "code": "484",
+        "ltd": "23",
+        "lng": "-102"
+    },
+    {
+        "Country": "Micronesia, Federated States of",
+        "iso": "FM",
+        "iso3": "FSM",
+        "code": "583",
+        "ltd": "6.9167",
+        "lng": "158.25"
+    },
+    {
+        "Country": "Moldova, Republic of",
+        "iso": "MD",
+        "iso3": "MDA",
+        "code": "498",
+        "ltd": "47",
+        "lng": "29"
+    },
+    {
+        "Country": "Monaco",
+        "iso": "MC",
+        "iso3": "MCO",
+        "code": "492",
+        "ltd": "43.7333",
+        "lng": "7.4"
+    },
+    {
+        "Country": "Mongolia",
+        "iso": "MN",
+        "iso3": "MNG",
+        "code": "496",
+        "ltd": "46",
+        "lng": "105"
+    },
+    {
+        "Country": "Montenegro",
+        "iso": "ME",
+        "iso3": "MNE",
+        "code": "499",
+        "ltd": "42",
+        "lng": "19"
+    },
+    {
+        "Country": "Montserrat",
+        "iso": "MS",
+        "iso3": "MSR",
+        "code": "500",
+        "ltd": "16.75",
+        "lng": "-62.2"
+    },
+    {
+        "Country": "Morocco",
+        "iso": "MA",
+        "iso3": "MAR",
+        "code": "504",
+        "ltd": "32",
+        "lng": "-5"
+    },
+    {
+        "Country": "Mozambique",
+        "iso": "MZ",
+        "iso3": "MOZ",
+        "code": "508",
+        "ltd": "-18.25",
+        "lng": "35"
+    },
+    {
+        "Country": "Myanmar",
+        "iso": "MM",
+        "iso3": "MMR",
+        "code": "104",
+        "ltd": "22",
+        "lng": "98"
+    },
+    {
+        "Country": "Namibia",
+        "iso": "NA",
+        "iso3": "NAM",
+        "code": "516",
+        "ltd": "-22",
+        "lng": "17"
+    },
+    {
+        "Country": "Nauru",
+        "iso": "NR",
+        "iso3": "NRU",
+        "code": "520",
+        "ltd": "-0.5333",
+        "lng": "166.9167"
+    },
+    {
+        "Country": "Nepal",
+        "iso": "NP",
+        "iso3": "NPL",
+        "code": "524",
+        "ltd": "28",
+        "lng": "84"
+    },
+    {
+        "Country": "Netherlands",
+        "iso": "NL",
+        "iso3": "NLD",
+        "code": "528",
+        "ltd": "52.5",
+        "lng": "5.75"
+    },
+    {
+        "Country": "Netherlands Antilles",
+        "iso": "AN",
+        "iso3": "ANT",
+        "code": "530",
+        "ltd": "12.25",
+        "lng": "-68.75"
+    },
+    {
+        "Country": "New Caledonia",
+        "iso": "NC",
+        "iso3": "NCL",
+        "code": "540",
+        "ltd": "-21.5",
+        "lng": "165.5"
+    },
+    {
+        "Country": "New Zealand",
+        "iso": "NZ",
+        "iso3": "NZL",
+        "code": "554",
+        "ltd": "-41",
+        "lng": "174"
+    },
+    {
+        "Country": "Nicaragua",
+        "iso": "NI",
+        "iso3": "NIC",
+        "code": "558",
+        "ltd": "13",
+        "lng": "-85"
+    },
+    {
+        "Country": "Niger",
+        "iso": "NE",
+        "iso3": "NER",
+        "code": "562",
+        "ltd": "16",
+        "lng": "8"
+    },
+    {
+        "Country": "Nigeria",
+        "iso": "NG",
+        "iso3": "NGA",
+        "code": "566",
+        "ltd": "10",
+        "lng": "8"
+    },
+    {
+        "Country": "Niue",
+        "iso": "NU",
+        "iso3": "NIU",
+        "code": "570",
+        "ltd": "-19.0333",
+        "lng": "-169.8667"
+    },
+    {
+        "Country": "Norfolk Island",
+        "iso": "NF",
+        "iso3": "NFK",
+        "code": "574",
+        "ltd": "-29.0333",
+        "lng": "167.95"
+    },
+    {
+        "Country": "Northern Mariana Islands",
+        "iso": "MP",
+        "iso3": "MNP",
+        "code": "580",
+        "ltd": "15.2",
+        "lng": "145.75"
+    },
+    {
+        "Country": "Norway",
+        "iso": "NO",
+        "iso3": "NOR",
+        "code": "578",
+        "ltd": "62",
+        "lng": "10"
+    },
+    {
+        "Country": "Oman",
+        "iso": "OM",
+        "iso3": "OMN",
+        "code": "512",
+        "ltd": "21",
+        "lng": "57"
+    },
+    {
+        "Country": "Pakistan",
+        "iso": "PK",
+        "iso3": "PAK",
+        "code": "586",
+        "ltd": "30",
+        "lng": "70"
+    },
+    {
+        "Country": "Palau",
+        "iso": "PW",
+        "iso3": "PLW",
+        "code": "585",
+        "ltd": "7.5",
+        "lng": "134.5"
+    },
+    {
+        "Country": "Palestinian Territory, Occupied",
+        "iso": "PS",
+        "iso3": "PSE",
+        "code": "275",
+        "ltd": "32",
+        "lng": "35.25"
+    },
+    {
+        "Country": "Panama",
+        "iso": "PA",
+        "iso3": "PAN",
+        "code": "591",
+        "ltd": "9",
+        "lng": "-80"
+    },
+    {
+        "Country": "Papua New Guinea",
+        "iso": "PG",
+        "iso3": "PNG",
+        "code": "598",
+        "ltd": "-6",
+        "lng": "147"
+    },
+    {
+        "Country": "Paraguay",
+        "iso": "PY",
+        "iso3": "PRY",
+        "code": "600",
+        "ltd": "-23",
+        "lng": "-58"
+    },
+    {
+        "Country": "Peru",
+        "iso": "PE",
+        "iso3": "PER",
+        "code": "604",
+        "ltd": "-10",
+        "lng": "-76"
+    },
+    {
+        "Country": "Philippines",
+        "iso": "PH",
+        "iso3": "PHL",
+        "code": "608",
+        "ltd": "13",
+        "lng": "122"
+    },
+    {
+        "Country": "Pitcairn",
+        "iso": "PN",
+        "iso3": "PCN",
+        "code": "612",
+        "ltd": "-24.7",
+        "lng": "-127.4"
+    },
+    {
+        "Country": "Poland",
+        "iso": "PL",
+        "iso3": "POL",
+        "code": "616",
+        "ltd": "52",
+        "lng": "20"
+    },
+    {
+        "Country": "Portugal",
+        "iso": "PT",
+        "iso3": "PRT",
+        "code": "620",
+        "ltd": "39.5",
+        "lng": "-8"
+    },
+    {
+        "Country": "Puerto Rico",
+        "iso": "PR",
+        "iso3": "PRI",
+        "code": "630",
+        "ltd": "18.25",
+        "lng": "-66.5"
+    },
+    {
+        "Country": "Qatar",
+        "iso": "QA",
+        "iso3": "QAT",
+        "code": "634",
+        "ltd": "25.5",
+        "lng": "51.25"
+    },
+    {
+        "Country": "Réunion",
+        "iso": "RE",
+        "iso3": "REU",
+        "code": "638",
+        "ltd": "-21.1",
+        "lng": "55.6"
+    },
+    {
+        "Country": "Romania",
+        "iso": "RO",
+        "iso3": "ROU",
+        "code": "642",
+        "ltd": "46",
+        "lng": "25"
+    },
+    {
+        "Country": "Russian Federation",
+        "iso": "RU",
+        "iso3": "RUS",
+        "code": "643",
+        "ltd": "60",
+        "lng": "100"
+    },
+    {
+        "Country": "Rwanda",
+        "iso": "RW",
+        "iso3": "RWA",
+        "code": "646",
+        "ltd": "-2",
+        "lng": "30"
+    },
+    {
+        "Country": "Saint Helena, Ascension and Tristan da Cunha",
+        "iso": "SH",
+        "iso3": "SHN",
+        "code": "654",
+        "ltd": "-15.9333",
+        "lng": "-5.7"
+    },
+    {
+        "Country": "Saint Kitts and Nevis",
+        "iso": "KN",
+        "iso3": "KNA",
+        "code": "659",
+        "ltd": "17.3333",
+        "lng": "-62.75"
+    },
+    {
+        "Country": "Saint Lucia",
+        "iso": "LC",
+        "iso3": "LCA",
+        "code": "662",
+        "ltd": "13.8833",
+        "lng": "-61.1333"
+    },
+    {
+        "Country": "Saint Pierre and Miquelon",
+        "iso": "PM",
+        "iso3": "SPM",
+        "code": "666",
+        "ltd": "46.8333",
+        "lng": "-56.3333"
+    },
+    {
+        "Country": "Saint Vincent and the Grenadines",
+        "iso": "VC",
+        "iso3": "VCT",
+        "code": "670",
+        "ltd": "13.25",
+        "lng": "-61.2"
+    },
+    {
+        "Country": "Samoa",
+        "iso": "WS",
+        "iso3": "WSM",
+        "code": "882",
+        "ltd": "-13.5833",
+        "lng": "-172.3333"
+    },
+    {
+        "Country": "San Marino",
+        "iso": "SM",
+        "iso3": "SMR",
+        "code": "674",
+        "ltd": "43.7667",
+        "lng": "12.4167"
+    },
+    {
+        "Country": "Sao Tome and Principe",
+        "iso": "ST",
+        "iso3": "STP",
+        "code": "678",
+        "ltd": "1",
+        "lng": "7"
+    },
+    {
+        "Country": "Saudi Arabia",
+        "iso": "SA",
+        "iso3": "SAU",
+        "code": "682",
+        "ltd": "25",
+        "lng": "45"
+    },
+    {
+        "Country": "Senegal",
+        "iso": "SN",
+        "iso3": "SEN",
+        "code": "686",
+        "ltd": "14",
+        "lng": "-14"
+    },
+    {
+        "Country": "Serbia",
+        "iso": "RS",
+        "iso3": "SRB",
+        "code": "688",
+        "ltd": "44",
+        "lng": "21"
+    },
+    {
+        "Country": "Seychelles",
+        "iso": "SC",
+        "iso3": "SYC",
+        "code": "690",
+        "ltd": "-4.5833",
+        "lng": "55.6667"
+    },
+    {
+        "Country": "Sierra Leone",
+        "iso": "SL",
+        "iso3": "SLE",
+        "code": "694",
+        "ltd": "8.5",
+        "lng": "-11.5"
+    },
+    {
+        "Country": "Singapore",
+        "iso": "SG",
+        "iso3": "SGP",
+        "code": "702",
+        "ltd": "1.3667",
+        "lng": "103.8"
+    },
+    {
+        "Country": "Slovakia",
+        "iso": "SK",
+        "iso3": "SVK",
+        "code": "703",
+        "ltd": "48.6667",
+        "lng": "19.5"
+    },
+    {
+        "Country": "Slovenia",
+        "iso": "SI",
+        "iso3": "SVN",
+        "code": "705",
+        "ltd": "46",
+        "lng": "15"
+    },
+    {
+        "Country": "Solomon Islands",
+        "iso": "SB",
+        "iso3": "SLB",
+        "code": "90",
+        "ltd": "-8",
+        "lng": "159"
+    },
+    {
+        "Country": "Somalia",
+        "iso": "SO",
+        "iso3": "SOM",
+        "code": "706",
+        "ltd": "10",
+        "lng": "49"
+    },
+    {
+        "Country": "South Africa",
+        "iso": "ZA",
+        "iso3": "ZAF",
+        "code": "710",
+        "ltd": "-29",
+        "lng": "24"
+    },
+    {
+        "Country": "South Georgia and the South Sandwich Islands",
+        "iso": "GS",
+        "iso3": "SGS",
+        "code": "239",
+        "ltd": "-54.5",
+        "lng": "-37"
+    },
+    {
+        "Country": "Spain",
+        "iso": "ES",
+        "iso3": "ESP",
+        "code": "724",
+        "ltd": "40",
+        "lng": "-4"
+    },
+    {
+        "Country": "Sri Lanka",
+        "iso": "LK",
+        "iso3": "LKA",
+        "code": "144",
+        "ltd": "7",
+        "lng": "81"
+    },
+    {
+        "Country": "Sudan",
+        "iso": "SD",
+        "iso3": "SDN",
+        "code": "736",
+        "ltd": "15",
+        "lng": "30"
+    },
+    {
+        "Country": "Suriname",
+        "iso": "SR",
+        "iso3": "SUR",
+        "code": "740",
+        "ltd": "4",
+        "lng": "-56"
+    },
+    {
+        "Country": "Svalbard and Jan Mayen",
+        "iso": "SJ",
+        "iso3": "SJM",
+        "code": "744",
+        "ltd": "78",
+        "lng": "20"
+    },
+    {
+        "Country": "Swaziland",
+        "iso": "SZ",
+        "iso3": "SWZ",
+        "code": "748",
+        "ltd": "-26.5",
+        "lng": "31.5"
+    },
+    {
+        "Country": "Sweden",
+        "iso": "SE",
+        "iso3": "SWE",
+        "code": "752",
+        "ltd": "62",
+        "lng": "15"
+    },
+    {
+        "Country": "Switzerland",
+        "iso": "CH",
+        "iso3": "CHE",
+        "code": "756",
+        "ltd": "47",
+        "lng": "8"
+    },
+    {
+        "Country": "Syrian Arab Republic",
+        "iso": "SY",
+        "iso3": "SYR",
+        "code": "760",
+        "ltd": "35",
+        "lng": "38"
+    },
+    {
+        "Country": "Taiwan, Province of China",
+        "iso": "TW",
+        "iso3": "TWN",
+        "code": "158",
+        "ltd": "23.5",
+        "lng": "121"
+    },
+    {
+        "Country": "Tajikistan",
+        "iso": "TJ",
+        "iso3": "TJK",
+        "code": "762",
+        "ltd": "39",
+        "lng": "71"
+    },
+    {
+        "Country": "Tanzania, United Republic of",
+        "iso": "TZ",
+        "iso3": "TZA",
+        "code": "834",
+        "ltd": "-6",
+        "lng": "35"
+    },
+    {
+        "Country": "Thailand",
+        "iso": "TH",
+        "iso3": "THA",
+        "code": "764",
+        "ltd": "15",
+        "lng": "100"
+    },
+    {
+        "Country": "Timor-Leste",
+        "iso": "TL",
+        "iso3": "TLS",
+        "code": "626",
+        "ltd": "-8.55",
+        "lng": "125.5167"
+    },
+    {
+        "Country": "Togo",
+        "iso": "TG",
+        "iso3": "TGO",
+        "code": "768",
+        "ltd": "8",
+        "lng": "1.1667"
+    },
+    {
+        "Country": "Tokelau",
+        "iso": "TK",
+        "iso3": "TKL",
+        "code": "772",
+        "ltd": "-9",
+        "lng": "-172"
+    },
+    {
+        "Country": "Tonga",
+        "iso": "TO",
+        "iso3": "TON",
+        "code": "776",
+        "ltd": "-20",
+        "lng": "-175"
+    },
+    {
+        "Country": "Trinidad and Tobago",
+        "iso": "TT",
+        "iso3": "TTO",
+        "code": "780",
+        "ltd": "11",
+        "lng": "-61"
+    },
+    {
+        "Country": "Tunisia",
+        "iso": "TN",
+        "iso3": "TUN",
+        "code": "788",
+        "ltd": "34",
+        "lng": "9"
+    },
+    {
+        "Country": "Turkey",
+        "iso": "TR",
+        "iso3": "TUR",
+        "code": "792",
+        "ltd": "39",
+        "lng": "35"
+    },
+    {
+        "Country": "Turkmenistan",
+        "iso": "TM",
+        "iso3": "TKM",
+        "code": "795",
+        "ltd": "40",
+        "lng": "60"
+    },
+    {
+        "Country": "Turks and Caicos Islands",
+        "iso": "TC",
+        "iso3": "TCA",
+        "code": "796",
+        "ltd": "21.75",
+        "lng": "-71.5833"
+    },
+    {
+        "Country": "Tuvalu",
+        "iso": "TV",
+        "iso3": "TUV",
+        "code": "798",
+        "ltd": "-8",
+        "lng": "178"
+    },
+    {
+        "Country": "Uganda",
+        "iso": "UG",
+        "iso3": "UGA",
+        "code": "800",
+        "ltd": "1",
+        "lng": "32"
+    },
+    {
+        "Country": "Ukraine",
+        "iso": "UA",
+        "iso3": "UKR",
+        "code": "804",
+        "ltd": "49",
+        "lng": "32"
+    },
+    {
+        "Country": "United Arab Emirates",
+        "iso": "AE",
+        "iso3": "ARE",
+        "code": "784",
+        "ltd": "24",
+        "lng": "54"
+    },
+    {
+        "Country": "United Kingdom",
+        "iso": "GB",
+        "iso3": "GBR",
+        "code": "826",
+        "ltd": "54",
+        "lng": "-2"
+    },
+    {
+        "Country": "United States",
+        "iso": "US",
+        "iso3": "USA",
+        "code": "840",
+        "ltd": "38",
+        "lng": "-97"
+    },
+    {
+        "Country": "United States Minor Outlying Islands",
+        "iso": "UM",
+        "iso3": "UMI",
+        "code": "581",
+        "ltd": "19.2833",
+        "lng": "166.6"
+    },
+    {
+        "Country": "Uruguay",
+        "iso": "UY",
+        "iso3": "URY",
+        "code": "858",
+        "ltd": "-33",
+        "lng": "-56"
+    },
+    {
+        "Country": "Uzbekistan",
+        "iso": "UZ",
+        "iso3": "UZB",
+        "code": "860",
+        "ltd": "41",
+        "lng": "64"
+    },
+    {
+        "Country": "Vanuatu",
+        "iso": "VU",
+        "iso3": "VUT",
+        "code": "548",
+        "ltd": "-16",
+        "lng": "167"
+    },
+    {
+        "Country": "Venezuela, Bolivarian Republic of",
+        "iso": "VE",
+        "iso3": "VEN",
+        "code": "862",
+        "ltd": "8",
+        "lng": "-66"
+    },
+    {
+        "Country": "Viet Nam",
+        "iso": "VN",
+        "iso3": "VNM",
+        "code": "704",
+        "ltd": "16",
+        "lng": "106"
+    },
+    {
+        "Country": "Virgin Islands, British",
+        "iso": "VG",
+        "iso3": "VGB",
+        "code": "92",
+        "ltd": "18.5",
+        "lng": "-64.5"
+    },
+    {
+        "Country": "Virgin Islands, U.S.",
+        "iso": "VI",
+        "iso3": "VIR",
+        "code": "850",
+        "ltd": "18.3333",
+        "lng": "-64.8333"
+    },
+    {
+        "Country": "Wallis and Futuna",
+        "iso": "WF",
+        "iso3": "WLF",
+        "code": "876",
+        "ltd": "-13.3",
+        "lng": "-176.2"
+    },
+    {
+        "Country": "Western Sahara",
+        "iso": "EH",
+        "iso3": "ESH",
+        "code": "732",
+        "ltd": "24.5",
+        "lng": "-13"
+    },
+    {
+        "Country": "Yemen",
+        "iso": "YE",
+        "iso3": "YEM",
+        "code": "887",
+        "ltd": "15",
+        "lng": "48"
+    },
+    {
+        "Country": "Zambia",
+        "iso": "ZM",
+        "iso3": "ZMB",
+        "code": "894",
+        "ltd": "-15",
+        "lng": "30"
+    },
+    {
+        "Country": "Zimbabwe",
+        "iso": "ZW",
+        "iso3": "ZWE",
+        "code": "716",
+        "ltd": "-20",
+        "lng": "30"
+    },
+    {
+        "Country": ""
+    }
+]
