@@ -34,6 +34,10 @@
 				font-size: 11px;
 				text-anchor:middle;
 			}
+
+			text.hidden {
+				display: none;
+			}
 		}
 
 		path.connection {

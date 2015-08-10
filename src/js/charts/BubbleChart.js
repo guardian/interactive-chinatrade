@@ -267,12 +267,17 @@ function BubbleChart(data,options) {
 	chineseBubble.append("text")
 			.attr("class","title")
 			.attr("x",0)
-			.attr("y",-24)
-			.text("Chinese exports losses")
+			.attr("y",-46)
+			.text("Chinese imports")
+	chineseBubble.append("text")
+			.attr("class","title")
+			.attr("x",0)
+			.attr("y",-26)
+			.text("demand decline")
 	var chineseValue = chineseBubble.append("text")
 						.attr("class","perc")
 						.attr("x",0)
-						.attr("y",24)
+						.attr("y",26)
 						.text(function(d){
 							return numberFormat(projection_data.y1*RATIO*1000);
 						})
@@ -390,7 +395,7 @@ function BubbleChart(data,options) {
 			//.origin(function(d) { return d; })
 			.on("dragstart", function() {
 				d3.event.sourceEvent.stopPropagation(); // silence other listeners
-				console.log("ciao",d3.event)
+				//console.log("ciao",d3.event)
 			})
 			.on("drag",function() {
 				//console.log(this,d3.event)
@@ -434,9 +439,13 @@ function BubbleChart(data,options) {
 							return "translate("+x+","+y+")";
 						})
 						.select("text.value")
+							.classed("hidden",function(d){
+								return d.loss_normalized<=0;
+							})
 							.text(function(d){
 								return numberFormat(d.loss_normalized);
 							})
+
 
 					link
 						.attr("transform",function(d,i){
