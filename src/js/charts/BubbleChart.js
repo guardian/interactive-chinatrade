@@ -22,7 +22,8 @@ function BubbleChart(data,options) {
 
 	console.log("DATA",data)
 
-	var RATIO=0.155;
+	var RATIO=0.155,
+		O_RATIO=RATIO;
 
 	var container=d3.select(options.container);
 	
@@ -414,6 +415,8 @@ function BubbleChart(data,options) {
 					return;
 				}
 				
+				var diff=(RATIO - O_RATIO)/O_RATIO;
+
 				RATIO=__ratio;
 				updateData()
 
@@ -445,6 +448,23 @@ function BubbleChart(data,options) {
 							.text(function(d){
 								return numberFormat(d.loss_normalized);
 							})
+					country.select("circle.inner")
+						.attr("cy",function(d){
+							return -gdp_scale(d.chinaexports*(1-diff))
+						})
+						.attr("r",function(d){
+							//if(d.iso=="AUS") {
+							//	console.log(diff,d.chinaexports*diff,gdp_scale(d.chinaexports*diff))
+							//}
+							return gdp_scale(d.chinaexports*(1-diff));
+						});
+					country.select("circle.outer")
+						.attr("cy",function(d){
+							return -gdp_scale(d.gdp - d.chinaexports*diff);
+						})
+						.attr("r",function(d){
+							return gdp_scale(d.gdp - d.chinaexports*diff);
+						})
 
 
 					link
