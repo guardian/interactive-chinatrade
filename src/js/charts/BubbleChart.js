@@ -436,7 +436,7 @@ function BubbleChart(data,options) {
 				return getPath([
 					{
 						x:0,
-						y:0+14
+						y:0+30
 					},
 					{
 						x: x-paths_space/2+(paths_space/19*i),
@@ -558,7 +558,7 @@ function BubbleChart(data,options) {
 							return getPath([
 								{
 									x:0,
-									y:0+14
+									y:0+30
 								},
 								{
 									x: x-paths_space/2+(paths_space/19*i),
