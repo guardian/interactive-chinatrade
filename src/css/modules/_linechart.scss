@@ -104,7 +104,13 @@
 				}
 			}
 		}
-
+		.axes {
+			text {
+				@include fs-textSans(1);
+				fill: #767676;
+				font-size: 11px;
+			}
+		}
 		.axis {
 			path,line {
 				fill:none;
