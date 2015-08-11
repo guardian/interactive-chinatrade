@@ -342,7 +342,7 @@ function BubbleChart(data,options) {
 	chineseBubble.append("text")
 			.attr("class","legend")
 			.attr("x",0)
-			.attr("y",gdp_scale(CHINA_GDP)-8)
+			.attr("y",gdp_scale(CHINA_GDP)+16)
 			.text("Chinese GDP")
 
 	chineseBubble.append("text")
@@ -351,7 +351,15 @@ function BubbleChart(data,options) {
 			.attr("y",-gdp_scale(CHINA_IMPORTS)-8)
 			.text("Chinese Imports")
 	
-		
+	chineseBubble.append("line")
+			.attr("x1",0)
+			.attr("x2",0)
+			.attr("y1",function(){
+				return gdp_scale(CHINA_GDP)-8
+			})
+			.attr("y2",function(){
+				return gdp_scale(CHINA_GDP)+6
+			})
 
 	//COUNTRIES
 	var link=countries_g
