@@ -13,6 +13,8 @@
 @import 'modules/_side-margins';
 
 @import 'modules/_common';
+@import 'modules/_buttons';
+
 
 // Setup page
 body {
@@ -71,14 +73,6 @@ h2 {
     @include fs-header(2);
 }
 
-g {
-  @include fs-textSans(3);
-}
-
-
-rect {
-    fill : colour('news-support-2');      
-}
 
 .display {
     margin-top: 30px;
@@ -91,6 +85,7 @@ rect {
 $CN: colour('news-support-6');
 $CNatMonth: colour('features-main-2');
 
+@import 'modules/_page';
 
 @import 'modules/_interactive-exports';
 @import 'modules/_linechart';

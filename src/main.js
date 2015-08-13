@@ -1,5 +1,6 @@
 var getJSON = require('./js/utils/getjson');
 var template = require('./html/base.html');
+var detect = require('./js/utils/detect');
 var d3 = require('d3');
 var formattedproperty;
 
@@ -71,7 +72,42 @@ function populate(data) {
 				return d.date < new Date(2015,0,1) ;
 			}
 		}
-	})
+	});
+
+	;(function() {
+	    var throttle = function(type, name, obj) {
+	        var obj = obj || window;
+	        var running = false;
+	        var func = function() {
+	            if (running) { return; }
+	            running = true;
+	            requestAnimationFrame(function() {
+	                obj.dispatchEvent(new CustomEvent(name));
+	                running = false;
+	            });
+	        };
+	        obj.addEventListener(type, func);
+	    };
+
+	    /* init - you can init any event */
+	    throttle ("scroll", "optimizedScroll");
+	})();
+
+	// handle event
+	window.addEventListener("optimizedScroll", function() {
+	    //console.log("Resource conscious scroll callback!");
+	    if(!bubbles.getLocked()) {
+	    	bubbles.setRatio(0.08)	
+	    }
+	});
+
+	
+	var viewport=detect.getViewport();
+	if(viewport.height>800) {
+		if(!bubbles.getLocked()) {
+	    	bubbles.setRatio(0.08)	
+	    }
+	}
 
 	return;
 

@@ -4,6 +4,8 @@ function BubbleChart(data,options) {
 	console.log(options)
 	var locations={};
 
+	
+
 	/** Extend Number object with method to convert numeric degrees to radians */
 	if (Number.prototype.toRadians === undefined) {
 	    Number.prototype.toRadians = function() { return this * Math.PI / 180; };
@@ -47,7 +49,7 @@ function BubbleChart(data,options) {
 	console.log("LOCATIONS",locations);
 
 	var numberFormat=options.numberFormat || function(d){
-			return d3.format("$,.0f")(d3.round(d,0)/1000)
+			return d3.format("$,.0f")(d3.round(d,0)/(1000*1000))+"B"
 		},
 		percFormat=options.percFormat || function(d){
 			return d3.format(",.1%")(d)
@@ -62,8 +64,9 @@ function BubbleChart(data,options) {
 
 	console.log("DATA",data)
 
-	var RATIO=0.08,
+	var RATIO=0,
 		O_RATIO=RATIO;
+	
 
 	var container=d3.select(options.container);
 	
@@ -82,7 +85,7 @@ function BubbleChart(data,options) {
     var margins={
     	left:WIDTH>320?100:20,
     	right:WIDTH>320?100:20,
-    	top:80,//320,
+    	top:320,//320,
     	bottom:150
     };
 
@@ -107,9 +110,12 @@ function BubbleChart(data,options) {
     		
 
 	    	d.new_value=d.chinaexports * (1 - RATIO); 
+	    	
 	    	d.loss = d.chinaexports - d.new_value;
 	    	d.loss_normalized=d.loss*d.averagevariation;
 
+	    	d.new_chinaexports = d.chinaexports - d.loss_normalized;
+	    	d.new_gdp = d.gdp - d.loss_normalized;
 
 	    	d.percGDP = d.loss_normalized / d.gdp;
 	    	//d.percGDP = d.chinaexportsovergdp;
@@ -361,27 +367,83 @@ function BubbleChart(data,options) {
 
 	chineseBubble.append("text")
 			.attr("class","title")
-			.attr("x",0)
-			.attr("y",10)
-			.text("Chinese imports")
+			.attr("x",-RADIUS[1]*2.2)
+			.attr("y",15)
+			.text("If China's import")
 	chineseBubble.append("text")
 			.attr("class","title")
-			.attr("x",0)
-			.attr("y",28)
-			.text("demand decline")
+			.attr("x",-RADIUS[1]*2.2)
+			.attr("y",39)
+			.text("demands decline by")
 
+	var scenarios=[
+		{
+			val:0.08,
+			text:"Stays steady",
+			selected:1
+		},
+		{
+			val:0,
+			text:"Recovers"
+		},
+		{
+			val:0.15,
+			text:"Decline"
+		},
+		{
+			val:0.25,
+			text:"Boooooom!"
+		},
+	]
+	
+	var scenarios_ul=container
+					.append("ul")
+					.attr("class","scenarios clearfix");
+
+	scenarios_ul.append("li")
+			.attr("class","button button--title")
+			.text("What happens if China's GDP")
+
+	var scenario=scenarios_ul
+					.selectAll("li.scenario")
+					.data(scenarios)
+					.enter()
+					.append("li")
+						.attr("class","scenario")
+			
+				
+	scenario
+		.append("button")
+		.attr("class","button")
+		.classed("button--primary",function(d){
+			return d.selected;
+		})
+		.classed("button--secondary",function(d){
+			return !d.selected;
+		})
+			.text(function(d){
+				return d.text;
+			})
+			.on("click",function(d){
+				setRatio(d.val);
+				scenario.select("button").classed("button--primary",false).classed("button--secondary",true)
+				console.log(this)
+				d3.select(this).classed("button--primary",true).classed("button--secondary",false)
+			})
+	
+			
 
 
 	var chineseText = chineseBubble.append("text")
 						.attr("class","perc")
 						.attr("x",0)
-						.attr("y",54)
+						.attr("y",15)
 						.text(percFormat(-RATIO));
 
 	var chineseValue = chineseBubble.append("text")
 						.attr("class","value")
 						.attr("x",0)
-						.attr("y",76)
+						.attr("y",39)
 						.text(function(d){
 							return numberFormat(-projection_data.y1*RATIO*1000);
 						})
@@ -527,13 +589,144 @@ function BubbleChart(data,options) {
 	var __THIS,
 		__Y=0,
 		__LAST_Y=0;
+	var locked=false;
+
+	function setRatio(ratio) {
+		locked=true;
+		RATIO=ratio;
+		updateData()
+		moveChina(true);
+	}
+	this.setRatio=function(ratio) {
+		setRatio(ratio);
+	}
+	this.getLocked=function() {
+		return locked;
+	}
+
+	function moveChina(animate) {
+		if(RATIO<=0.3) {
+
+			var val=projection_data.y1*RATIO;//projection_data.y1-projection_data.y1*__ratio;
+			//console.log(val)
+			if(animate) {
+				d3.select(__THIS)
+					.transition()
+					.duration(RATIO>0.2?1000:2000)
+					.ease(RATIO>0.2?"bounce":"cubic-in-out")
+						.attr("transform","translate("+xscale.range()[1]/2+","+yscale_china(RATIO)+")")
+						.select("circle.inner")
+								.attr("cy",-gdp_scale(CHINA_GDP)+gdp_scale(CHINA_IMPORTS-CHINA_IMPORTS*RATIO))
+								.attr("r",gdp_scale(CHINA_IMPORTS-CHINA_IMPORTS*RATIO))
+								
+			} else {
+				d3.select(__THIS)
+					.attr("transform","translate("+xscale.range()[1]/2+","+yscale_china(RATIO)+")")
+					.select("circle.inner")
+							.attr("cy",-gdp_scale(CHINA_GDP)+gdp_scale(CHINA_IMPORTS-CHINA_IMPORTS*RATIO))
+							.attr("r",gdp_scale(CHINA_IMPORTS-CHINA_IMPORTS*RATIO))
+			}
+			
+
+
+			chineseText.text(percFormat(-RATIO))
+			chineseValue.text(numberFormat(-val*1000));
+
+			chineseBubble.select("text.legend.inner")
+				.attr("y",-gdp_scale(CHINA_IMPORTS)-8)
+
+			var cc=animate?country.transition().duration(RATIO>0.2?1000:2000).ease(RATIO>0.2?"bounce":"cubic-in-out"):country;						
+			cc
+				.attr("transform",function(d,i){
+					var x=xscale(i),
+						y=yscale_countries(d.percGDP),
+						mid=xscale.range()[1]/2;
+
+					var ratio=yscale_countries(d.percGDP)/yscale_countries.range()[1];
+					var delta=(x-mid)/mid;
+					//if(d.iso=="AUS" || d.iso=="ZAF" || d.iso=="SGP") {
+					//	console.log(d.iso,ratio,delta);
+						
+
+
+						x+= ratio*(mid*Math.abs(delta))*(-delta)*0.2;
+					//}
+					
+					d.new_x=x;
+
+					return "translate("+x+","+y+")";
+				})
+				.select("circle.outer")
+					.attr("rel",function(d){
+						return d.percGDP;
+					})
+						.style("fill",function(d){
+							return color_countries(d.percGDP)
+						})
+						.attr("cy",function(d){
+							return -gdp_scale(d.new_gdp)
+						})
+						.attr("r",function(d){
+							return gdp_scale(d.new_gdp);
+						});
+					
+			country.select("circle.inner")
+						.attr("cy",function(d){
+							return -gdp_scale(d.new_chinaexports)
+						})
+						.attr("r",function(d){
+							return gdp_scale(d.new_chinaexports);
+						});
+			country
+				.select("text.value")
+					.classed("hidden",function(d){
+						return d.loss_normalized<=0;
+					})
+					.text(function(d){
+						return numberFormat(-d.loss_normalized);
+					})
+			
+			var ll=animate?link.transition().duration(RATIO>0.2?1000:2000).ease(RATIO>0.2?"bounce":"cubic-in-out"):link;	
+			ll.attr("transform",function(d,i){
+					var x=d.new_x,//xscale(i),
+						y=yscale_countries(d.percGDP);
+					return "translate("+x+","+y+")";
+				})
+				.select("path.connection")
+						.attr("d",function(d,i){
+							var x=xscale.range()[1]/2 - d.new_x,//xscale(i),
+								y=(yscale_countries.range()[1] + yscale_china(RATIO)) - yscale_countries(d.percGDP);
+							return getPath([
+								{
+									x:0,
+									y:0+30
+								},
+								{
+									x: x-paths_space/2+(paths_space/19*i),
+									y: y-CHINESE_RADIUS/2
+								}
+							])
+						})
+						.style("stroke",function(d){
+							return color_countries(d.percGDP)
+						});
+		}
+	}
+
 	function dragChina() {
 
-		window.requestAnimationFrame(dragChina);
+
+		
+		window.requestAnimationFrame(dragChina);	
+		
+		
+		//console.log(__Y,"!=",__LAST_Y)
 
 		if(__Y!=__LAST_Y) {
 
-			
+			console.log(__Y,"!=",__LAST_Y)
+
+			scenario.select("button").classed("button--primary",false).classed("button--secondary",true)
 
 			__LAST_Y = __Y;
 
@@ -543,103 +736,12 @@ function BubbleChart(data,options) {
 				return;
 			}
 			
-			var diff=(RATIO - O_RATIO)/O_RATIO;
-
 			RATIO=__ratio;
 			updateData()
 
-			//console.log(RATIO)
-
-			//ratio=ratio<0.005?0:ratio;
-			//console.log(ratio)
-			if(RATIO<=0.3) {
-
-				var val=projection_data.y1*__ratio;//projection_data.y1-projection_data.y1*__ratio;
-				//console.log(val)
-
-				d3.select(__THIS)
-					.attr("transform","translate("+xscale.range()[1]/2+","+yscale_china(RATIO)+")")
-					.select("circle.inner")
-						.attr("cy",-gdp_scale(CHINA_GDP)+gdp_scale(CHINA_IMPORTS-CHINA_IMPORTS*RATIO))
-						.attr("r",gdp_scale(CHINA_IMPORTS-CHINA_IMPORTS*RATIO));
-
-				chineseText.text(percFormat(-RATIO))
-				chineseValue.text(numberFormat(-val*1000));
-
-
-
-				country.attr("transform",function(d,i){
-						var x=xscale(i),
-							y=yscale_countries(d.percGDP),
-							mid=xscale.range()[1]/2;
-
-						var ratio=yscale_countries(d.percGDP)/yscale_countries.range()[1];
-						var delta=(x-mid)/mid;
-						//if(d.iso=="AUS" || d.iso=="ZAF" || d.iso=="SGP") {
-						//	console.log(d.iso,ratio,delta);
-							
-
-
-							x+= ratio*(mid*Math.abs(delta))*(-delta)*0.2;
-						//}
-						
-						d.new_x=x;
-
-						return "translate("+x+","+y+")";
-					})
-					.select("circle.outer")
-						.attr("rel",function(d){
-							return d.percGDP;
-						})
-						.style("fill",function(d){
-							return color_countries(d.percGDP)
-						})
-						//.style("fill-opacity",function(d){
-						//	return opacityscale_countries(d.percGDP)
-						//});
-				/*country.select("circle.inner")
-							.attr("cy",function(d){
-								return -gdp_scale(d.chinaexports)*diff
-							})
-							.attr("r",function(d){
-								return gdp_scale(d.chinaexports)*diff;
-							});*/
-				country
-					.select("text.value")
-						.classed("hidden",function(d){
-							return d.loss_normalized<=0;
-						})
-						.text(function(d){
-							return numberFormat(-d.loss_normalized);
-						})
-				
-
-
-				link
-					.attr("transform",function(d,i){
-						var x=d.new_x,//xscale(i),
-							y=yscale_countries(d.percGDP);
-						return "translate("+x+","+y+")";
-					})
-					.select("path.connection")
-					.attr("d",function(d,i){
-						var x=xscale.range()[1]/2 - d.new_x,//xscale(i),
-							y=(yscale_countries.range()[1] + yscale_china(RATIO)) - yscale_countries(d.percGDP);
-						return getPath([
-							{
-								x:0,
-								y:0+30
-							},
-							{
-								x: x-paths_space/2+(paths_space/19*i),
-								y: y-CHINESE_RADIUS/2
-							}
-						])
-					})
-					.style("stroke",function(d){
-						return color_countries(d.percGDP)
-					});
-			}
+			moveChina();
+			
+			
 
 		}
 	}
@@ -660,7 +762,7 @@ function BubbleChart(data,options) {
 				
 
 				//ratio=(Math.round(ratio*1000) - Math.round(ratio*1000)%5)/1000;
-				__THIS=this;
+				//__THIS=this;
 				__Y=d3.event.y;
 				
 				
@@ -717,11 +819,11 @@ function BubbleChart(data,options) {
 				.attr("stop-color","#ccc")
 				.attr("stop-opacity",0.7)
 		grad.append("stop")
-				.attr("offset","10%")
+				.attr("offset","20%")
 				.attr("stop-color","#ccc")
 				.attr("stop-opacity",0)
 		grad.append("stop")
-				.attr("offset","90%")
+				.attr("offset","80%")
 				.attr("stop-color","#ccc")
 				.attr("stop-opacity",0)
 		grad.append("stop")
@@ -753,15 +855,19 @@ function BubbleChart(data,options) {
 				.attr("y",20)
 				.text("to China over GDP")
 
+	__THIS = chineseBubble.node();
 	chineseBubble.call(drag);
 
 	new Legend();
 
 	function Legend() {
-		var x=margins.left,
-			y=HEIGHT - 40;//- margins.bottom -12;
 
 		var gdp = 1000000000000*2/3;
+
+		var x=margins.left,
+			y=yscale_countries.range()[1]+margins.top+gdp_scale(gdp)*2+30;
+
+		
 
 		var grad=defs.append("linearGradient")
 				.attr("id","circleGradientLegend")

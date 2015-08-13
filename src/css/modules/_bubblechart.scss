@@ -2,15 +2,50 @@
 	width:100%;
 	height:568px;
 	@include mq(desktop) {
-		height: 100vh;
+		height: calc(100vh + 240px);
+		min-height: 600px;
+		margin-top:-240px;
+	}
+
+
+	ul.scenarios {
+		margin:0;
+		padding:0;
+		list-style-type: none;
+		
+		width: 50%;
+		margin: 0 auto;
+
+		/*clear:left;
+		float:left;
+		list-style:none;
+		position:relative;
+		left:50%;
+		text-align:center;*/
+
+		li {
+			margin:0;
+			padding:0;
+			float:left;
+
+			/*display:block;
+			list-style:none;
+			position:relative;
+			right:50%;*/
+		}
+		li.button--title {
+			background:transparent;
+			color:#000;
+			border:none;
+			margin-right:20px;
+		}
 	}
 }
 .bubblechart {
 	width:100%;
 	height:100%;
 	svg {
-		border-top:1px solid #767676;
-
+		//border-top:1px solid #767676;
 		line {
 			stroke:#ddd;
 			stroke-width:1;
@@ -92,8 +127,9 @@
 				}
 				line.grid {
 					display: block;
-					stroke-width:1.5;
-					stroke-dasharray: 3,4;
+					stroke-width:2;
+					stroke-dasharray: 2,2;
+					stroke-linecap:butt;
 				}
 				text {
 					//display: none;
@@ -183,13 +219,23 @@
 			}
 			text.value {
 				text-anchor:middle;
-				@include fs-header(1);
+				@include fs-header(4);
 				fill:#fff;
+				fill-opacity: 0.4;
+				font-weight: normal;
 			}
 			text.title {
-				@include fs-header(2);
+				@include fs-header(4);
+				fill:#000;
+				text-anchor: start;
+				font-weight: 500;
 			}
-			
+			text.link {
+				@include fs-textSans(1);
+				fill: #000;
+				font-size: 10px;
+				text-anchor: start;
+			}
 			text.legend {
 				@include fs-textSans(1);
 				fill: #333;
