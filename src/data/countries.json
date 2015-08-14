@@ -101,7 +101,8 @@
         "iso3": "AUS",
         "code": "36",
         "ltd": "-27",
-        "lng": "133"
+        "lng": "133",
+        "area": "OT"
     },
     {
         "Country": "Austria",
@@ -237,7 +238,8 @@
         "iso3": "BRA",
         "code": "76",
         "ltd": "-10",
-        "lng": "-55"
+        "lng": "-55",
+        "area": "OT"
     },
     {
         "Country": "British Indian Ocean Territory",
@@ -581,7 +583,8 @@
         "iso3": "FRA",
         "code": "250",
         "ltd": "46",
-        "lng": "2"
+        "lng": "2",
+        "area": "EU"
     },
     {
         "Country": "French Guiana",
@@ -637,7 +640,8 @@
         "iso3": "DEU",
         "code": "276",
         "ltd": "51",
-        "lng": "9"
+        "lng": "9",
+        "area": "EU"
     },
     {
         "Country": "Ghana",
@@ -797,7 +801,8 @@
         "iso3": "IND",
         "code": "356",
         "ltd": "20",
-        "lng": "77"
+        "lng": "77",
+        "area": "AS"
     },
     {
         "Country": "Indonesia",
@@ -805,7 +810,8 @@
         "iso3": "IDN",
         "code": "360",
         "ltd": "-5",
-        "lng": "120"
+        "lng": "120",
+        "area": "AS"
     },
     {
         "Country": "Iran, Islamic Republic of",
@@ -853,7 +859,8 @@
         "iso3": "ITA",
         "code": "380",
         "ltd": "42.8333",
-        "lng": "12.8333"
+        "lng": "12.8333",
+        "area": "EU"
     },
     {
         "Country": "Jamaica",
@@ -869,7 +876,8 @@
         "iso3": "JPN",
         "code": "392",
         "ltd": "36",
-        "lng": "138"
+        "lng": "138",
+        "area": "AS"
     },
     {
         "Country": "Jersey",
@@ -925,7 +933,8 @@
         "iso3": "KOR",
         "code": "410",
         "ltd": "37",
-        "lng": "127.5"
+        "lng": "127.5",
+        "area": "AS"
     },
     {
         "Country": "Kuwait",
@@ -1053,7 +1062,8 @@
         "iso3": "MYS",
         "code": "458",
         "ltd": "2.5",
-        "lng": "112.5"
+        "lng": "112.5",
+        "area": "AS"
     },
     {
         "Country": "Maldives",
@@ -1229,7 +1239,8 @@
         "iso3": "NLD",
         "code": "528",
         "ltd": "52.5",
-        "lng": "5.75"
+        "lng": "5.75",
+        "area": "EU"
     },
     {
         "Country": "Netherlands Antilles",
@@ -1253,7 +1264,8 @@
         "iso3": "NZL",
         "code": "554",
         "ltd": "-41",
-        "lng": "174"
+        "lng": "174",
+        "area": "OT"
     },
     {
         "Country": "Nicaragua",
@@ -1445,7 +1457,8 @@
         "iso3": "RUS",
         "code": "643",
         "ltd": "60",
-        "lng": "100"
+        "lng": "100",
+        "area": "EU"
     },
     {
         "Country": "Rwanda",
@@ -1565,7 +1578,8 @@
         "iso3": "SGP",
         "code": "702",
         "ltd": "1.3667",
-        "lng": "103.8"
+        "lng": "103.8",
+        "area": "AS"
     },
     {
         "Country": "Slovakia",
@@ -1605,7 +1619,8 @@
         "iso3": "ZAF",
         "code": "710",
         "ltd": "-29",
-        "lng": "24"
+        "lng": "24",
+        "area": "OT"
     },
     {
         "Country": "South Georgia and the South Sandwich Islands",
@@ -1693,7 +1708,8 @@
         "iso3": "TWN",
         "code": "158",
         "ltd": "23.5",
-        "lng": "121"
+        "lng": "121",
+        "area": "AS"
     },
     {
         "Country": "Tajikistan",
@@ -1829,7 +1845,8 @@
         "iso3": "GBR",
         "code": "826",
         "ltd": "54",
-        "lng": "-2"
+        "lng": "-2",
+        "area": "EU"
     },
     {
         "Country": "United States",
@@ -1837,7 +1854,8 @@
         "iso3": "USA",
         "code": "840",
         "ltd": "38",
-        "lng": "-97"
+        "lng": "-97",
+        "area": "OT"
     },
     {
         "Country": "United States Minor Outlying Islands",

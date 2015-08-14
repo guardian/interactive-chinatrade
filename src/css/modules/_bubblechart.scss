@@ -1,6 +1,9 @@
 #bubbles {
 	width:100%;
-	height:568px;
+	height: calc(100vh + 240px);
+	position: relative;
+	margin-top:-240px;
+
 	@include mq(desktop) {
 		height: calc(100vh + 240px);
 		min-height: 600px;
@@ -13,8 +16,12 @@
 		padding:0;
 		list-style-type: none;
 		
-		width: 50%;
+		width: 880px;
 		margin: 0 auto;
+
+		position:absolute;
+		left:calc(50% - (880px / 2));
+		bottom:0;
 
 		/*clear:left;
 		float:left;
@@ -83,9 +90,10 @@
 			text.country-name {
 				fill:#000;
 				font-weight: 800;
+				text-transform: uppercase;
 			}
 			text.value {
-				display: none;
+				//display: none;
 				@include mq(desktop) {
 					display: block;
 				}
@@ -95,9 +103,11 @@
 				display: none;
 			}
 		}
+		
+		
 		.axes {
 
-			display: none;
+			display: block;
 			@include mq(desktop) {
 				display: block;
 			}
@@ -170,7 +180,7 @@
 				fill: #888;
 				font-size: 10px;
 				text-anchor:middle;
-				text-transform: uppercase;
+				//text-transform: uppercase;
 			}
 			line {
 				stroke-dasharray: 1,1;
@@ -179,12 +189,24 @@
 				shape-rendering: crispEdges;
 			}
 		}
+		
+		.country.visible,
+		g.link.visible {
+			visibility: visible;
+			opacity: 1;
+			transition: opacity 1s linear;
+		}
+		.country.hidden,
+		g.link.hidden {
+			visibility: hidden;
+			opacity: 0;
+		}
 
 		path.connection {
 			fill:none;
 			stroke:#aa001e;
-			stroke-opacity: 0.1;
-			stroke-width:1;
+			stroke-opacity: 1;
+			stroke-width:3;
 			stroke-linecap:square;
 			@include mq(desktop) {
 				stroke-opacity: 1;
@@ -210,25 +232,31 @@
 			}
 			text {
 				text-anchor:middle;
-				@include fs-header(4);
+				@include fs-header(1);
 				fill:#fff;
-				display: none;
+				//display: none;
 				@include mq(desktop) {
-					display: block;
+					@include fs-header(4);
 				}
 			}
 			text.value {
 				text-anchor:middle;
-				@include fs-header(4);
+				@include fs-header(1);
 				fill:#fff;
 				fill-opacity: 0.4;
 				font-weight: normal;
+				@include mq(desktop) {
+					@include fs-header(4);
+				}
 			}
 			text.title {
-				@include fs-header(4);
+				@include fs-header(1);
 				fill:#000;
 				text-anchor: start;
 				font-weight: 500;
+				@include mq(desktop) {
+					@include fs-header(4);
+				}
 			}
 			text.link {
 				@include fs-textSans(1);
@@ -241,20 +269,23 @@
 				fill: #333;
 				font-size: 10px;
 				text-anchor:middle;
-				text-transform: uppercase;
+				//text-transform: uppercase;
 			}
 			text.legend.inner {
 				fill: #fff;
 				fill-opacity: 0.5;
+			}
+			text.hidden {
+				display: none;
 			}
 			line {
 				stroke-dasharray: 1,1;
 				stroke-width:1;
 				stroke:#333;
 				shape-rendering: crispEdges;
-				display: none;
+				//display: none;
 				@include mq(desktop) {
-					display: block;
+					//display: block;
 				}
 			}
 		}

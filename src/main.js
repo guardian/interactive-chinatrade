@@ -49,7 +49,7 @@ function populate(data) {
 		return c.chinaexportsovergdp > .02;
 	});
 	
-	var bubbles=new BubbleChart(data.sheets["customsdata"],{
+	window.bubbles=new BubbleChart(data.sheets["customsdata"],{
 		container:"#bubbles",
 		latlng: countriesLatLng,
 		china:data.sheets["historical exports"].map(function(d){
@@ -61,6 +61,7 @@ function populate(data) {
 			return +a.date - +b.date;
 		}),
 		lines:["CN"],
+		area:"EU",
 		filters:{
 			atMonth:function(d){
 				return d.date.getMonth() <= 6
@@ -91,6 +92,7 @@ function populate(data) {
 
 	    /* init - you can init any event */
 	    throttle ("scroll", "optimizedScroll");
+	    throttle ("resize", "optimizedResize");
 	})();
 
 	// handle event
@@ -99,6 +101,10 @@ function populate(data) {
 	    if(!bubbles.getLocked()) {
 	    	bubbles.setRatio(0.08)	
 	    }
+	});
+
+	window.addEventListener("optimizedResize", function() {
+	    bubbles.resize();
 	});
 
 	
