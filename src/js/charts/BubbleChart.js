@@ -49,7 +49,7 @@ function BubbleChart(data,options) {
 	console.log("LOCATIONS",locations);
 
 	var numberFormat=options.numberFormat || function(d){
-			return d3.format("$,.0f")(d3.round(d,0)/(1000*1000))+"B"
+			return d3.format("$.2f")(d3.round(d,0)/(1000*1000000))+"bn"
 		},
 		percFormat=options.percFormat || function(d){
 			return d3.format(",.1%")(d)
@@ -369,30 +369,30 @@ function BubbleChart(data,options) {
 			.attr("class","title")
 			.attr("x",-RADIUS[1]*2.2)
 			.attr("y",15)
-			.text("If China's import")
+			.text("This is who loses out if China's import")
 	chineseBubble.append("text")
 			.attr("class","title")
 			.attr("x",-RADIUS[1]*2.2)
 			.attr("y",39)
-			.text("demands decline by")
+			.text("demand declines by")
 
 	var scenarios=[
 		{
 			val:0.08,
-			text:"Stays steady",
+			text:"Declines at the July rate",
 			selected:1
 		},
 		{
 			val:0,
-			text:"Recovers"
+			text:"Recovers to 2014 levels"
 		},
 		{
 			val:0.15,
-			text:"Decline"
+			text:"Declines at the April - June rate"
 		},
 		{
 			val:0.25,
-			text:"Boooooom!"
+			text:"Gets even worse"
 		},
 	]
 	
@@ -574,7 +574,7 @@ function BubbleChart(data,options) {
 					return 12;//-exports_scale(d.exports)*2-5;
 				})
 				.text(function(d){
-					return d.iso;
+					return d.countrybis;
 				})
 
 	country.append("text")
