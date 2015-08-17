@@ -12,6 +12,12 @@ var BubbleChart = require("./js/charts/BubbleChart");
 
 var countriesLatLng = require('./data/countries.json');
 
+d3.selection.prototype.moveToFront = function() {
+      return this.each(function(){
+      this.parentNode.appendChild(this);
+      });
+    };
+
 //var _ = require('lodash');
 var countries, topcountries, africa, europe, samerica, pacific, lowesttier, tierone, tiertwo,tierthree,tierfour;
 
@@ -41,6 +47,8 @@ function Graph(name, title, list, property, units) {
 
 function populate(data) {
 
+	var viewport=detect.getViewport();
+
 	console.log(data)
 	var dateFormat=d3.time.format("%d/%m/%Y");
 
@@ -61,7 +69,7 @@ function populate(data) {
 			return +a.date - +b.date;
 		}),
 		lines:["CN"],
-		area:"EU",
+		area:viewport.width>480?null:"AS",
 		filters:{
 			atMonth:function(d){
 				return d.date.getMonth() <= 6
@@ -99,7 +107,7 @@ function populate(data) {
 	window.addEventListener("optimizedScroll", function() {
 	    //console.log("Resource conscious scroll callback!");
 	    if(!bubbles.getLocked()) {
-	    	bubbles.setRatio(0.08)	
+	    	bubbles.setRatio(0.146)	
 	    }
 	});
 
@@ -108,10 +116,10 @@ function populate(data) {
 	});
 
 	
-	var viewport=detect.getViewport();
+	
 	if(viewport.height>800) {
 		if(!bubbles.getLocked()) {
-	    	bubbles.setRatio(0.08)	
+	    	bubbles.setRatio(0.146)	
 	    }
 	}
 

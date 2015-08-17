@@ -6,7 +6,7 @@
 
 	@include mq(desktop) {
 		height: calc(100vh + 240px);
-		min-height: 600px;
+		min-height: 840px;
 		margin-top:-240px;
 	}
 
@@ -56,6 +56,16 @@
 		line {
 			stroke:#ddd;
 			stroke-width:1;
+		}
+		
+		.h2 {
+			@include fs-header(1);
+			fill:#000;
+			text-anchor: start;
+			font-weight: 500;
+			@include mq(desktop) {
+				@include fs-header(4);
+			}
 		}
 
 		.country {
@@ -213,6 +223,11 @@
 				stroke-width:4;
 			}
 		}
+		
+		g.link.highlight path.connection {
+			//stroke:#000 !important;
+			filter:url(#dropshadow);
+		}
 
 		#china {
 			circle {
@@ -247,6 +262,7 @@
 				font-weight: normal;
 				@include mq(desktop) {
 					@include fs-header(4);
+					font-weight: normal;
 				}
 			}
 			text.title {
