@@ -59,6 +59,7 @@
 		}
 		
 		.h2 {
+			pointer-events: none;
 			@include fs-header(1);
 			fill:#000;
 			text-anchor: start;
@@ -211,6 +212,18 @@
 			visibility: hidden;
 			opacity: 0;
 		}
+	
+		.country.highlight {
+			circle.outer {
+				stroke:#000;	
+			}
+			circle.inner {
+				
+				stroke:#000;
+				stroke-width:2;
+				
+			}
+		}
 
 		path.connection {
 			fill:none;
@@ -225,8 +238,8 @@
 		}
 		
 		g.link.highlight path.connection {
-			//stroke:#000 !important;
-			filter:url(#dropshadow);
+			stroke:#000 !important;
+			//filter:url(#dropshadow);
 		}
 
 		#china {

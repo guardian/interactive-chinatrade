@@ -5,6 +5,8 @@ var d3 = require('d3');
 var formattedproperty;
 
 require('./js/utils/raf.js');
+require('./js/utils/jsBezier.js');
+
 
 var LineChart = require("./js/charts/LineChart");
 var BarChart = require("./js/charts/BarChart");

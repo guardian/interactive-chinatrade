@@ -1,3 +1,4 @@
+var Tooltip=require('../components/Tooltip');
 function BubbleChart(data,options) {
 
 	var self=this;
@@ -13,6 +14,12 @@ function BubbleChart(data,options) {
     		d.china_exports_over_gdp = d.chinaexports / d.gdp;
 
     });
+
+    var current={
+    	beziers:[],
+    	points:[]
+    };
+
 
 	var MAX_GDP=d3.max(data.map(function(d){return d.gdp;}))
 	console.log(MAX_GDP)
@@ -293,9 +300,89 @@ function BubbleChart(data,options) {
 	yscale_countries.domain([0,0.035])
 	opacityscale_countries.domain([0,0.035])
 
+	var tooltip=new Tooltip({
+    	container:container.node(),
+    	margins:margins,
+    	width:190,
+    	html:"<p>At <span></span> decline, <span></span> export sales lost: <span></span></p>",
+    	indicators:[
+    		{
+    			id:"export-perc"
+    		},
+    		{
+    			id:"export-country"
+    		},
+    		{
+    			id:"export-total"
+    		}
+    	]
+    });
+	var MOUSE_MOVING,
+		MOUSE_ON_CIRCLE=false;
+
+	function detectInteractions() {
+
+		//var point=findClosestPoint(MOUSE_MOVING.x,MOUSE_MOVING.y);
+		//console.log("point",point)
+		var bezier=findBezier(MOUSE_MOVING.x,MOUSE_MOVING.y);
+		
+
+		
+
+		/*dot
+			.attr("cx",bezier.p.x)
+			.attr("cy",bezier.p.y)*/
+
+		tooltip.show(
+			[
+	    		{
+	    			id:"export-perc",
+	    			value:bezier.i.perc
+	    		},
+	    		{
+	    			id:"export-country",
+	    			value:bezier.i.country
+	    		},
+	    		{
+	    			id:"export-total",
+	    			value:bezier.i.loss
+	    		}
+	    	],
+			bezier.p.x-margins.left,
+			bezier.p.y-margins.top
+		);
+
+		link.classed("highlight",function(c){
+			return c.iso == bezier.i.iso;
+		}).filter(function(c){
+			return c.iso == bezier.i.iso;
+		}).moveToFront()
+
+		country.classed("highlight",function(c){
+			return c.iso == bezier.i.iso;
+		}).filter(function(c){
+			return c.iso == bezier.i.iso;
+		}).moveToFront()
+	}
+
 	var svg=viz.append("svg")
 				.attr("width","100%")
-				.attr("height","100%");
+				.attr("height","100%")
+				.on("mousemove",function(d){
+					if(!MOUSE_ON_CIRCLE) {
+						var mouse=d3.mouse(this),
+							coords={
+								x:mouse[0],
+								y:mouse[1]
+							};
+						MOUSE_MOVING=coords;	
+					}
+				});
+
+	/*var dot=svg.append("circle")
+				.attr("r",5)
+				.attr("fill","#000")*/
+
 	var defs=svg.append("defs");
 
 	
@@ -562,7 +649,7 @@ function BubbleChart(data,options) {
 								y=yscale_countries(d.percGDP);
 							return "translate("+x+","+y+")";
 						})
-						.on("mouseover",function(d){
+						/*.on("mouseover",function(d){
 
 							link.classed("highlight",function(c){
 								//console.log(c.country,d.country)
@@ -570,7 +657,7 @@ function BubbleChart(data,options) {
 							})
 
 							d3.select(this).moveToFront();
-						})
+						})*/
 						
 
 	var country=countries_g
@@ -595,11 +682,63 @@ function BubbleChart(data,options) {
 							return Math.pow(gdp_scale(d.chinaexports),2)+"/"+Math.pow(gdp_scale(d.gdp),2)+"="+(Math.pow(gdp_scale(d.chinaexports),2)/Math.pow(gdp_scale(d.gdp),2));
 						})
 						.attr("transform",function(d,i){
-							console.log("!!!!!!!!!",d,xscale.domain())
+							//console.log("!!!!!!!!!",d,xscale.domain())
 							var domain=xscale.domain(),
 								x=domain.indexOf(d.index)>-1?xscale(d.index):0,
 								y=yscale_countries(d.percGDP);
+
+							//addPoint({x:0,y:-gdp_scale(d.gdp)},{x:x,y:y,info:d},i);
+
 							return "translate("+x+","+y+")";
+						})
+						.on("mouseenter",function(d){
+							d3.event.stopPropagation();
+							
+							MOUSE_ON_CIRCLE=true;
+							MOUSE_MOVING=false;
+
+							var domain=xscale.domain(),
+								x=domain.indexOf(d.index)>-1?xscale(d.index):0,
+								y=yscale_countries(d.percGDP)+30;
+
+							console.log(d);
+
+							tooltip.show(
+								[
+						    		{
+						    			id:"export-perc",
+						    			value:RATIO
+						    		},
+						    		{
+						    			id:"export-country",
+						    			value:d.country
+						    		},
+						    		{
+						    			id:"export-total",
+						    			value:d.loss_normalized
+						    		}
+						    	],
+								x,
+								y
+							);
+
+							link.classed("highlight",function(c){
+								return c.iso == d.iso;
+							}).filter(function(c){
+								return c.iso == d.iso;
+							}).moveToFront()
+
+							country.classed("highlight",function(c){
+								return c.iso == d.iso;
+							}).filter(function(c){
+								return c.iso == d.iso;
+							}).moveToFront()
+
+
+							
+						})
+						.on("mouseleave",function(d){
+							MOUSE_ON_CIRCLE=false;
 						})
 
 	country.append("circle")
@@ -644,6 +783,81 @@ function BubbleChart(data,options) {
 		
 		return d;
 	}
+	function addPoint(point,d) {
+		var x=d.x,
+			y=d.y;
+
+		current.points.push(
+			{
+				p:{	
+					x:point.x+x+margins.left,
+					y:point.y+y+margins.top
+				},
+				info:{
+					country:d.info.country,
+					iso:d.info.iso,
+					loss:numberFormat(d.info.loss_normalized),
+					perc:percFormat(-RATIO)
+				}
+			}
+		);
+
+		console.log(current.points)
+	}
+	function findClosestPoint(px,py) {
+		//console.log(p)
+		return d3.min(current.points,function(d){
+
+			var x=px - d.p.x,
+				y=py - d.p.y;
+
+			//console.log(p)
+			return Math.sqrt(x*x + y*y);
+
+		})
+
+		return 
+	}
+	function addBezier(points,d) {
+
+		var x=d.x,
+			y=d.y;
+
+		var p1=points[0];
+		var p2=points[1];
+
+		//console.log("!!!!",d)
+
+		current.beziers.push(
+			{
+				b:[
+					{	
+						x:p1.x+x+margins.left,
+						y:p1.y+y+margins.top
+					},
+					{	x:p1.x+x+margins.left,
+						y:(p2.y)/2+y+margins.top
+					},
+					{	x:p2.x+x+margins.left,
+						y:p2.y/2+y+margins.top
+					},
+					{	
+						x: p2.x+x+margins.left,
+						y: p2.y+y+margins.top
+					}
+				],
+				info:{
+					country:d.info.country,
+					iso:d.info.iso,
+					loss:numberFormat(d.info.loss_normalized),
+					perc:percFormat(-RATIO)
+				}
+			}
+		);
+
+		//console.log("BEZIERS",current)
+
+	}
 	var paths_space=RADIUS[1];
 
 	/*link.append("path")
@@ -678,8 +892,8 @@ function BubbleChart(data,options) {
 
 				x=(WIDTH-(margins.right+margins.left))/2 - x;
 					//x=xscale.range()[1]/2 - xscale(i),
-					
-				return getPath([
+				
+				var point=[
 					{
 						x:0,
 						y:0+30
@@ -688,7 +902,18 @@ function BubbleChart(data,options) {
 						x: x,//-paths_space/2+(paths_space/data.length*i),
 						y: y-CHINESE_RADIUS/2
 					}
-				],yscale_countries(d.percGDP))
+				];
+
+				var domain=xscale.domain(),
+					__x=domain.indexOf(d.index)>-1?xscale(d.index):0,
+					__y=yscale_countries(d.percGDP);
+				addBezier(point,{x:__x,y:__y,info:d},i);
+
+
+
+
+
+				return getPath(point,yscale_countries(d.percGDP))
 			})
 			.style("stroke",function(d){
 				return color_countries(d.percGDP)
@@ -781,6 +1006,8 @@ function BubbleChart(data,options) {
 	}
 	function moveChina(animate) {
 		if(RATIO<=0.3) {
+
+			current.beziers=[];
 
 			var val=projection_data.y1*RATIO;//projection_data.y1-projection_data.y1*__ratio;
 			//console.log(val)
@@ -937,7 +1164,7 @@ function BubbleChart(data,options) {
 								y=(yscale_countries.range()[1] + yscale_china(RATIO)) - yscale_countries(d.percGDP);
 							x=(WIDTH-(margins.right+margins.left))/2 - d.new_x;
 
-							return getPath([
+							var point=[
 								{
 									x:0,
 									y:0+30
@@ -946,7 +1173,22 @@ function BubbleChart(data,options) {
 									x: x,//-paths_space/2+(paths_space/data.length*i),
 									y: y-CHINESE_RADIUS/2
 								}
-							])
+							];
+
+							addBezier(point,{x:d.new_x,y:yscale_countries(d.percGDP),info:d},i);
+
+							return getPath(point)
+
+							/*return getPath([
+								{
+									x:0,
+									y:0+30
+								},
+								{
+									x: x,//-paths_space/2+(paths_space/data.length*i),
+									y: y-CHINESE_RADIUS/2
+								}
+							])*/
 						})
 						.style("stroke",function(d){
 							return color_countries(d.percGDP)
@@ -988,6 +1230,9 @@ function BubbleChart(data,options) {
 		
 		window.requestAnimationFrame(dragChina);
 		
+		if(MOUSE_MOVING) {
+			detectInteractions();	
+		}
 		
 		//console.log(__Y,"!=",__LAST_Y)
 
@@ -1101,6 +1346,44 @@ function BubbleChart(data,options) {
 
 
 
+	
+	function findBezier(x,y) {
+		var point=null,
+			bezier=null,
+			location=null;
+		if(current.beziers.length>0) {
+			var distance=WIDTH;
+
+			var i = current.beziers.length;
+			while(i--) {
+				var d=jsBezier.distanceFromCurve({x:x,y:y},current.beziers[i].b);
+				if(d.distance<distance) {
+					bezier=current.beziers[i];
+					distance=d.distance;
+					location=d.location;
+
+					if(distance<2)
+						break;
+				}
+			}
+
+			if(bezier) {
+				point=jsBezier.pointOnCurve(bezier.b,1-location);	
+			}
+			
+
+		}
+		return {
+			p:point,
+			l:location,
+			i:bezier?bezier.info:null,
+			b:bezier?bezier.b:null
+		}
+	}
+	this.findBezier=findBezier;
+	this.getBeziers=function() {
+		return current.beziers;
+	}
 
 
 	new Legend();
