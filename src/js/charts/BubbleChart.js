@@ -1335,11 +1335,11 @@ function BubbleChart(data,options) {
 	axis_title.append("text")
 				.attr("x",0)
 				.attr("y",0)
-				.text("% of lost exports")
+				.text("lost export income")
 	axis_title.append("text")
 				.attr("x",0)
 				.attr("y",20)
-				.text("to China over GDP")
+				.text("as % of GDP")
 
 	__THIS = chineseBubble.node();
 	chineseBubble.call(drag);
@@ -1443,14 +1443,14 @@ function BubbleChart(data,options) {
 			.attr("y",function(){
 				return 18;
 			})
-			.text("export to china")
+			.text("exports to ")
 
 		legend.append("text")
 			.attr("x",0)
 			.attr("y",function(){
 				return 18+12;
 			})
-			.text("over gdp")
+			.text("China")
 
 		
 		legend.append("text")
