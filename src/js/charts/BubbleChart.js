@@ -102,8 +102,8 @@ function BubbleChart(data,options) {
 		RADIUS=[0,WIDTH>320?WIDTH*0.125:50];
 
     var margins={
-    	left:WIDTH>320?100:20,
-    	right:WIDTH>320?100:20,
+    	left:WIDTH>375?100:20,
+    	right:WIDTH>375?100:40,
     	top:320,//320,
     	bottom:150
     };
@@ -707,7 +707,7 @@ function BubbleChart(data,options) {
 								[
 						    		{
 						    			id:"export-perc",
-						    			value:RATIO
+						    			value:percFormat(RATIO)
 						    		},
 						    		{
 						    			id:"export-country",
@@ -715,7 +715,7 @@ function BubbleChart(data,options) {
 						    		},
 						    		{
 						    			id:"export-total",
-						    			value:d.loss_normalized
+						    			value:numberFormat(d.loss_normalized)
 						    		}
 						    	],
 								x,
