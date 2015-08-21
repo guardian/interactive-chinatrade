@@ -166,8 +166,8 @@ var dollarstyle = d3.format("$,.0f");
 
 function boot(el) {
 	el.innerHTML = template;
-	//var key = '13EUfteezFDeA-d96SiwTKaadcikoZbaJrt1QXLuAcJg'; //test version
-	var key = '1DGN3PJhnsiUnbshFfklL7TXZpIiD4NiBe52G_ITJVOM';
+//	var key = '13EUfteezFDeA-d96SiwTKaadcikoZbaJrt1QXLuAcJg'; //test version
+	var key = '1DGN3PJhnsiUnbshFfklL7TXZpIiD4NiBe52G_ITJVOM'; //production version
 	var url = 'https://interactive.guim.co.uk/spreadsheetdata/' + key + '.json';
 
 	getJSON(url, populate);
