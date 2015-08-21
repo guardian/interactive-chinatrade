@@ -103,13 +103,13 @@ function BubbleChart(data,options) {
    	console.log(WIDTH,HEIGHT)
 
    	var SPLIT=0.5,
-		RADIUS=[0,WIDTH>375?WIDTH*0.125:50];
+		RADIUS=[0,WIDTH>740?WIDTH*0.125:50];
 
     var margins={
-    	left:WIDTH>980?100:40,
-    	right:WIDTH>980?100:40,
-    	top:320,//320,
-    	bottom:150
+    	left:WIDTH>768?100:40,
+    	right:WIDTH>768?100:40,
+    	top:WIDTH>768?320:RADIUS[1]*2,//320,
+    	bottom:RADIUS[1]
     };
 
     var CHINA_GDP = 9240000000000,
@@ -268,14 +268,14 @@ function BubbleChart(data,options) {
 	setExtents();
 	console.log(extents)
 
-	var PERC_SCALE_MIN=0.15;
+	var PERC_SCALE_MIN=0.035;
 
 
 	var xscale=d3.scale.ordinal().domain(data.map(function(d){return d.index})).rangePoints([0,(WIDTH-(margins.right+margins.left))]),
-		yscale_china=d3.scale.linear().domain([0,0.3]).range([0,(HEIGHT-(margins.top+margins.bottom))*(1-SPLIT)]),
 		//gdp_scale=d3.scale.sqrt().domain([extents.chinaexports[0],extents.gdp[1]]).range(RADIUS),
 		gdp_scale=d3.scale.sqrt().domain([0,extents.gdp[1]]).range(RADIUS),
 		CHINESE_RADIUS=gdp_scale(CHINA_GDP),
+		yscale_china=d3.scale.linear().domain([0,0.3]).range([CHINESE_RADIUS,(HEIGHT-(margins.top+margins.bottom))*(1-SPLIT)]),
 		yscale_countries=d3.scale.linear().domain([0,extents.percGDP[1]*2]).range([0,(HEIGHT-(margins.top+margins.bottom))*SPLIT]).nice(),
 		opacityscale_countries=d3.scale.linear().domain([0,extents.percGDP[1]*3]).range([0.05,0.8]),
 		exports_scale=d3.scale.sqrt().domain([extents.chinaexports[0],extents.exports[1]]).range(RADIUS);
@@ -492,17 +492,13 @@ function BubbleChart(data,options) {
 		o_y2:__data[__data.length-1]["CNatMonth"]
 	};
 
-	var h2=svg.append("g")
-			.attr("class","h2")
-			.attr("transform","translate("+(WIDTH>980?240:20)+",0)");
-	h2.append("text")
-		.attr("x",0)
-		.attr("y",240)
-		.text("A drop in China's imports");
-	h2.append("text")
-		.attr("x",0)
-		.attr("y",269)
-		.text("could drag these countries down")
+
+
+	var intro_label=viz.append("div")
+			.attr("class","blurb top")
+			//.html("<h2>... if China's imports<br/>fall by <span class=\"title perc\">"+percFormat(RATIO)+"</span></h2><p class=\"header-text\">China's import demand over the first seven months of 2015 <button class='btn-standfirst'>was down 14.6%</button> on the same period in 2014, with particularly sharp drops in January and February, <button class='btn-standfirst'>of 20% on average.</button> In July the change was <button class='btn-standfirst'>less severe at 8%</button> on the same month in the previous year, but even this change applied to the year as a whole would take billions of dollars out of some of the world's most advanced economies</p>")
+			.html("<h2>A drop in China's imports<br/>could drag these countries down ...</h2>")
+	
 
 	/*var title_label=chineseBubble.append("g")
 			.attr("class","title")
@@ -523,14 +519,24 @@ function BubbleChart(data,options) {
 				.text(" ");*/
 	
 	var title_label=viz.append("div")
-			.attr("class","blurb")
+			.attr("class","blurb bubble")
 			.style({
-				"top":(margins.top+yscale_countries.range()[1]+yscale_china(0.2)-gdp_scale(CHINA_GDP))+"px",
-				"left":(WIDTH>980?240:20)+"px"
+				//"top":(margins.top+yscale_countries.range()[1]+yscale_china(0.2)-gdp_scale(CHINA_GDP))+"px",
+				"left":WIDTH/2-gdp_scale(CHINA_GDP)>240+290?"240px":(WIDTH/2+gdp_scale(CHINA_GDP)+20)+"px"
 			})
 			//.html("<h2>... if China's imports<br/>fall by <span class=\"title perc\">"+percFormat(RATIO)+"</span></h2><p class=\"header-text\">China's import demand over the first seven months of 2015 <button class='btn-standfirst'>was down 14.6%</button> on the same period in 2014, with particularly sharp drops in January and February, <button class='btn-standfirst'>of 20% on average.</button> In July the change was <button class='btn-standfirst'>less severe at 8%</button> on the same month in the previous year, but even this change applied to the year as a whole would take billions of dollars out of some of the world's most advanced economies</p>")
-			.html("<h2>... if China's imports<br/>fall by <span class=\"title perc\">"+percFormat(RATIO)+"</span></h2><p class=\"header-text\">China's demand <button class='btn-standfirst'>was down 14.6%</button> over the first seven months of 2015 compared to the same period last year.  January and February fared worst, <button class='btn-standfirst'>20% on average</button>. July's change was <button class='btn-standfirst'>less severe at 8%</button></p>")
-			
+			.html("<h2>... if China's imports<br/>fall by <span class=\"title perc\">"+percFormat(RATIO)+"</span></h2><p class=\"header-text\">China's demand <button class='btn-standfirst selected' data-loss='0.146'>was down 14.6%</button> over the first seven months of 2015 compared to the same period last year.  January and February fared worst, <button class='btn-standfirst' data-loss='0.2'>20% on average</button>. July's change was <button class='btn-standfirst' data-loss='0.08'>less severe at 8%</button></p>")
+	title_label.selectAll("button")
+			.on("mousedown",function(d){
+				var __this=d3.select(this),
+					perc=__this.attr("data-loss");
+
+				setRatio(+perc);
+				
+				title_label.selectAll("button").classed("selected",false);
+				__this.classed("selected",true);
+
+			})
 
 	/*title_label.append("text")
 			.attr("class","title")
@@ -538,7 +544,7 @@ function BubbleChart(data,options) {
 			.attr("y",53)
 			.text("demand declines by")*/
 
-	var scenarios=[
+	/*var scenarios=[
 		{
 			val:0,
 			text:"Recovers to 2014 levels"
@@ -556,9 +562,9 @@ function BubbleChart(data,options) {
 			val:0.25,
 			text:"Gets even worse"
 		},
-	]
+	]*/
 	
-	var scenarios_ul=container
+	/*var scenarios_ul=container
 					.append("ul")
 					.attr("class","scenarios clearfix");
 
@@ -591,7 +597,7 @@ function BubbleChart(data,options) {
 				scenario.select("button").classed("button--primary",false).classed("button--secondary",true)
 				console.log(this)
 				d3.select(this).classed("button--primary",true).classed("button--secondary",false)
-			})
+			})*/
 
 	
 			
@@ -980,23 +986,44 @@ function BubbleChart(data,options) {
 	}
 
 	this.resize=function() {
-		size=viz.node().getBoundingClientRect(),
-			WIDTH = size.width,
-			HEIGHT = size.height;
+		size=viz.node().getBoundingClientRect();
+		WIDTH = size.width;
+		HEIGHT = size.height;
+		RADIUS=[0,WIDTH>740?WIDTH*0.125:50];
+
+		if(WIDTH<740) {
+			filterCountriesByArea("Europe",true);
+		} else {
+			filterCountriesByArea(null,true);
+		}
+
+		margins={
+	    	left:WIDTH>768?100:40,
+	    	right:WIDTH>768?100:40,
+	    	top:WIDTH>768?320:RADIUS[1]*2,//320,
+	    	bottom:RADIUS[1]
+	    };
 
 		xscale.rangePoints([0,(WIDTH-(margins.right+margins.left))]);
 
-		RADIUS=[0,WIDTH>320?WIDTH*0.125:50];
+		
 		gdp_scale.range(RADIUS);
 		CHINESE_RADIUS=gdp_scale(CHINA_GDP);
+
+		
+		yscale_china.range([CHINESE_RADIUS,(HEIGHT-(margins.top+margins.bottom))*(1-SPLIT)]);
+
+
 		exports_scale.range(RADIUS);
 		chinacircle_scale.range(RADIUS);
 		chinacircle_scale.range([CHINESE_RADIUS,CHINESE_RADIUS*1.2])
 
-		moveChina();
+
+
+		moveChina(false,true);
 	}
 
-	function filterCountriesByArea(area) {
+	function filterCountriesByArea(area,dont_resize) {
 		
 		AREA=area || null;
 
@@ -1019,18 +1046,29 @@ function BubbleChart(data,options) {
 			return locations[d.iso].area == AREA;
 		}).map(function(d){return d.index}))
 
-		self.resize();
+		if(!dont_resize) {
+			self.resize();
+		}
 	}
 	this.filterCountriesByArea = function(area) {
 		filterCountriesByArea(area);
 	}
-	function moveChina(animate) {
+	function moveChina(animate,resize) {
 		if(RATIO<=0.3) {
-
+			console.log("MOVE CHINA")
 			current.beziers=[];
 
 			var val=projection_data.y1*RATIO;//projection_data.y1-projection_data.y1*__ratio;
 			//console.log(val)
+
+			if(resize) {
+				countries_g
+					.attr("transform","translate("+margins.left+","+(margins.top)+")")
+
+				china_g
+					.attr("transform","translate("+margins.left+","+(margins.top+yscale_countries.range()[1])+")")
+			}
+
 			if(animate) {
 				var sel=d3.select(__THIS)
 					.transition()
@@ -1086,6 +1124,12 @@ function BubbleChart(data,options) {
 					"top":(margins.top+yscale_countries.range()[1]+(yscale_china(RATIO)-gdp_scale(CHINA_GDP)))+"px",
 					"left":(WIDTH>980?240:20)+"px"
 				})*/
+
+			title_label
+						.style({
+							"left":WIDTH/2-gdp_scale(CHINA_GDP)>240+290?"240px":(WIDTH/2+gdp_scale(CHINA_GDP)+20)+"px"
+						})
+	
 			import_label
 				.attr("transform","translate(0,"+(-gdp_scale(CHINA_GDP) +gdp_scale(CHINA_IMPORTS)-2)+")");
 			gdp_label
@@ -1269,9 +1313,9 @@ function BubbleChart(data,options) {
 
 		if(__Y!=__LAST_Y) {
 
-			console.log(__Y,"!=",__LAST_Y)
+			//console.log(__Y,"!=",__LAST_Y)
 
-			scenario.select("button").classed("button--primary",false).classed("button--secondary",true)
+			//scenario.select("button").classed("button--primary",false).classed("button--secondary",true)
 
 			__LAST_Y = __Y;
 
@@ -1323,6 +1367,7 @@ function BubbleChart(data,options) {
 	var axis=axes.append("g")
 			      .attr("class", "y axis")
 			      .call(yAxis);
+
 	var axis_title=axes.append("g")
 						.attr("class","title")
 						.attr("transform","translate("+(35)+","+(yscale_countries.range()[1]+20)+")");
@@ -1353,6 +1398,9 @@ function BubbleChart(data,options) {
 				.attr("stop-opacity",0.7)
 
 	axis.selectAll(".tick")
+			.classed("hidden",function(d,i){
+				return WIDTH<740 && i%2===0;
+			})
 			.append("line")
 				.attr("class","grid")
 				.attr("x2",0)

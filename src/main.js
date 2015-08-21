@@ -48,7 +48,7 @@ function populate(data) {
 			return +a.date - +b.date;
 		}),
 		lines:["CN"],
-		area:viewport.width>480?null:"Americas",
+		area:viewport.width>740?null:"Europe",
 		viewport:viewport,
 		filters:{
 			atMonth:function(d){
@@ -166,8 +166,8 @@ var dollarstyle = d3.format("$,.0f");
 
 function boot(el) {
 	el.innerHTML = template;
-	var key = '13EUfteezFDeA-d96SiwTKaadcikoZbaJrt1QXLuAcJg'; //test version
-//	var key = '1DGN3PJhnsiUnbshFfklL7TXZpIiD4NiBe52G_ITJVOM';
+	//var key = '13EUfteezFDeA-d96SiwTKaadcikoZbaJrt1QXLuAcJg'; //test version
+	var key = '1DGN3PJhnsiUnbshFfklL7TXZpIiD4NiBe52G_ITJVOM';
 	var url = 'https://interactive.guim.co.uk/spreadsheetdata/' + key + '.json';
 
 	getJSON(url, populate);
