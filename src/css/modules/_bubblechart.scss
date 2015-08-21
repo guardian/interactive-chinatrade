@@ -2,7 +2,7 @@
 	width:100%;
 	height: calc(100vh + 240px);
 	position: relative;
-	margin-top:-240px;
+	margin-top:0px;
 
 	@include mq(desktop) {
 		height: calc(100vh + 240px);
@@ -46,6 +46,33 @@
 			border:none;
 			margin-right:20px;
 		}
+	}
+}
+.nav {
+	width:100%;
+	float:none;
+	border-top:1px solid #000;
+	padding-top:5px;
+	.contents {
+		width: 100%;
+		float: none;
+	}
+}
+#regionNav {
+	width: 100%;
+	line-height: 40px;
+	height:44px;
+	h1 {
+		@include fs-header(4);
+		margin:0;
+		float: left;
+		width:calc(100% - 100px);
+		line-height: 40px;
+		height:40px;
+	}
+	.arrows {
+		width:100px;
+		float:right;
 	}
 }
 .bubblechart {
@@ -105,6 +132,12 @@
 			}
 			text.value {
 				//display: none;
+    			paint-order: stroke;
+    			stroke: #fff;
+    			stroke-width: 8px;
+    			stroke-linecap: butt;
+    			stroke-linejoin: miter;
+    
 				@include mq(desktop) {
 					display: block;
 				}
@@ -318,5 +351,51 @@
 				}
 			}
 		}
+	}
+	.blurb {
+		position: absolute;
+		width:290px;
+		top:0px;
+		
+		transition: top 2s ease-in-out;
+
+		h2 {
+			@include fs-header(1);
+			color:#000;
+			font-weight: 500;
+			margin:0;
+			@include mq(desktop) {
+				@include fs-header(4);
+			}
+		}
+		p {
+			margin: 0;
+			line-height: 26px;
+			.btn-standfirst {
+			    color: #333;
+			    background-color: #d4d4d4;
+			    @include fs-bodyCopy(2);
+			    vertical-align: top;
+			    text-decoration: none;
+			    //line-height: 24px;
+			    width: auto;
+			    height: 24px;
+			    padding: 0 6px;
+			    margin: 0 3px;
+			    border: 1px solid #d4d4d4;
+			    border-radius: 24px;
+			    box-sizing: border-box;
+			    display: inline-block;
+			}
+			.btn-standfirst:hover,
+			.btn-standfirst.selected {
+			    color: #fff;
+			    background-color: #005689;
+			    border-color: #005689;
+			}
+		}
+	}
+	.blurb.dragging {
+		transition: none;
 	}
 }

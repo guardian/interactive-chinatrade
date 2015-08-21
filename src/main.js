@@ -11,8 +11,10 @@ require('./js/utils/jsBezier.js');
 var LineChart = require("./js/charts/LineChart");
 var BarChart = require("./js/charts/BarChart");
 var BubbleChart = require("./js/charts/BubbleChart");
+var Matrix = require("./js/charts/Matrix");
 
-var countriesLatLng = require('./data/countries.json');
+var countriesLatLng = require('./data/countries2.json');
+var chieftrades = require('./data/chieftrades.json');
 
 d3.selection.prototype.moveToFront = function() {
       return this.each(function(){
@@ -46,7 +48,8 @@ function populate(data) {
 			return +a.date - +b.date;
 		}),
 		lines:["CN"],
-		area:viewport.width>480?null:"AS",
+		area:viewport.width>480?null:"Americas",
+		viewport:viewport,
 		filters:{
 			atMonth:function(d){
 				return d.date.getMonth() <= 6
@@ -59,6 +62,8 @@ function populate(data) {
 			}
 		}
 	});
+
+	var matrix=new Matrix(chieftrades)
 	
 	;(function() {
 	    var throttle = function(type, name, obj) {

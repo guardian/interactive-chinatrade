@@ -90,3 +90,54 @@ a {
 a {
     text-shadow: none !important; // Override apps
 }
+
+.arrow {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border-radius: 80px;
+    border: 2px solid #000;
+    outline: 0;
+    cursor: pointer;
+    margin-right: 3px;
+    vertical-align: middle;
+
+
+    &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 40px;
+        height: 40px;
+        background-repeat:no-repeat;
+        background-position: 8px 8px;
+        background-size: 20px;
+    }
+}
+
+.arrow-left {
+    background-color: #fff;
+    
+    &::before {
+        background-image: url('../imgs/arrow-left.svg');
+        
+    
+    }
+    &:hover {
+        background-color: #fff;
+    }
+}
+.arrow-right {
+    background-color: #fff;
+    background-repeat:no-repeat;
+
+    &::before {
+        background-image: url('../imgs/arrow-right.svg');
+        
+    
+    }
+    &:hover {
+        background-color: #fff;
+    }
+}

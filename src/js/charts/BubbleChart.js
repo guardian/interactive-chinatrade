@@ -54,15 +54,19 @@ function BubbleChart(data,options) {
 	}
 
 	options.latlng.forEach(function(d){
-		locations[d.iso3] = {
-			lat:+d.ltd,
-			lng:+d.lng,
+		var lng=d.latlng[1];
+
+		locations[d.cca3] = {
+			name: d.name.common,
+			lat: d.latlng[0],
+			lng: lng,
 			//distance:(+d.ltd>0?-1:1)*distance({iso:d.iso3,lat:+d.ltd,lng:+d.lng},{lat: 35,lng: 105}),
-			area:d.area
+			area:d.region,
+			subregion: d.subregion
 		}
 
-		if(+d.lng < -50) {
-			locations[d.iso3].lng = 174 + (180 - Math.abs(+d.lng));			
+		if(lng < -50) {
+			locations[d.cca3].lng = 174 + (180 - Math.abs(lng));			
 		}
 	});
 	console.log("LOCATIONS",locations);
@@ -99,11 +103,11 @@ function BubbleChart(data,options) {
    	console.log(WIDTH,HEIGHT)
 
    	var SPLIT=0.5,
-		RADIUS=[0,WIDTH>320?WIDTH*0.125:50];
+		RADIUS=[0,WIDTH>375?WIDTH*0.125:50];
 
     var margins={
-    	left:WIDTH>375?100:20,
-    	right:WIDTH>375?100:40,
+    	left:WIDTH>980?100:40,
+    	right:WIDTH>980?100:40,
     	top:320,//320,
     	bottom:150
     };
@@ -112,6 +116,7 @@ function BubbleChart(data,options) {
     	CHINA_IMPORTS = 1960290297000,
     	CHINA_IMPORTS_OVER_GDP = CHINA_IMPORTS / CHINA_GDP;
 
+    var DRAGGING=false;
     
     function updateData() {
     	data.forEach(function(d,i){
@@ -263,7 +268,8 @@ function BubbleChart(data,options) {
 	setExtents();
 	console.log(extents)
 
-	
+	var PERC_SCALE_MIN=0.15;
+
 
 	var xscale=d3.scale.ordinal().domain(data.map(function(d){return d.index})).rangePoints([0,(WIDTH-(margins.right+margins.left))]),
 		yscale_china=d3.scale.linear().domain([0,0.3]).range([0,(HEIGHT-(margins.top+margins.bottom))*(1-SPLIT)]),
@@ -296,9 +302,9 @@ function BubbleChart(data,options) {
 				"#DD0027",
 				"#AA001E"];
 
-	var color_countries=d3.scale.linear().domain(d3.range(0,0.035+0.035/7,0.035/7)).range(colors);
-	yscale_countries.domain([0,0.035])
-	opacityscale_countries.domain([0,0.035])
+	var color_countries=d3.scale.linear().domain(d3.range(0,PERC_SCALE_MIN+PERC_SCALE_MIN/7,PERC_SCALE_MIN/7)).range(colors);
+	yscale_countries.domain([0,PERC_SCALE_MIN])
+	opacityscale_countries.domain([0,PERC_SCALE_MIN])
 
 	var tooltip=new Tooltip({
     	container:container.node(),
@@ -369,6 +375,10 @@ function BubbleChart(data,options) {
 				.attr("width","100%")
 				.attr("height","100%")
 				.on("mousemove",function(d){
+					console.log(DRAGGING)
+					if(DRAGGING) {
+						return;
+					}
 					if(!MOUSE_ON_CIRCLE) {
 						var mouse=d3.mouse(this),
 							coords={
@@ -386,13 +396,13 @@ function BubbleChart(data,options) {
 	var defs=svg.append("defs");
 
 	
-	var filter=defs.append("filter")
+	/*var filter=defs.append("filter")
 					.attr({
 						id:"dropshadow"
 					});
 	var str='<feGaussianBlur in="SourceAlpha" stdDeviation="2.2"/><feOffset dx="0" dy="0" result="offsetblur"/><feFlood flood-color="rgba(0,0,0,1)"/><feComposite in2="offsetblur" operator="in"/><feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>';
 
-	filter.html(str)
+	filter.html(str)*/
 
 
 
@@ -484,7 +494,7 @@ function BubbleChart(data,options) {
 
 	var h2=svg.append("g")
 			.attr("class","h2")
-			.attr("transform","translate(240,0)");
+			.attr("transform","translate("+(WIDTH>980?240:20)+",0)");
 	h2.append("text")
 		.attr("x",0)
 		.attr("y",240)
@@ -494,24 +504,34 @@ function BubbleChart(data,options) {
 		.attr("y",269)
 		.text("could drag these countries down")
 
-	var title_label=chineseBubble.append("g")
+	/*var title_label=chineseBubble.append("g")
 			.attr("class","title")
-			.attr("transform","translate("+((-(WIDTH-(margins.right+margins.left))/2)-margins.left+240)+","+(-gdp_scale(CHINA_GDP)-10)+")")
+			.attr("transform","translate("+((-(WIDTH-(margins.right+margins.left))/2)-margins.left+(WIDTH>980?240:20))+","+(-gdp_scale(CHINA_GDP)-10)+")")
 	title_label.append("text")
 			.attr("class","title")
 			.attr("x",0)
 			.attr("y",5)
 			.text("... if China's imports")
+
 	title_label.append("text")
 			.attr("class","title")
 			.attr("x",0)
 			.attr("y",31)
-			.text("fall by");
-	title_label.append("text")
-			.attr("class","title perc")
-			.attr("x",67)
-			.attr("y",31)
+			.text("fall by")
+			.append("tspan")
+				.attr("class","title perc")
+				.text(" ");*/
+	
+	var title_label=viz.append("div")
+			.attr("class","blurb")
+			.style({
+				"top":(margins.top+yscale_countries.range()[1]+yscale_china(0.2)-gdp_scale(CHINA_GDP))+"px",
+				"left":(WIDTH>980?240:20)+"px"
+			})
+			//.html("<h2>... if China's imports<br/>fall by <span class=\"title perc\">"+percFormat(RATIO)+"</span></h2><p class=\"header-text\">China's import demand over the first seven months of 2015 <button class='btn-standfirst'>was down 14.6%</button> on the same period in 2014, with particularly sharp drops in January and February, <button class='btn-standfirst'>of 20% on average.</button> In July the change was <button class='btn-standfirst'>less severe at 8%</button> on the same month in the previous year, but even this change applied to the year as a whole would take billions of dollars out of some of the world's most advanced economies</p>")
+			.html("<h2>... if China's imports<br/>fall by <span class=\"title perc\">"+percFormat(RATIO)+"</span></h2><p class=\"header-text\">China's demand <button class='btn-standfirst'>was down 14.6%</button> over the first seven months of 2015 compared to the same period last year.  January and February fared worst, <button class='btn-standfirst'>20% on average</button>. July's change was <button class='btn-standfirst'>less severe at 8%</button></p>")
 			
+
 	/*title_label.append("text")
 			.attr("class","title")
 			.attr("x",0)
@@ -1043,20 +1063,29 @@ function BubbleChart(data,options) {
 			}
 			
 
-
+			
 			title_label
-				.select("text.perc")
+				.select("span.perc")
 				.text(percFormat(-RATIO))
+			
 			chineseValue
 				.classed("hidden",function(d){
 					return RATIO<=0;
 				})
 				.text(numberFormat(-val*1000));
-
+			/*
 			title_label
-				.attr("transform","translate("+((-(WIDTH-(margins.right+margins.left))/2)-margins.left+240)+","+(-gdp_scale(CHINA_GDP)-10)+")")
+				.attr("transform","translate("+((-(WIDTH-(margins.right+margins.left))/2)-margins.left+(WIDTH>980?240:20))+","+(-gdp_scale(CHINA_GDP)-10)+")")
 				//.attr("transform","translate("+((-(WIDTH-(margins.right+margins.left))/2)-margins.left+240)+","+0+")")
 				//.attr("transform","translate("+(-RADIUS[1]*2.4)+","+0+")")
+			*/
+			
+			/*title_label
+				.classed("dragging",!animate)
+				.style({
+					"top":(margins.top+yscale_countries.range()[1]+(yscale_china(RATIO)-gdp_scale(CHINA_GDP)))+"px",
+					"left":(WIDTH>980?240:20)+"px"
+				})*/
 			import_label
 				.attr("transform","translate(0,"+(-gdp_scale(CHINA_GDP) +gdp_scale(CHINA_IMPORTS)-2)+")");
 			gdp_label
@@ -1226,11 +1255,13 @@ function BubbleChart(data,options) {
 
 	function dragChina() {
 
+		window.requestAnimationFrame(dragChina);
 
 		
-		window.requestAnimationFrame(dragChina);
 		
-		if(MOUSE_MOVING) {
+		
+		
+		if(MOUSE_MOVING && !DRAGGING) {
 			detectInteractions();	
 		}
 		
@@ -1246,7 +1277,7 @@ function BubbleChart(data,options) {
 
 			var __ratio=yscale_china.invert(__Y);
 
-			console.log(__ratio)
+			//console.log(__ratio)
 
 			if(__ratio < 0) {
 				__ratio=0;
@@ -1270,6 +1301,11 @@ function BubbleChart(data,options) {
 			//.origin(function(d) { return d; })
 			.on("dragstart", function() {
 				d3.event.sourceEvent.stopPropagation(); // silence other listeners
+				DRAGGING=true;
+			})
+			.on("dragend", function() {
+				d3.event.sourceEvent.stopPropagation(); // silence other listeners
+				DRAGGING=false;
 			})
 			.on("drag",function() {
 				__Y=d3.event.y;
