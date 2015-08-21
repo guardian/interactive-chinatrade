@@ -48,7 +48,7 @@ function populate(data) {
 			return +a.date - +b.date;
 		}),
 		lines:["CN"],
-		area:viewport.width>740?null:"Europe",
+		area:viewport.width>740?null:"Asia",
 		viewport:viewport,
 		filters:{
 			atMonth:function(d){
@@ -62,6 +62,11 @@ function populate(data) {
 			}
 		}
 	});
+
+	d3.select(".arrow-right").on("mousedown",function(d){
+
+		bubbles.filterCountriesByArea("Americas");
+	})
 
 	var matrix=new Matrix(chieftrades)
 	

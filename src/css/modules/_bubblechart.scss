@@ -302,6 +302,28 @@
 				}
 
 			}
+			g.hint {
+				line.arrow {
+					stroke:#ccc;
+					stroke-dasharray:none;
+					stroke-width:2;
+				}
+				text {
+					@include fs-textSans(1);
+					fill: #aaa;
+					font-size: 10px;
+					text-anchor:start;
+				}
+				text.center {
+					text-anchor:middle !important;
+				}
+			}
+			g.hint.left {
+				text {
+					text-anchor:end;
+				}
+			}
+			
 			text {
 				text-anchor:middle;
 				@include fs-header(1);
@@ -365,7 +387,7 @@
 	}
 	.blurb {
 		position: absolute;
-		
+
 		
 		left:0px;
 		top:50% + 20%;
@@ -429,6 +451,11 @@
 		@include mq(desktop) {
 			top:220px;
 		}
+	}
+	.blurb.bubble {
+		background-color:rgba(255,255,255,0.8);
+		padding:5px;
+		border-radius:10px;
 	}
 	.blurb.dragging {
 		transition: none;
