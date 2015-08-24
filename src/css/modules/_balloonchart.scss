@@ -1,0 +1,137 @@
+.balloon-chart {
+	width:100%;
+	height:400px;
+
+	svg {
+
+		.country {
+			circle.outer {
+				fill:#aa001e;
+				stroke:none;
+				stroke-width:2;
+				fill-opacity:0.7;
+			}
+			circle.inner {
+				fill:#fff;
+				stroke:#63717a;
+				stroke-width:1.5;
+				
+
+				@include mq(desktop) {
+					stroke-width:1.5;
+					stroke-dasharray: 1.5,2;
+				}
+			}
+			line {
+				//stroke-dasharray: 1,1;
+				stroke-width:1;
+				stroke:#bbb;
+				shape-rendering: crispEdges;
+			}
+			
+			text {
+				@include fs-textSans(1);
+				fill: #767676;
+				
+				font-size: 11px;
+				text-anchor:middle;
+				
+			}
+			text.country-name {
+				fill:#000;
+				font-weight: 800;
+				text-transform: uppercase;
+
+				paint-order: stroke;
+				stroke: #fff;
+    			stroke-width: 8px;
+    			stroke-linecap: butt;
+    			stroke-linejoin: miter;
+			}
+			text.value {
+				//display: none;
+    			paint-order: stroke;
+    			stroke: #fff;
+    			stroke-width: 8px;
+    			stroke-linecap: butt;
+    			stroke-linejoin: miter;
+    
+				@include mq(desktop) {
+					display: block;
+				}
+			}
+
+			.tag {
+				text {
+					@include fs-textSans(1);
+					fill: #000;
+					font-size: 10px;
+					text-anchor:middle;
+					//text-transform: uppercase;
+				}
+				rect {
+					fill:#ddd;
+				}
+			}
+		}
+
+		.axes {
+
+			display: block;
+			@include mq(desktop) {
+				display: block;
+			}
+			.title{
+				text {
+					@include fs-textSans(1);
+					fill: #767676;
+					font-size: 11px;
+					text-anchor:end;
+				}
+			}
+		}
+		.axis {
+			path,line {
+				fill:none;
+				shape-rendering: crispEdges;
+				stroke:#ccc;
+				stroke-opacity:1;
+			}
+			path {
+				display: none;
+			}
+
+			.tick {
+				line {
+					display: none;
+				}
+				line.grid {
+					display: block;
+					stroke-width:2;
+					stroke-dasharray: 2,2;
+					stroke-linecap:butt;
+				}
+				text {
+					//display: none;
+					
+				}
+			}
+			.tick.main {
+				text {
+					display: block;
+				}
+			}
+			.tick.hidden {
+				visibility: hidden;
+			}
+			text {
+				@include fs-textSans(1);
+				fill: #aa001e;
+				font-size: 12px;
+			}
+			
+		}
+
+	}
+
+}

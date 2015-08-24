@@ -11,7 +11,7 @@ require('./js/utils/jsBezier.js');
 var LineChart = require("./js/charts/LineChart");
 var BarChart = require("./js/charts/BarChart");
 var BubbleChart = require("./js/charts/BubbleChart");
-var Matrix = require("./js/charts/Matrix");
+var BalloonsChart = require("./js/charts/BalloonsChart");
 
 var countriesLatLng = require('./data/countries2.json');
 var chieftrades = require('./data/chieftrades.json');
@@ -47,7 +47,30 @@ function populate(data) {
 		}).sort(function(a,b){
 			return +a.date - +b.date;
 		}),
+		regions:[
+			{
+				c:"Asia",
+				n:"Asia"
+			},
+			{
+				c:"Europe",
+				n:"Europe"
+			},
+			{
+				c:"NAmerica",
+				n:"North America"
+			},
+			{
+				c:"SAmerica",
+				n:"South America"
+			},
+			{
+				c:"Pacific",
+				n:"Pacific"
+			}
+		],
 		lines:["CN"],
+		ratio:0.146,
 		area:viewport.width>740?null:"Asia",
 		viewport:viewport,
 		filters:{
@@ -67,8 +90,22 @@ function populate(data) {
 
 		bubbles.filterCountriesByArea("Americas");
 	})
+	
+	var regions=["Asia","NAmerica","SAmerica","Pacific","Europe"],
+		balloonsCharts=[];
 
-	var matrix=new Matrix(chieftrades)
+	regions.forEach(function(region){
+		balloonsCharts.push(new BalloonsChart(chieftrades.filter(function(c){
+			return c.continent == region;
+		}).sort(function(a,b){
+			return b.chinaexportsovergdp - a.chinaexportsovergdp;
+		}).slice(0,10),{
+			container:"#regions",
+			region:region,
+			ratio:0.146
+		}));
+	})
+
 	
 	;(function() {
 	    var throttle = function(type, name, obj) {

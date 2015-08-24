@@ -260,11 +260,37 @@
 			    	}
 		    	}
 		    }
+		}
+		.subsection {
+			width:100%;
+			overflow: hidden;
 
-		    
+			.sub-intro {
+				p {
+				    color: colour(neutral-2);
+				    @include fs-bodyCopy(2);
+
+				}
+			}
 			
+			.h2 {
+				@include fs-headline(7);
+				font-weight:600;
+				margin-top: 5px;
+			}
+
 			
 
+			@include mq(desktop) {
+				.sub-intro {
+					float:left;
+					width:30%;
+				}
+				.sub-contents {
+					float:left;
+					width:70%;
+				}	
+			}
 		}
 	    
 	}
