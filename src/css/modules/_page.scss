@@ -118,55 +118,7 @@
 				margin-bottom: 0;
 			}
 			
-			.period {
-				border-top: 1px dotted #dcdcdc;
-  				//padding-bottom: 80px;
-				
-				h3 {
-					@include fs-headline(6);
-					color:colour(neutral-3);
-					margin-top:5px;
-					margin-bottom:0.25em;
-				}
-			}
 			
-			#batsmen1 {
-				
-
-				.section-subtext {
-					
-				}
-
-				@include mq(tablet) {
-					//background: transparent url(../imgs/cook.png) top right no-repeat;
-					background-size: 200px 200px;
-			       	
-			       	.section-subtext {
-			       		width: gs-span(7);
-					}
-			    }
-			    @include mq(wide) {
-			    	background-position: 70% 20px;
-				}
-			}
-			#bowlers1 {
-				
-				
-
-				.section-subtext {
-					
-				}
-
-				@include mq(tablet) {
-					//background: transparent url(../imgs/warne.png) top right no-repeat;
-					background-size: 200px 200px;
-			       	
-			       	.section-subtext {
-						width: gs-span(7);
-					}
-			    }
-			   
-			}
 			.section-intro {
 				overflow: hidden;
 
@@ -284,11 +236,11 @@
 			@include mq(desktop) {
 				.sub-intro {
 					float:left;
-					width:30%;
+					width:25%;
 				}
 				.sub-contents {
 					float:left;
-					width:70%;
+					width:75%;
 				}	
 			}
 		}

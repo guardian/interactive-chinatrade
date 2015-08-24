@@ -136,7 +136,7 @@
 			text.country-name {
 				fill:#000;
 				font-weight: 800;
-				text-transform: uppercase;
+				text-transform: capitalize;
 			}
 			text.value {
 				//display: none;
@@ -304,18 +304,26 @@
 			}
 			g.hint {
 				line.arrow {
-					stroke:#ccc;
+					stroke:#767676;
 					stroke-dasharray:none;
 					stroke-width:2;
 				}
 				text {
 					@include fs-textSans(1);
-					fill: #aaa;
+					fill: #767676;
 					font-size: 10px;
 					text-anchor:start;
+					display: none;
 				}
 				text.center {
 					text-anchor:middle !important;
+					display: block !important;
+				}
+				@include mq(tablet) {
+					text {
+						display: block;		
+					}
+					
 				}
 			}
 			g.hint.left {
@@ -456,6 +464,7 @@
 		background-color:rgba(255,255,255,0.8);
 		padding:5px;
 		border-radius:10px;
+		min-width: 100px;
 	}
 	.blurb.dragging {
 		transition: none;

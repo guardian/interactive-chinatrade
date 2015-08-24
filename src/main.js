@@ -35,10 +35,41 @@ function populate(data) {
 		return c.chinaexportsovergdp > .02;
 	});
 	
+	var trades=d3.nest()
+				.key(function(d){
+					return d.continent;
+				})
+				.rollup(function(leaves){
+					return leaves.sort(function(a,b){
+						return b.chinaexportsovergdp - a.chinaexportsovergdp;
+					}).slice(0,10);
+				})
+				.entries(chieftrades.filter(function(d){
+					return d.chinaexportsovergdp<0.04;
+				}));
+
+	console.log(trades)
+	var new_trades=[];
+	trades.forEach(function(d){
+		new_trades=new_trades.concat(d.values.slice(0,((d.key=="Asia" || d.key=="Europe")?2:10)));
+	})
+	
+	chieftrades.filter(function(d){
+		return d.majorpartner;
+	}).forEach(function(c){
+		var fil=new_trades.filter(function(d){
+			return d.iso == c.iso;
+		});
+		if(!fil.length) {
+			new_trades.push(c);
+		}
+	})
+	console.log(new_trades);
+
 	
 	//window.bubbles=new BubbleChart(data.sheets["customsdata"],{
-	window.bubbles=new BubbleChart(chieftrades.filter(function(d){
-		return typeof d.chinaexports !== 'undefined' && d.majorpartner;
+	window.bubbles=new BubbleChart(new_trades.filter(function(d){
+		return typeof d.chinaexports !== 'undefined';
 	}),{
 		container:"#bubbles",
 		latlng: countriesLatLng,
@@ -74,11 +105,15 @@ function populate(data) {
 			{
 				c:"Africa",
 				n:"Africa"
+			},
+			{
+				c:"Mideast",
+				n:"Middle East"
 			}
 		],
 		lines:["CN"],
 		ratio:0.146,
-		area:viewport.width>740?null:"Asia",
+		area:viewport.width>740?null:0,
 		viewport:viewport,
 		filters:{
 			atMonth:function(d){
@@ -94,11 +129,13 @@ function populate(data) {
 	});
 
 	d3.select(".arrow-right").on("mousedown",function(d){
-
 		bubbles.filterCountriesByArea(bubbles.getNextArea());
+	});
+	d3.select(".arrow-left").on("mousedown",function(d){
+		bubbles.filterCountriesByArea(bubbles.getPrevArea());
 	})
 	
-	var regions=["Asia","NAmerica","SAmerica","Pacific","Europe","Africa"],
+	var regions=["Asia","NAmerica","SAmerica","Pacific","Europe","Africa","Mideast"],
 		balloonsCharts=[];
 
 	regions.forEach(function(region){
@@ -159,56 +196,7 @@ function populate(data) {
 
 	return;
 
-	var losses=new BarChart(data.sheets["customsdata"],{
-		container:"#losses",
-		field:"loss_normalized",
-		countries:true,
-		droplines:true
-	})
-	var gdp=new BarChart(data.sheets["customsdata"],{
-		container:"#gdp",
-		field:"percGDP",
-		numberFormat:d3.format(",.2%")
-	})
-
 	
-
-	var historical_exports=new LineChart(data.sheets["historical exports"].map(function(d){
-		return {
-			date:dateFormat.parse(d.month),
-			"CN":d.imports
-		}
-	}).sort(function(a,b){
-		return +a.date - +b.date;
-	}),{
-		container:"#history",
-		title:"China exports 2000 - 2015",
-		lines:["CN"],
-		dateFormat:dateFormat,
-		filters:{
-			atMonth:function(d){
-				return d.date.getMonth() <= 6
-			},
-			min:function(d){
-				return d.date >= new Date(2001,0,1) ;
-			},
-			max:function(d){
-				return d.date < new Date(2015,0,1) ;
-			}
-		},
-		callback:function(ratio) {
-			//console.log(ratio)
-			losses.update(ratio);
-			gdp.update(ratio)
-		}
-	});
-	
-
-	window.onresize=function(){
-		historical_exports.update();
-		losses.update();
-		gdp.update();
-	}
 };
 
 var dollarstyle = d3.format("$,.0f");
