@@ -38,7 +38,7 @@ function populate(data) {
 	
 	//window.bubbles=new BubbleChart(data.sheets["customsdata"],{
 	window.bubbles=new BubbleChart(chieftrades.filter(function(d){
-		return typeof d.chinaexports !== 'undefined';
+		return typeof d.chinaexports !== 'undefined' && d.majorpartner;
 	}),{
 		container:"#bubbles",
 		latlng: countriesLatLng,
@@ -144,6 +144,9 @@ function populate(data) {
 
 	window.addEventListener("optimizedResize", function() {
 	    bubbles.resize();
+	    balloonsCharts.forEach(function(d){
+	    	d.resize();
+	    })
 	});
 
 	

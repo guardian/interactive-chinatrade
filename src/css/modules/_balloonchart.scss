@@ -1,6 +1,12 @@
 .balloon-chart {
 	width:100%;
 	height:400px;
+	
+	$Foodandagriculture: #258e8a;
+	$Manufactures: #7e39a5;
+	$Primarymaterials: #4982b9;
+	$Energy: #ffa14d;
+	$Other: #bdbdbd;
 
 	svg {
 
@@ -73,6 +79,36 @@
 					fill:#ddd;
 				}
 			}
+			.tag.Foodandagriculture {
+				rect {
+					fill:$Foodandagriculture;	
+				}
+				
+			}
+			.tag.Manufactures {
+				rect {
+					fill:$Manufactures;	
+				}
+				
+			}
+			.tag.Primarymaterials {
+				rect {
+					fill:$Primarymaterials;	
+				}
+				
+			}
+			.tag.Energy {
+				rect {
+					fill:$Energy;	
+				}
+				
+			}
+			.tag.Other {
+				rect {
+					fill:$Other;	
+				}
+				
+			}
 		}
 
 		.axes {
@@ -113,7 +149,7 @@
 				}
 				text {
 					//display: none;
-					
+
 				}
 			}
 			.tick.main {

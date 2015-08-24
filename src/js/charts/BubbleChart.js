@@ -36,7 +36,14 @@ function BubbleChart(data,options) {
 	var CURRENT_AREA=0,
 		AREA=(typeof options.area!='number')?null:options.regions[CURRENT_AREA].c;
 
+
 	data=data.sort(function(a,b){
+		if(+a.lng<-50) {
+			a.lng = 174 + (180 - Math.abs(+a.lng));
+		}
+		if(+b.lng<-50) {
+			b.lng = 174 + (180 - Math.abs(+b.lng));
+		}
 		return (+a.lng) - (+b.lng);
 	})
 
@@ -249,7 +256,7 @@ function BubbleChart(data,options) {
 
 	var opacity_strokescale_countries=opacityscale_countries.copy().range([0.3,1]);
 
-
+	var LABEL_WIDTH=(WIDTH-(margins.right+margins.left))/data.length;
 
 	var colors=["#FFEEF1",
 				"#FFBBC7",
@@ -965,7 +972,7 @@ function BubbleChart(data,options) {
 		
 		AREA=area || null;
 		
-		alert(area)
+		//alert(area)
 
 		d3.select("#regionNav h1").text(findArea(AREA).n);
 
@@ -1127,6 +1134,7 @@ function BubbleChart(data,options) {
 			cc
 				.select("text.country-name")
 				.text(function(d){
+
 					return ((d.text.length>8  && RATIO<0.05) || WIDTH<=980)?d.iso:d.text;
 				})
 			

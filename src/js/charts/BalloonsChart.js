@@ -133,6 +133,8 @@ function BalloonsChart(data,options) {
 		tag_yscale=d3.scale.ordinal().domain(d3.range(5)).rangePoints([0,tag_height*5]),
 		tag_widthscale=d3.scale.linear().domain([0,extents.commOnExports[1]]).range([0,100]);
 
+	var tag_width=(WIDTH-(margins.right+margins.left))/data.length;
+
 	var colors=["#FFEEF1",
 				"#FFBBC7",
 				"#FF889D",
@@ -197,7 +199,8 @@ function BalloonsChart(data,options) {
 				})
 				.attr("x2",0)
 				.attr("y2",function(d){
-					return gdp_scale(d.gdp)+HEIGHT*SPLIT/2;
+					return (-yscale(d.percGDP))+HEIGHT-margins.bottom-margins.top-tag_yscale(4)-5
+					return -yscale(d.percGDP)//gdp_scale(d.gdp)+HEIGHT*SPLIT/2;
 				})
 				.style("stroke",function(d){
 					return color_countries(d.percGDP)
@@ -228,6 +231,7 @@ function BalloonsChart(data,options) {
 				.attr("transform",function(d){
 						var x=0,
 							y=gdp_scale(d.gdp)+HEIGHT*SPLIT/2;
+						y=(-yscale(d.percGDP))+HEIGHT-margins.bottom-margins.top-tag_yscale(4);
 						//console.log(d.iso,d.percGDP,y,yscale.range(),yscale.domain())
 						return "translate("+x+","+y+")";
 					});
@@ -238,7 +242,9 @@ function BalloonsChart(data,options) {
 			})
 			.enter()
 			.append("g")
-				.attr("class","tag")
+				.attr("class",function(d){
+					return "tag "+d.value.rollup.replace(/\s/g,"");
+				})
 				.attr("transform",function(d,i){
 					var x=0,
 						y=tag_yscale(d.value.rank-1);
@@ -246,12 +252,14 @@ function BalloonsChart(data,options) {
 				})
 	tag.append("rect")
 		.attr("x",function(d){
+			return -tag_width/2;
 			return -tag_widthscale(d.value.commOnExports)/2;
 		})
 		.attr("y",0)
 		.attr("rx",2)
 		.attr("ry",2)
 		.attr("width",function(d){
+			return tag_width;
 			return tag_widthscale(d.value.commOnExports);
 		})
 		.attr("height",tag_height)
@@ -320,9 +328,8 @@ function BalloonsChart(data,options) {
 				.attr("y2",0.00001)
 				.style("stroke","url(#gridGradient)")
 
-
-	function Slider() {
-
+	this.resize=function() {
+		
 	}
 }
 
