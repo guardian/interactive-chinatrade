@@ -36,7 +36,10 @@ function populate(data) {
 	});
 	
 	
-	window.bubbles=new BubbleChart(data.sheets["customsdata"],{
+	//window.bubbles=new BubbleChart(data.sheets["customsdata"],{
+	window.bubbles=new BubbleChart(chieftrades.filter(function(d){
+		return typeof d.chinaexports !== 'undefined';
+	}),{
 		container:"#bubbles",
 		latlng: countriesLatLng,
 		china:data.sheets["historical exports"].map(function(d){
@@ -67,6 +70,10 @@ function populate(data) {
 			{
 				c:"Pacific",
 				n:"Pacific"
+			},
+			{
+				c:"Africa",
+				n:"Africa"
 			}
 		],
 		lines:["CN"],
@@ -88,10 +95,10 @@ function populate(data) {
 
 	d3.select(".arrow-right").on("mousedown",function(d){
 
-		bubbles.filterCountriesByArea("Americas");
+		bubbles.filterCountriesByArea(bubbles.getNextArea());
 	})
 	
-	var regions=["Asia","NAmerica","SAmerica","Pacific","Europe"],
+	var regions=["Asia","NAmerica","SAmerica","Pacific","Europe","Africa"],
 		balloonsCharts=[];
 
 	regions.forEach(function(region){
