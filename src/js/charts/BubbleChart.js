@@ -59,15 +59,17 @@ function BubbleChart(data,options) {
 
 	var container=d3.select(options.container);
 	
-	var viz=container.append("div")
-							.attr("class","bubblechart");
+	var viz=container.select("div.bubblechart")
+							//.attr("class","bubblechart");
+
+	console.log("!!!",document.querySelector("#bubbles").getBoundingClientRect());
 
 	var size=viz.node().getBoundingClientRect(),
     	WIDTH = size.width,
     	HEIGHT = size.height;
 
    	console.log(WIDTH,HEIGHT)
-
+   	
    	var SPLIT=0.5,
 		RADIUS=[0,WIDTH>768?WIDTH*0.125:50];
 

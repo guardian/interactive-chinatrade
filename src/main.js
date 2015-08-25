@@ -213,13 +213,26 @@ function populate(data) {
 
 
 function boot(el) {
-	el.innerHTML = template;
+	
 //	var key = '13EUfteezFDeA-d96SiwTKaadcikoZbaJrt1QXLuAcJg'; //test version
 	var key = '1DGN3PJhnsiUnbshFfklL7TXZpIiD4NiBe52G_ITJVOM'; //production version
 	var url = 'https://interactive.guim.co.uk/spreadsheetdata/' + key + '.json';
 
 	//getJSON(url, populate);
-	populate();
+	el.innerHTML = template;
+
+	(function checkInnerHTML() {
+		var b=document.querySelector("#bubbles");
+		if(b){
+			if(b.getBoundingClientRect().height) {
+				populate();
+				return;	
+			}
+		};
+		window.requestAnimationFrame(checkInnerHTML);	
+	}());
+	
+	
 
 }
 
