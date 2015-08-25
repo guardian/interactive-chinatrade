@@ -315,7 +315,7 @@ function BalloonsChart(data,options) {
 				.style({
 					"margin-left":(margins.left - (xscale(2)-xscale(1))/2)+"px"
 				})
-
+	
 	var tags_buckets=tags.selectAll("ul")
 			.data(data)
 			.enter()
@@ -338,7 +338,7 @@ function BalloonsChart(data,options) {
 					return "tag "+d.value.rollup.replace(/\s/g,"");
 				})
 				.html(function(d){
-					return "<span>"+d.value.shortdesc+"</span><br/><span>"+ numberFormat(d.value.dollarvalue)+"</span>"
+					return "<span>"+d.value.shortdesc+"</span><span>"+ numberFormat(d.value.dollarvalue)+"</span>"
 				})
 
 	this.resize=function() {
