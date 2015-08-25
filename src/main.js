@@ -30,10 +30,8 @@ function populate(data) {
 	console.log(data)
 	var dateFormat=d3.time.format("%d/%m/%Y");
 
-	countries = data.sheets.Exports;
-	var topcountries = countries.filter(function findtop(c) {
-		return c.chinaexportsovergdp > .02;
-	});
+	//countries = data.sheets.Exports;
+	
 	
 	var trades=d3.nest()
 				.key(function(d){
@@ -45,13 +43,13 @@ function populate(data) {
 					}).slice(0,10);
 				})
 				.entries(chieftrades.filter(function(d){
-					return d.chinaexportsovergdp<0.04;
+					return 1;//d.chinaexportsovergdp<0.04;
 				}));
 
 	console.log(trades)
 	var new_trades=[];
 	trades.forEach(function(d){
-		new_trades=new_trades.concat(d.values.slice(0,((d.key=="Asia" || d.key=="Europe")?2:10)));
+		new_trades=new_trades.concat(d.values);//.slice(0,((d.key=="Asia" || d.key=="Europe")?2:10)));
 	})
 	
 	chieftrades.filter(function(d){
@@ -66,8 +64,46 @@ function populate(data) {
 	})
 	console.log(new_trades);
 
+	var regions=[
+			{
+				c:"Asia",
+				n:"Asia",
+				d:10
+			},
+			{
+				c:"Europe",
+				n:"Europe",
+				d:10
+			},
+			{
+				c:"NAmerica",
+				n:"North America",
+				d:10
+			},
+			{
+				c:"SAmerica",
+				n:"South America",
+				d:10
+			},
+			{
+				c:"Pacific",
+				n:"Pacific",
+				d:10
+			},
+			{
+				c:"Africa",
+				n:"Africa",
+				d:10
+			},
+			{
+				c:"Mideast",
+				n:"Middle East",
+				d:10
+			}
+		];
 	
 	//window.bubbles=new BubbleChart(data.sheets["customsdata"],{
+	
 	var bubbles=new BubbleChart(new_trades.filter(function(d){
 		return typeof d.chinaexports !== 'undefined';
 	}),{
@@ -81,36 +117,7 @@ function populate(data) {
 		}).sort(function(a,b){
 			return +a.date - +b.date;
 		}),
-		regions:[
-			{
-				c:"Asia",
-				n:"Asia"
-			},
-			{
-				c:"Europe",
-				n:"Europe"
-			},
-			{
-				c:"NAmerica",
-				n:"North America"
-			},
-			{
-				c:"SAmerica",
-				n:"South America"
-			},
-			{
-				c:"Pacific",
-				n:"Pacific"
-			},
-			{
-				c:"Africa",
-				n:"Africa"
-			},
-			{
-				c:"Mideast",
-				n:"Middle East"
-			}
-		],
+		regions:regions,
 		lines:["CN"],
 		ratio:0.146,
 		area:viewport.width>740?null:0,
@@ -135,21 +142,20 @@ function populate(data) {
 		bubbles.filterCountriesByArea(bubbles.getPrevArea());
 	})
 	
-	var regions=["Asia","NAmerica","SAmerica","Pacific","Europe","Africa","Mideast"],
-		balloonsCharts=[];
+	var balloonsCharts=[];
 
 	regions.forEach(function(region){
 		balloonsCharts.push(new BalloonsChart(chieftrades.filter(function(c){
-			return c.continent == region;
+			return c.continent == region.c;
 		}).sort(function(a,b){
 			return b.chinaexportsovergdp - a.chinaexportsovergdp;
-		}).slice(0,10),{
+		}).slice(0,region.d),{
 			container:"#regions",
-			region:region,
+			region:region.c,
 			ratio:0.146
 		}));
 	})
-
+	
 	
 	;(function() {
 	    var throttle = function(type, name, obj) {
@@ -171,6 +177,7 @@ function populate(data) {
 	    throttle ("resize", "optimizedResize");
 	})();
 
+	
 	// handle event
 	window.addEventListener("optimizedScroll", function() {
 	    //console.log("Resource conscious scroll callback!");
@@ -178,9 +185,9 @@ function populate(data) {
 	    	bubbles.setRatio(0.146)	
 	    }
 	});
-
+	
 	window.addEventListener("optimizedResize", function() {
-	    bubbles.resize();
+	    //bubbles.resize();
 	    balloonsCharts.forEach(function(d){
 	    	d.resize();
 	    })

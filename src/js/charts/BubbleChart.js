@@ -110,7 +110,7 @@ function BubbleChart(data,options) {
     		
     		d.index=i;
 
-	    	d.new_value=d.chinaexports * (1 - RATIO); 
+	    	d.new_value=d.chinaexports * (1 - RATIO);
 	    	
 	    	d.loss = d.chinaexports - d.new_value;
 	    	d.loss_normalized=d.loss*d.averagevariation;
