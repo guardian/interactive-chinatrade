@@ -1448,6 +1448,12 @@ function BubbleChart(data,options) {
 
 	new Legend();
 
+	/*container.append("div")
+				.attr("class","notes nofloat")
+				.append("p")
+					.html("The losses are calculated as the total reduction in exports to China over the year at the rate indicated, and include a factor for each country to account for variations in the drop in exports so far this year. For instance, while China's imports have been falling by 14.6% on average, imports from Australia are down 25.8%")
+	*/
+
 	function Legend() {
 
 		var gdp = 1000000000000*2/3;

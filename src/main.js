@@ -2,19 +2,20 @@ var getJSON = require('./js/utils/getjson');
 var template = require('./html/base.html');
 var detect = require('./js/utils/detect');
 var d3 = require('d3');
-var formattedproperty;
+var chieftrades = require('./data/chieftrades.json');
+//var formattedproperty;
 
 require('./js/utils/raf.js');
 require('./js/utils/jsBezier.js');
 
 
-var LineChart = require("./js/charts/LineChart");
-var BarChart = require("./js/charts/BarChart");
+//var LineChart = require("./js/charts/LineChart");
+//var BarChart = require("./js/charts/BarChart");
 var BubbleChart = require("./js/charts/BubbleChart");
 var BalloonsChart = require("./js/charts/BalloonsChart");
 
-var countriesLatLng = require('./data/countries2.json');
-var chieftrades = require('./data/chieftrades.json');
+//var countriesLatLng = require('./data/countries2.json');
+
 
 d3.selection.prototype.moveToFront = function() {
       return this.each(function(){
@@ -32,7 +33,7 @@ function populate(data) {
 
 	//countries = data.sheets.Exports;
 	
-	
+	/*
 	var trades=d3.nest()
 				.key(function(d){
 					return d.continent;
@@ -63,6 +64,7 @@ function populate(data) {
 		}
 	})
 	console.log(new_trades);
+	*/
 
 	var regions=[
 			{
@@ -108,7 +110,7 @@ function populate(data) {
 		return typeof d.chinaexports !== 'undefined';
 	}),{
 		container:"#bubbles",
-		latlng: countriesLatLng,
+		//latlng: countriesLatLng,
 		china:data.sheets["historical exports"].map(function(d){
 			return {
 				date:dateFormat.parse(d.month),
@@ -206,8 +208,6 @@ function populate(data) {
 	
 };
 
-var dollarstyle = d3.format("$,.0f");
-
 
 
 
@@ -218,6 +218,7 @@ function boot(el) {
 	var url = 'https://interactive.guim.co.uk/spreadsheetdata/' + key + '.json';
 
 	getJSON(url, populate);
+
 }
 
 module.exports = { boot: boot };
