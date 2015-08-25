@@ -3,6 +3,7 @@ var template = require('./html/base.html');
 var detect = require('./js/utils/detect');
 var d3 = require('d3');
 var chieftrades = require('./data/chieftrades.json');
+var historicalexports = require('./data/historicalexports.json');
 //var formattedproperty;
 
 require('./js/utils/raf.js');
@@ -111,7 +112,7 @@ function populate(data) {
 	}),{
 		container:"#bubbles",
 		//latlng: countriesLatLng,
-		china:data.sheets["historical exports"].map(function(d){
+		china:historicalexports.map(function(d){
 			return {
 				date:dateFormat.parse(d.month),
 				"CN":d.imports
@@ -151,7 +152,7 @@ function populate(data) {
 			return c.continent == region.c;
 		}).sort(function(a,b){
 			return b.chinaexportsovergdp - a.chinaexportsovergdp;
-		}).slice(0,region.d),{
+		}),{
 			container:"#regions",
 			region:region.c,
 			ratio:0.146
@@ -217,7 +218,8 @@ function boot(el) {
 	var key = '1DGN3PJhnsiUnbshFfklL7TXZpIiD4NiBe52G_ITJVOM'; //production version
 	var url = 'https://interactive.guim.co.uk/spreadsheetdata/' + key + '.json';
 
-	getJSON(url, populate);
+	//getJSON(url, populate);
+	populate();
 
 }
 
