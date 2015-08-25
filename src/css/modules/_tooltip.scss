@@ -2,10 +2,11 @@
 	position: absolute;
 	top:0;
 	left:0;
-	//width:210px;
-	background-color: rgba(255,255,255,1);
-
-	padding:10px;
+	
+	width:0;
+	height:30px;
+	overflow:visible;
+	border-left:2px solid #ff0000;
 	
 	//height:45px;
 	
@@ -13,7 +14,7 @@
 
 	pointer-events: none;
 
-	display: none;
+	//display: none;
 	
 	@include fs-textSans(2);
 
@@ -49,9 +50,13 @@
 }
 
 .arrow_box {
-	//position: relative;
+	position: absolute;
+	left:0;
+	top:0;
+	padding:10px;
 	background: #fff;
 	border: 1px solid #aaa;
+	margin-left:10px;
 }
 .arrow_box:after, .arrow_box:before {
 	right: 100%;
@@ -77,3 +82,34 @@
 	border-width: 8px;
 	margin-top: -8px;
 }
+
+.tooltip.right {
+	.arrow_box {
+		left:-240px;
+	}
+	.arrow_box:after, .arrow_box:before {
+		left: 100%;
+		top: 25px;
+		border: solid transparent;
+		content: " ";
+		height: 0;
+		width: 0;
+		position: absolute;
+		pointer-events: none;
+
+	}
+
+	.arrow_box:after {
+		border-color: rgba(255, 255, 255, 0);
+		border-left-color: #fff;
+		border-width: 7px;
+		margin-top: -7px;
+	}
+	.arrow_box:before {
+		border-color: rgba(170, 170, 170, 0);
+		border-left-color: #777;
+		border-width: 8px;
+		margin-top: -8px;
+	}
+}
+	

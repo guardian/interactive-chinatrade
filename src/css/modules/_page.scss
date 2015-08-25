@@ -68,8 +68,9 @@
 	.section {
 	    position: relative;
 	    overflow: hidden;
-	    //border-bottom: 1px solid colour(neutral-4);
-
+	    border-bottom: 1px solid colour(neutral-2);
+		margin-bottom:25px;
+		padding-bottom:25px;
 
 	    > div {
 	    	float:left;
@@ -77,6 +78,9 @@
 
 	    
 	    &:last-child {
+	        border-bottom: 0;
+	    }
+	    &:first-child {
 	        border-bottom: 0;
 	    }
 		
@@ -216,18 +220,21 @@
 		.subsection {
 			width:100%;
 			overflow: hidden;
-
+			margin-bottom:50px;
+			border-top:1px solid #ddd;
+			
 			.sub-intro {
+
 				p {
-				    color: colour(neutral-2);
+				    //color: colour(neutral-2);
 				    @include fs-bodyCopy(2);
 
 				}
 			}
 			
-			.h2 {
-				@include fs-headline(7);
-				font-weight:600;
+			h2 {
+				@include fs-header(5);
+				//font-weight:600;
 				margin-top: 5px;
 			}
 
@@ -235,6 +242,7 @@
 
 			@include mq(desktop) {
 				.sub-intro {
+					padding-top:20px;
 					float:left;
 					width:20%;
 				}
@@ -244,9 +252,20 @@
 				}	
 			}
 		}
+		.subsection:first-child {
+			border-top:none;
+		}
 	    
 	}
-
+	
+	.sourcesandcredits {
+		@include fs-header(1);
+	    color: #767676;
+	    span {
+	    	font-weight: normal;
+	    }
+	}
+	
 	
 
 }

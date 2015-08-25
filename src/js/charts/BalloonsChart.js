@@ -130,7 +130,7 @@ function BalloonsChart(data,options) {
 
 
 	var xscale=d3.scale.ordinal().domain(data.map(function(d){return d.b_index})).rangePoints([0,(WIDTH-(margins.right+margins.left))]),
-		yscale=d3.scale.linear().domain([0,extents.percGDP[1]]).range([0,(HEIGHT-(margins.top+margins.bottom))]).nice(),
+		yscale=d3.scale.linear().domain([0,extents.percGDP[1]]).range([0,(HEIGHT-(margins.top+margins.bottom))]),
 		gdp_scale=d3.scale.sqrt().domain([0,extents.gdp[1]]).range(RADIUS);
 	var tag_height=16,
 		tag_yscale=d3.scale.ordinal().domain(d3.range(5)).rangePoints([0,tag_height*5]),
@@ -276,13 +276,14 @@ function BalloonsChart(data,options) {
 			      .attr("class", "y axis")
 			      .call(yAxis);
 
-	var axis_title=axes.append("g")
-						.attr("class","title")
-						.attr("transform","translate("+(45)+","+(yscale.range()[1]+10)+")");
+	
 
-
+	var last_tick;
 	axis.selectAll(".tick")
 			.classed("hidden",function(d,i){
+				if(i%3===0) {
+					last_tick=d;
+				}
 				return i%3!==0;
 			})
 			.append("line")
@@ -299,6 +300,10 @@ function BalloonsChart(data,options) {
 			.style("fill",function(d){
 				return color_countries_axis(d)
 			})
+
+	var axis_title=axes.append("g")
+						.attr("class","title")
+						.attr("transform","translate("+(45)+","+(yscale(last_tick)+20)+")");
 
 	axis_title.append("text")
 				.attr("x",0)

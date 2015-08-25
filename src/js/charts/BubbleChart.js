@@ -29,6 +29,7 @@ function BubbleChart(data,options) {
 	
 
 	var numberFormat=options.numberFormat || function(d){
+			//return d;
 			return d3.format("$.2f")(d3.round(d,0)/(1000*1000000))+"bn"
 		},
 		percFormat=options.percFormat || function(d){
@@ -108,12 +109,16 @@ function BubbleChart(data,options) {
 
     		//d.exports= +((d.exports+"").replace(/,/gi,""));
     		
+
+
     		d.index=i;
 
 	    	d.new_value=d.chinaexports * (1 - RATIO);
 	    	
 	    	d.loss = d.chinaexports - d.new_value;
 	    	d.loss_normalized=d.loss*d.averagevariation;
+
+	    	
 
 	    	d.new_chinaexports = d.chinaexports - d.loss_normalized;
 	    	d.new_gdp = d.gdp - d.loss_normalized;
@@ -257,9 +262,11 @@ function BubbleChart(data,options) {
 	var PERC_SCALE_MIN=0.035;
 
 
+	var gdp_scale=d3.scale.sqrt().domain([0,extents.gdp[1]]).range(RADIUS);
+	margins.left=gdp_scale(2941885537461)
+
 	var xscale=d3.scale.ordinal().domain(data.map(function(d){return d.index})).rangePoints([0,(WIDTH-(margins.right+margins.left))]),
 		//gdp_scale=d3.scale.sqrt().domain([extents.chinaexports[0],extents.gdp[1]]).range(RADIUS),
-		gdp_scale=d3.scale.sqrt().domain([0,extents.gdp[1]]).range(RADIUS),
 		CHINESE_RADIUS=gdp_scale(CHINA_GDP),
 		yscale_china=d3.scale.linear().domain([0,0.3]).range([CHINESE_RADIUS,(HEIGHT-(margins.top+margins.bottom))*(1-SPLIT)]),
 		yscale_countries=d3.scale.linear().domain([0,extents.percGDP[1]*2]).range([0,(HEIGHT-(margins.top+margins.bottom))*SPLIT]).nice(),
@@ -318,11 +325,10 @@ function BubbleChart(data,options) {
 
 	function detectInteractions() {
 
-		//var point=findClosestPoint(MOUSE_MOVING.x,MOUSE_MOVING.y);
-		//console.log("point",point)
+		
 		var bezier=findBezier(MOUSE_MOVING.x,MOUSE_MOVING.y);
 		
-		
+		//console.log(bezier.i)
 		
 
 		/*dot
@@ -349,7 +355,9 @@ function BubbleChart(data,options) {
 	    		}
 	    	],
 			bezier.p.x-margins.left,
-			bezier.p.y-margins.top
+			bezier.p.y-margins.top,
+			null,
+			WIDTH
 		);
 
 		link.classed("highlight",function(c){
@@ -520,7 +528,7 @@ function BubbleChart(data,options) {
 				"left":WIDTH/2-gdp_scale(CHINA_GDP)>240+290?"240px":(WIDTH/2+gdp_scale(CHINA_GDP)+20)+"px"
 			})
 			//.html("<h2>... if China's imports<br/>fall by <span class=\"title perc\">"+percFormat(RATIO)+"</span></h2><p class=\"header-text\">China's import demand over the first seven months of 2015 <button class='btn-standfirst'>was down 14.6%</button> on the same period in 2014, with particularly sharp drops in January and February, <button class='btn-standfirst'>of 20% on average.</button> In July the change was <button class='btn-standfirst'>less severe at 8%</button> on the same month in the previous year, but even this change applied to the year as a whole would take billions of dollars out of some of the world's most advanced economies</p>")
-			.html("<h2>... if China's imports<br/>fall by <span class=\"title perc\">"+percFormat(RATIO)+"</span></h2><p class=\"header-text\">China's demand <button class='btn-standfirst selected' data-loss='0.146'>was down 14.6%</button> over the first seven months of 2015 compared to the same period last year.  January and February fared worst, <button class='btn-standfirst' data-loss='0.2'>20% on average</button>. July's change was <button class='btn-standfirst' data-loss='0.08'>less severe at 8%</button></p>")
+			.html("<h2>... if China's imports<br/>fall by <span class=\"perc\">"+percFormat(RATIO)+"</span></h2><p class=\"header-text\">China's demand <button class='btn-standfirst selected' data-loss='0.146'>was down 14.6%</button> over the first seven months of 2015 compared to the same period last year.  January and February fared worst, <button class='btn-standfirst' data-loss='0.2'>20% on average</button>. July's change was <button class='btn-standfirst' data-loss='0.08'>less severe at 8%</button></p>")
 	title_label.selectAll("button")
 			.on("mousedown",function(d){
 				var __this=d3.select(this),
@@ -689,7 +697,9 @@ function BubbleChart(data,options) {
 						    		}
 						    	],
 								x,
-								y
+								y,
+								null,
+								WIDTH
 							);
 
 							link.classed("highlight",function(c){
@@ -820,7 +830,7 @@ function BubbleChart(data,options) {
 					text:d.info.text,
 					iso:d.info.iso,
 					loss:numberFormat(d.info.loss_normalized),
-					perc:percFormat(-RATIO)
+					perc:percFormat(d.info.percGDP)
 				}
 			}
 		);
@@ -919,9 +929,10 @@ function BubbleChart(data,options) {
 		if(!dont_filter) {
 			setCountriesByArea();
 		}
+		gdp_scale.range(RADIUS);
 
 		margins={
-	    	left:WIDTH>768?100:40,
+	    	left:gdp_scale(2941885537461),
 	    	right:WIDTH>768?100:40,
 	    	top:WIDTH>768?320:RADIUS[1]*2,//320,
 	    	bottom:RADIUS[1]
@@ -930,7 +941,7 @@ function BubbleChart(data,options) {
 		xscale.rangePoints([0,(WIDTH-(margins.right+margins.left))]);
 
 		
-		gdp_scale.range(RADIUS);
+		
 		CHINESE_RADIUS=gdp_scale(CHINA_GDP);
 
 		
@@ -1246,7 +1257,8 @@ function BubbleChart(data,options) {
 
 			axis.selectAll(".tick")
 				.select("line.grid")
-					.attr("x1",-((WIDTH-(margins.right+margins.left)))-(margins.right))
+					.attr("x1",-WIDTH)
+					//.attr("x1",-((WIDTH-(margins.right+margins.left)))-(margins.right))
 		}
 	}
 
@@ -1298,7 +1310,6 @@ function BubbleChart(data,options) {
 	}
 
 	var drag=d3.behavior.drag()
-			//.origin(function(d) { return d; })
 			.on("dragstart", function() {
 				d3.event.sourceEvent.stopPropagation(); // silence other listeners
 				DRAGGING=true;
@@ -1308,7 +1319,14 @@ function BubbleChart(data,options) {
 				DRAGGING=false;
 			})
 			.on("drag",function() {
-				__Y=d3.event.y;
+				if(!__Y) {
+					__Y=yscale_china(RATIO);
+				} else {
+					__Y+=d3.event.dy;	
+				}
+				
+				
+
 			});
 
 	window.requestAnimationFrame(dragChina);
@@ -1359,10 +1377,10 @@ function BubbleChart(data,options) {
 			})
 			.append("line")
 				.attr("class","grid")
-				.attr("x2",0)
+				.attr("x1",-WIDTH)
 				.attr("y1",0)
 				//.attr("x1",-xscale.range()[1]-(margins.right))
-				.attr("x1",-((WIDTH-(margins.right+margins.left)))-(margins.right))
+				.attr("x2",0)
 				.attr("y2",0.00001)
 				.style("stroke","url(#gridGradient)")
 
@@ -1408,7 +1426,9 @@ function BubbleChart(data,options) {
 			}
 
 			if(bezier) {
-				point=jsBezier.pointOnCurve(bezier.b,1-location);	
+				point=jsBezier.pointOnCurve(bezier.b,1-location);
+
+				//console.log("BEZIER",bezier.info)
 			}
 			
 
@@ -1432,7 +1452,7 @@ function BubbleChart(data,options) {
 
 		var gdp = 1000000000000*2/3;
 
-		var x=margins.left;//WIDTH - gdp_scale(gdp) - 20,
+		var x=gdp_scale(gdp)+10,//margins.left;//WIDTH - gdp_scale(gdp) - 20,
 			y=yscale_countries.range()[1]+margins.top+gdp_scale(gdp)*2 + 30;
 
 		
@@ -1479,44 +1499,68 @@ function BubbleChart(data,options) {
 				});
 
 		legend.append("text")
-			.attr("x",0)
+			.attr("x",gdp_scale(gdp))
 			.attr("y",function(){
-				return 18;
+				return -gdp_scale(gdp/10);
 			})
+			.attr("dx","10px")
+			.attr("dy","2px")
 			.text("exports to ")
 
 		legend.append("text")
-			.attr("x",0)
+			.attr("x",gdp_scale(gdp))
 			.attr("y",function(){
-				return 18+12;
+				return -gdp_scale(gdp/10)+12;
 			})
+			.attr("dx","10px")
+			.attr("dy","2px")
 			.text("China")
 
 		
 		legend.append("text")
-			.attr("x",0)
+			.attr("x",gdp_scale(gdp))
 			.attr("y",function(){
-				return -gdp_scale(gdp)*2-10
+				return -gdp_scale(gdp)
 			})
+			.attr("dx","10px")
+			.attr("dy","4px")
 			.text("country gdp")
 
 		legend.append("line")
 			.attr("x1",0)
-			.attr("x2",0)
+			.attr("x2",gdp_scale(gdp)+5)
 			.attr("y1",function(){
 				return -gdp_scale(gdp)
 			})
 			.attr("y2",function(){
-				return -gdp_scale(gdp)*2-7
+				return -gdp_scale(gdp)
 			})
 
 		legend.append("line")
 			.attr("x1",0)
-			.attr("x2",0)
-			.attr("y1",7)
+			.attr("x2",gdp_scale(gdp)+5)
+			.attr("y1",function(){
+				return -gdp_scale(gdp/10)
+			})
 			.attr("y2",function(){
 				return -gdp_scale(gdp/10)
 			})
+
+		legend.append("text")
+			.attr("class","center")
+			.attr("x",0)
+			.attr("y",function(){
+				return 12;
+			})
+			.text("country name");
+
+		legend.append("text")
+			.attr("class","center")
+			.attr("x",0)
+			.attr("y",function(){
+				return 24;
+			})
+			.text("$bn projected loss");
 	}
 }
 

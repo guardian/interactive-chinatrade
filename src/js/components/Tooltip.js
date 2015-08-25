@@ -7,27 +7,30 @@ function Tooltip(options) {
 
 	var tooltip=d3.select(options.container)
 					.append("div")
-						.attr("class","tooltip arrow_box clearfix")
+						.attr("class","tooltip")
+
+	var arrowBox=tooltip.append("div")
+						.attr("class","arrow_box clearfix")
 						.style("width",w+"px")
 	var tooltipTitle;
 	if(options.title) {
-		tooltipTitle=tooltip.append("h1")
+		tooltipTitle=arrowBox.append("h1")
 			.attr("class","tooltip-title")
-			.text("title")	
+			.text("title");
 	}
 
 	var indicator;
 	if(options.html) {
-		tooltip.html(options.html);
+		arrowBox.html(options.html);
 
-		indicator=tooltip.selectAll("span")
+		indicator=arrowBox.selectAll("span")
 				.data(options.indicators)
 				.attr("id",function(d){
 					return d.id;
 				})
 				.attr("class","value")
 	} else {
-		indicator=tooltip.selectAll("div.indicator")
+		indicator=arrowBox.selectAll("div.indicator")
 				.data(options.indicators,function(d){
 					return d.id;
 				})
@@ -54,7 +57,7 @@ function Tooltip(options) {
 	this.hide=function() {
 		tooltip.classed("visible",false);
 	};
-	this.show=function(data,x,y,title) {
+	this.show=function(data,x,y,title,max_width) {
 		//console.log(x,y)
 		//percentage.text(data.percentage+"%");
 		//projection_value.text(data.total)
@@ -72,11 +75,24 @@ function Tooltip(options) {
 				return d.value;
 			})
 
-		tooltip.style({
-			left:(x+16+options.margins.left)+"px",
-			top:(y+options.margins.top-25)+"px"
-		})
-		.classed("visible",true)
+		tooltip
+			.classed("right",function(){
+				if(!max_width) {
+					return 0;
+				}
+				if(x+16+options.margins.left+w>max_width) {
+					return 1;
+				}
+			})
+			/*.style({
+				left:(x+16+options.margins.left)+"px",
+				top:(y+options.margins.top-25)+"px"
+			})*/
+			.style("top",(y+options.margins.top-25)+"px")
+			.style("left",function(){
+				return (x+options.margins.left)+"px";
+			})
+			.classed("visible",true)
 		
 	};
 
