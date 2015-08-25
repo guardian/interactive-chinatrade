@@ -70,7 +70,7 @@ a {
 .share--twitter {
     background-color: #03b3ee;
     &::before {
-        background-image: url('../imgs/twitter.svg');
+        background-image: url('/imgs/twitter.svg');
     }
     &:hover {
         background-color: #028dbc;
@@ -80,7 +80,7 @@ a {
 .share--facebook {
     background-color: #3067a3;
     &::before {
-        background-image: url('../imgs/facebook.svg');
+        background-image: url('/imgs/facebook.svg');
     }
     &:hover {
         background-color: #244e7c;
@@ -120,7 +120,7 @@ a {
     background-color: #fff;
     
     &::before {
-        background-image: url('../imgs/arrow-left.svg');
+        background-image: url('/imgs/arrow-left.svg');
         
     
     }
@@ -133,7 +133,7 @@ a {
     background-repeat:no-repeat;
 
     &::before {
-        background-image: url('../imgs/arrow-right.svg');
+        background-image: url('/imgs/arrow-right.svg');
         
     
     }
