@@ -12,7 +12,7 @@
 		height:300px;
 	}
 	.tags {
-		height: (48px + 10px + 4px) * 5;
+		//height: (48px + 10px + 4px) * 5;
 		overflow: hidden;
 		
 		margin:0;
@@ -23,14 +23,29 @@
 			padding: 0;
 			list-style: none;
 			//width: calc(10% - 4px);
-
+			
 			li {
 				@include fs-textSans(1);
 				color: #fff;
+				
+				width:24px;
+				height: 24px;
 				margin:2px 0;
+				margin-left:calc(50% - 12px);
 				border-radius: 5px;
-				padding:5px;
-				height:48px;
+				span {
+					display: none;
+				}
+
+				@include mq(desktop) {
+					margin:2px 1px;
+					border-radius: 5px;
+					padding:5px;
+					height:48px;
+					span {
+						display: block;
+					}
+				}
 			}
 
 			li.Foodandagriculture {

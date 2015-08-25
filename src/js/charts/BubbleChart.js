@@ -610,7 +610,7 @@ function BubbleChart(data,options) {
 							return d.continent !== AREA;
 						})
 						.attr("transform",function(d,i){
-							console.log(d);
+							//console.log(d);
 							var domain=xscale.domain(),
 								x=domain.indexOf(d.index)>-1?xscale(d.index):0,
 								y=yscale_countries(d.percGDP);

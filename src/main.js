@@ -68,7 +68,7 @@ function populate(data) {
 
 	
 	//window.bubbles=new BubbleChart(data.sheets["customsdata"],{
-	window.bubbles=new BubbleChart(new_trades.filter(function(d){
+	var bubbles=new BubbleChart(new_trades.filter(function(d){
 		return typeof d.chinaexports !== 'undefined';
 	}),{
 		container:"#bubbles",

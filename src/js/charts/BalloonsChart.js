@@ -31,7 +31,7 @@ function BalloonsChart(data,options) {
    	console.log(WIDTH,HEIGHT)
 
    	var SPLIT=1,
-   		RADIUS=[0,50];//WIDTH>740?WIDTH*0.125:50];
+   		RADIUS=[0,WIDTH>740?WIDTH*0.125:12];
 
     var margins={
     	left:RADIUS[1],
@@ -43,7 +43,7 @@ function BalloonsChart(data,options) {
     function updateData() {
     	data.forEach(function(d,i){
 
-    		d.index=i;
+    		d.b_index=i;
 
 	    	d.new_value=d.chinaexports * (1 - RATIO); 
 	    	
@@ -69,7 +69,7 @@ function BalloonsChart(data,options) {
 
 		extents={
 			index:d3.extent(data,function(d){
-				return d.index;
+				return d.b_index;
 			}),
 			loss:d3.extent(data,function(d){
 				return d.loss;
@@ -128,7 +128,7 @@ function BalloonsChart(data,options) {
 	var PERC_SCALE_MIN=extents.percGDP[1];
 
 
-	var xscale=d3.scale.ordinal().domain(data.map(function(d){return d.index})).rangePoints([0,(WIDTH-(margins.right+margins.left))]),
+	var xscale=d3.scale.ordinal().domain(data.map(function(d){return d.b_index})).rangePoints([0,(WIDTH-(margins.right+margins.left))]),
 		yscale=d3.scale.linear().domain([0,extents.percGDP[1]]).range([0,(HEIGHT-(margins.top+margins.bottom))]).nice(),
 		gdp_scale=d3.scale.sqrt().domain([0,extents.gdp[1]]).range(RADIUS);
 	var tag_height=16,
@@ -169,9 +169,10 @@ function BalloonsChart(data,options) {
 					.append("g")
 					.attr("class","country")
 					.attr("transform",function(d){
-						var x=xscale(d.index),
+						var x=xscale(d.b_index),
 							y=yscale(d.percGDP);
 						//console.log(d.iso,d.percGDP,y,yscale.range(),yscale.domain())
+						//console.log("--->",d.iso,d.b_index,x,xscale.range(),xscale.domain())
 						return "translate("+x+","+y+")";
 					});
 
@@ -183,7 +184,7 @@ function BalloonsChart(data,options) {
 					return gdp_scale(d.gdp);
 				})
 				.style("fill",function(d){
-					return color_countries(d.percGDP)
+					return color_countries_axis(d.percGDP)
 				});
 	country.append("circle")
 			.attr("class","inner")
@@ -311,16 +312,19 @@ function BalloonsChart(data,options) {
 
 	var tags=container.append("div")
 				.attr("class","tags")
-				//.style("margin","0 "+(margins.right+"px")+" 0 "+(margins.left+"px"));
+				.style({
+					"margin-left":(margins.left - (xscale(2)-xscale(1))/2)+"px"
+				})
 
-	tags=tags.selectAll("ul")
+	var tags_buckets=tags.selectAll("ul")
 			.data(data)
 			.enter()
 				.append("ul")
-				.style("width","calc( (100% - "+margins.left+"px - "+margins.right+"px ) / ("+(data.length)+") )")
-				.style("margin-left","calc( (100% / "+data.length+") / 10 )")
+				.style("width",(xscale(2)-xscale(1))+"px")
+				//.style("width","calc( (100% - "+margins.left+"px - "+margins.right+"px ) / ("+(data.length-1)+") )")
+				//.style("margin-left","2px")//"calc( (100% / "+data.length+") / 10 )")
 
-	var tag=tags.selectAll("li.tag")
+	var tag=tags_buckets.selectAll("li.tag")
 			.data(function(d){
 				//console.log(d)
 				//console.log(d3.entries(d.trades))
@@ -338,7 +342,31 @@ function BalloonsChart(data,options) {
 				})
 
 	this.resize=function() {
+		var size=viz.node().getBoundingClientRect();
+	    WIDTH = size.width;
+	    HEIGHT = size.height;
 
+	    console.log(WIDTH)
+
+	    update();
+	}
+	function update() {
+		xscale.rangePoints([0,(WIDTH-(margins.right+margins.left))]);
+
+		country.attr("transform",function(d){
+						var x=xscale(d.b_index),
+							y=yscale(d.percGDP);
+						//console.log(d.iso,d.b_index,x,xscale.range(),xscale.domain())
+						return "translate("+x+","+y+")";
+					});
+
+		tags
+			.style({
+				"margin-left":(margins.left - (xscale(2)-xscale(1))/2)+"px"
+			})
+
+		tags_buckets
+			.style("width",(xscale(2)-xscale(1))+"px")
 	}
 }
 
