@@ -303,7 +303,7 @@ function BubbleChart(data,options) {
     	container:container.node(),
     	margins:margins,
     	width:190,
-    	html:"<p>At <span></span> decline, <span></span> export sales lost: <span></span>(<span></span>)</p>",
+    	html:"<p>At <span></span> decline, <span></span> export sales lost: <span></span> (<span></span>)</p>",
     	indicators:[
     		{
     			id:"ratio",

@@ -232,7 +232,8 @@ function BalloonsChart(data,options) {
 					return 26;
 				})
 				.text(function(d){
-					return numberFormat(d.loss_normalized);
+					var loss = "-" + numberFormat(d.loss_normalized);
+					return loss;
 				})
 
 	
