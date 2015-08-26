@@ -10,6 +10,8 @@ require('./js/utils/jsBezier.js');
 var BubbleChart = require("./js/charts/BubbleChart");
 var BalloonsChart = require("./js/charts/BalloonsChart");
 
+var ShareButtons = require('./js/utils/social.js');
+
 d3.selection.prototype.moveToFront = function() {
       return this.each(function(){
       this.parentNode.appendChild(this);
@@ -204,6 +206,7 @@ function boot(el) {
 		var b=document.querySelector("#bubbles");
 		if(b && b.getBoundingClientRect().height) {
 			populate();
+			new ShareButtons('.header .share');
 			return;	
 		};
 		window.requestAnimationFrame(checkInnerHTML);	
