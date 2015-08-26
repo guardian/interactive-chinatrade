@@ -3,6 +3,7 @@ var detect = require('./js/utils/detect');
 var d3 = require('d3');
 var chieftrades = require('./data/chieftrades.json');
 var historicalexports = require('./data/historicalexports.json');
+var guardian;
 
 require('./js/utils/raf.js');
 require('./js/utils/jsBezier.js');
@@ -22,6 +23,7 @@ d3.selection.prototype.moveToFront = function() {
 function populate() {
 
 	var viewport=detect.getViewport();
+	guardian !== undefined ? console.log(guardian.config.page.edition): console.log("thing");
 
 	
 	var dateFormat=d3.time.format("%d/%m/%Y");
