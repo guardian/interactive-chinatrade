@@ -9,8 +9,8 @@ function ShareButtons(selector) {
         var twitterBaseUrl = "https://twitter.com/intent/tweet?text=";
         var facebookBaseUrl = "https://www.facebook.com/dialog/feed?display=popup&app_id=741666719251986&link=";
         var pageUrl = "http://gu.com/p/4af3t";
-        var shareImage = "pic.twitter.com/Y0gcJbhhJT";
-        var sharePNG = "http://interactive.guim.co.uk/2015/07/the-ashes/imgs/overtime.jpg";
+        var shareImage = "pic.twitter.com/TdatLErLKG";
+        var sharePNG = "http://visuals.guim.co.uk/2015/images/chinatrade-image.png";
 
         var pageMessage = "A drop in China's imports could drag many countries down"+ " " + 
                 pageUrl + " #China " + " " + shareImage;
