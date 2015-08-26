@@ -11,7 +11,7 @@
 		margin-top:-45px;
 		height: calc(100vh);
 
-		
+
 	}
 	@include mq(desktop) {
 		height: calc(100vh + 240px);
@@ -153,7 +153,7 @@
 				text-transform: capitalize;
 			}
 			text.value {
-				//display: none;
+				display: none;
     			paint-order: stroke;
     			stroke: #fff;
     			stroke-width: 8px;
@@ -161,7 +161,7 @@
     			stroke-linejoin: miter;
     
 				@include mq(desktop) {
-					display: none;
+					display: block;
 				}
 			}
 
