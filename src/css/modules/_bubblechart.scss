@@ -1,10 +1,25 @@
+.notes {
+	@include fs-textSans(1);
+	
+	padding-bottom:20px;
+	margin-bottom:20px;
+	color:#767676;
+	
+	@include mq(desktop) {
+		width:60%;
+		padding-left:240px;
+	}
+
+
+}
 #bubbles {
 	width:100%;
 	height: calc(100vh - 90px);
 	//height:500px;
 	position: relative;
 	margin-top:0;
-	
+	margin-bottom:10px;
+	border-top:none;
 
 
 	@include mq(tablet) {

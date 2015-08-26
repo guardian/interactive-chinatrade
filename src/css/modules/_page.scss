@@ -13,6 +13,7 @@
 	    position: relative;
 	    overflow: hidden;
 	    //border-bottom: 1px solid colour(neutral-1);
+	    border-top:none !important;
 	    padding-bottom: ($gs-baseline * 2);
 	    z-index: 9999;
 
@@ -68,7 +69,7 @@
 	.section {
 	    position: relative;
 	    //overflow: hidden;
-	    border-bottom: 1px solid colour(neutral-2);
+	    border-top: 1px solid colour(neutral-2);
 		
 		@include mq(tablet) {	
 			margin-bottom:25px;
