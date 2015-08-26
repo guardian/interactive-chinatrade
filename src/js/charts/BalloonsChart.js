@@ -35,8 +35,8 @@ function BalloonsChart(data,options) {
    		RADIUS=[0,WIDTH*0.125];
 
     var margins={
-    	left:WIDTH>740?50:25,
-    	right:WIDTH>740?WIDTH*0.125:12+55,
+    	left:WIDTH>739?50:25,
+    	right:WIDTH>739?WIDTH*0.125:12+55,
     	top:RADIUS[1],
     	bottom:50
     };
