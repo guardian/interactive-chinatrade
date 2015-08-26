@@ -47,11 +47,12 @@
 				margin-left:calc(50% - 12px);
 				border-radius: 5px;
 				
-				overflow: hidden;
-  				text-overflow: ellipsis;
+				
 
 				span {
 					display: none;
+					overflow: hidden;
+  					text-overflow: ellipsis;
 				}
 				span.value {
 					opacity: 0.5;

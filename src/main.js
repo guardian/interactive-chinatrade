@@ -138,7 +138,7 @@ function populate() {
 			if(a.majorpartner) return -1;
 			if(b.majorpartner) return 1;
 			return b.chinaexportsovergdp - a.chinaexportsovergdp;
-		}).slice(0,viewport.width>320?1000:8),{
+		}).slice(0,viewport.width>375?12:8),{
 			container:"#regions",
 			region:region.c,
 			ratio:0.146
