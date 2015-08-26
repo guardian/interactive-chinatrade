@@ -254,6 +254,12 @@
 			text.center {
 				text-anchor:middle;
 			}
+			text.inner {
+				display: none;
+				@include mq(tablet) {
+					display: block;
+				}
+			}
 			line {
 				stroke-dasharray: 1,1;
 				stroke-width:1;
