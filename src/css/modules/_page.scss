@@ -69,14 +69,17 @@
 	    position: relative;
 	    //overflow: hidden;
 	    border-bottom: 1px solid colour(neutral-2);
-		margin-bottom:25px;
-		padding-bottom:25px;
+		
+		@include mq(tablet) {	
+			margin-bottom:25px;
+			padding-bottom:25px;
+		}
 
 	    > div {
 	    	float:left;
 	    }
 		
-		
+
 	    
 	    &:last-child {
 	        border-bottom: 0;
