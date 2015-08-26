@@ -23,7 +23,7 @@ d3.selection.prototype.moveToFront = function() {
 function populate() {
 
 	var viewport=detect.getViewport();
-	guardian !== undefined ? console.log(guardian.config.page.edition): console.log("thing");
+	//guardian !== undefined ? console.log(guardian.config.page.edition): console.log("thing");
 
 	
 	var dateFormat=d3.time.format("%d/%m/%Y");

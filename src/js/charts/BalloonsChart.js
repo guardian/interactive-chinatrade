@@ -330,7 +330,7 @@ function BalloonsChart(data,options) {
 		__delta=__w;
 	}
 
-	console.log(__w,__delta)
+	//console.log(__w,__delta)
 	var tags=container.append("div")
 				.attr("class","tags clearfix")
 				.style({
