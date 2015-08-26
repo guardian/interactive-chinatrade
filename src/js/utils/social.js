@@ -8,7 +8,7 @@ function ShareButtons(selector) {
     function openShareWindow(e){
         var twitterBaseUrl = "https://twitter.com/intent/tweet?text=";
         var facebookBaseUrl = "https://www.facebook.com/dialog/feed?display=popup&app_id=741666719251986&link=";
-        var pageUrl = "http://gu.com/p/4af3t";
+        var pageUrl = "http://gu.com/p/4b9h8";
         var shareImage = "pic.twitter.com/TdatLErLKG";
         var sharePNG = "http://visuals.guim.co.uk/2015/images/chinatrade-image.png";
 
