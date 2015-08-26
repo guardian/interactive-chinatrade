@@ -489,7 +489,7 @@ function BubbleChart(data,options) {
 	var intro_label=viz.append("div")
 			.attr("class","blurb top")
 			//.html("<h2>... if China's imports<br/>fall by <span class=\"title perc\">"+percFormat(RATIO)+"</span></h2><p class=\"header-text\">China's import demand over the first seven months of 2015 <button class='btn-standfirst'>was down 14.6%</button> on the same period in 2014, with particularly sharp drops in January and February, <button class='btn-standfirst'>of 20% on average.</button> In July the change was <button class='btn-standfirst'>less severe at 8%</button> on the same month in the previous year, but even this change applied to the year as a whole would take billions of dollars out of some of the world's most advanced economies</p>")
-			.html("<h2>A drop in China's imports<br/>could drag these countries down ...</h2>")
+			.html("<h2>A drop in China's demand<br/>could drag these countries down ...</h2>")
 
 	
 	var title_label=viz.append("div")
@@ -499,7 +499,7 @@ function BubbleChart(data,options) {
 				"left":WIDTH/2-gdp_scale(CHINA_GDP)>240+290?"240px":(WIDTH/2+gdp_scale(CHINA_GDP)+20)+"px"
 			})
 			//.html("<h2>... if China's imports<br/>fall by <span class=\"title perc\">"+percFormat(RATIO)+"</span></h2><p class=\"header-text\">China's import demand over the first seven months of 2015 <button class='btn-standfirst'>was down 14.6%</button> on the same period in 2014, with particularly sharp drops in January and February, <button class='btn-standfirst'>of 20% on average.</button> In July the change was <button class='btn-standfirst'>less severe at 8%</button> on the same month in the previous year, but even this change applied to the year as a whole would take billions of dollars out of some of the world's most advanced economies</p>")
-			.html("<h2>... if China's imports<br/>fall by <span class=\"perc\">"+percFormat(RATIO)+"</span></h2><p class=\"header-text\">China's demand <button class='btn-standfirst selected' data-loss='0.146'>was down 14.6%</button> over the first seven months of 2015 compared to the same period last year.  January and February fared worst, <button class='btn-standfirst' data-loss='0.2'>20% on average</button>. July's change was <button class='btn-standfirst' data-loss='0.08'>less severe at 8%</button></p>")
+			.html("<h2>... if China's imports<br/>fall by <span class=\"perc\">"+percFormat(RATIO)+"</span></h2><p class=\"header-text\">China's demand <button class='btn-standfirst selected' data-loss='0.146'>was down 14.6%</button> over the first seven months of 2015 compared to the same period last year. In January and February the decline was <button class='btn-standfirst' data-loss='0.2'>20% on average</button>. July's change was <button class='btn-standfirst' data-loss='0.08'>less severe at 8%</button></p>")
 	title_label.selectAll("button")
 			.on("mousedown",function(d){
 				var __this=d3.select(this),
