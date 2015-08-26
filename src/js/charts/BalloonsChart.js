@@ -325,7 +325,12 @@ function BalloonsChart(data,options) {
 
 	var __w=Math.min(xscale(1),100),
 		__delta=xscale(1)>100?__w/2:0;
-	
+
+	if(WIDTH>1024 && __delta) {
+		__delta=__w;
+	}
+
+	console.log(__w,__delta)
 	var tags=container.append("div")
 				.attr("class","tags clearfix")
 				.style({
@@ -425,6 +430,10 @@ function BalloonsChart(data,options) {
 					});
 		var __w=Math.min(xscale(1),100),
 			__delta=xscale(1)>100?__w/2:0;
+
+		if(WIDTH>1024 && __delta) {
+			__delta=__w;
+		}
 				
 		tags
 			.style({
