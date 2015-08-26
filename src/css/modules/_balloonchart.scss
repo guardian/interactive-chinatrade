@@ -111,6 +111,7 @@
 
 	svg {
 		width:100%;
+		overflow: hidden;
 		.country {
 			circle.outer {
 				fill:#aa001e;
@@ -150,16 +151,16 @@
 				text-transform: capitalize;
 
 				paint-order: stroke;
-				stroke: #fff;
-    			stroke-width: 8px;
+				//stroke: #fff;
+    			//stroke-width: 8px;
     			stroke-linecap: butt;
     			stroke-linejoin: miter;
 			}
 			text.value {
 				//display: none;
     			paint-order: stroke;
-    			stroke: #fff;
-    			stroke-width: 8px;
+    			//stroke: #fff;
+    			//stroke-width: 8px;
     			stroke-linecap: butt;
     			stroke-linejoin: miter;
     

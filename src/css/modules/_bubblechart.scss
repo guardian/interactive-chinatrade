@@ -112,6 +112,7 @@
 	svg {
 		//border-top:1px solid #767676;
 		//background-color: #fff000;
+		overflow: hidden;
 		
 		* {
 			-webkit-tap-highlight-color: rgba(0,0,0,0);
@@ -170,8 +171,8 @@
 			text.value {
 				display: none;
     			paint-order: stroke;
-    			stroke: #fff;
-    			stroke-width: 8px;
+    			//stroke: #fff;
+    			//stroke-width: 8px;
     			stroke-linecap: butt;
     			stroke-linejoin: miter;
     

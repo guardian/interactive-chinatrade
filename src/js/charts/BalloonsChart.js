@@ -207,11 +207,11 @@ function BalloonsChart(data,options) {
 	country.append("line")
 				.attr("x1",0)
 				.attr("y1",function(d){
-					return 0;//gdp_scale(d.gdp);
+					return 30;//gdp_scale(d.gdp);
 				})
 				.attr("x2",0)
 				.attr("y2",function(d){
-					return HEIGHT;
+					return HEIGHT - yscale(d.percGDP);
 					return (-yscale(d.percGDP))+HEIGHT-margins.bottom-margins.top-tag_yscale(4)-5
 					return -yscale(d.percGDP)//gdp_scale(d.gdp)+HEIGHT*SPLIT/2;
 				})

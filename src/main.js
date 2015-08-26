@@ -168,7 +168,7 @@ function populate() {
 
 	
 	// handle event
-	window.addEventListener("optimizedScroll", function() {
+	window.addEventListener("scroll", function() {
 	    //console.log("Resource conscious scroll callback!");
 	    if(!bubbles.getLocked()) {
 	    	bubbles.setRatio(0.146)	
