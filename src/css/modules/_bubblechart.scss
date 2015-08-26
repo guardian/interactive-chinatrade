@@ -10,6 +10,8 @@
 	@include mq(tablet) {
 		margin-top:-45px;
 		height: calc(100vh);
+
+		
 	}
 	@include mq(desktop) {
 		height: calc(100vh + 240px);

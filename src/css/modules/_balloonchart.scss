@@ -16,6 +16,13 @@
 		height:300px;
 	}
 	.tags {
+		
+		@include mq(tablet) {
+			.tooltip {
+				display: none !important;
+			}
+		}
+
 		//height: (48px + 10px + 4px) * 5;
 		position: relative;
 		overflow: visible;
