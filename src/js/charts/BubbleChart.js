@@ -1238,7 +1238,7 @@ function BubbleChart(data,options) {
 		window.requestAnimationFrame(dragChina);
 
 		
-		
+		locked=true;
 		
 		
 		if(MOUSE_MOVING && !DRAGGING) {
