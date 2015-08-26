@@ -1,24 +1,30 @@
 .balloon-chart {
 	width:100%;
 	
+	
 	*, *:before, *:after {
 	  box-sizing: border-box;
 	}
 	
-	$Foodandagriculture: #258e8a;
-	$Manufactures: #7e39a5;
-	$Primarymaterials: #4982b9;
-	$Energy: #ffa14d;
-	$Other: #bdbdbd;
+	
 	
 	.countries {
 		height:300px;
 	}
 	.tags {
+		
+		@include mq(tablet) {
+			.tooltip {
+				display: none !important;
+			}
+		}
+
 		//height: (48px + 10px + 4px) * 5;
-		overflow: hidden;
+		position: relative;
+		overflow: visible;
 		
 		margin:0;
+		margin-bottom:30px;
 
 		ul {
 			float:left;
@@ -40,6 +46,9 @@
 				margin:2px 0;
 				margin-left:calc(50% - 12px);
 				border-radius: 5px;
+				
+				overflow: hidden;
+  				text-overflow: ellipsis;
 
 				span {
 					display: none;

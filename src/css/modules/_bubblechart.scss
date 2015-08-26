@@ -1,13 +1,17 @@
 #bubbles {
 	width:100%;
-	height: calc(100vh - 44px);
+	height: calc(100vh - 90px);
 	//height:500px;
 	position: relative;
 	margin-top:0;
 	
+
+
 	@include mq(tablet) {
 		margin-top:-45px;
 		height: calc(100vh);
+
+
 	}
 	@include mq(desktop) {
 		height: calc(100vh + 240px);
@@ -81,6 +85,10 @@
 	.arrows {
 		width:100px;
 		float:right;
+
+		button {
+			-webkit-tap-highlight-color: rgba(0,0,0,0);
+		}
 	}
 }
 .bubblechart {
@@ -89,6 +97,11 @@
 	svg {
 		//border-top:1px solid #767676;
 		//background-color: #fff000;
+		
+		* {
+			-webkit-tap-highlight-color: rgba(0,0,0,0);
+		}
+
 		line {
 			stroke:#ddd;
 			stroke-width:1;
@@ -140,7 +153,7 @@
 				text-transform: capitalize;
 			}
 			text.value {
-				//display: none;
+				display: none;
     			paint-order: stroke;
     			stroke: #fff;
     			stroke-width: 8px;

@@ -264,11 +264,53 @@
 	
 	.sourcesandcredits {
 		@include fs-header(1);
+		font-weight: normal;
 	    color: #767676;
 	    span {
 	    	font-weight: normal;
 	    }
 	}
+	
+	ul#chart-key {
+     
+        margin:0;
+        padding:0;
+        margin-top:10px;
+        height: 30px;
+        display: block;
+    
+
+	    li {
+	        @include fs-textSans(1);
+	        font-size:11px;
+	        color:#767676;
+	        float:left;
+	        list-style: none;
+	        padding-right: 15px;
+	        margin-bottom:5px;
+	        @include mq(desktop) {
+	        	float: none;
+	        }
+	    }
+	}
+
+	.key {
+	    width: 10px;
+	    height: 10px;
+	    margin-right: 3px;
+	    border-radius: 2px;
+	    display: inline-block;
+	    vertical-align: middle;
+	    margin-bottom: 2px;
+
+	   
+	}
+
+	#key-Foodandagriculture{background-color:$Foodandagriculture;}
+	#key-Manufactures{background-color:$Manufactures;}
+	#key-Primarymaterials{background-color:$Primarymaterials;}
+	#key-Energy{background-color:$Energy;}
+	#key-Other{background-color:$Other;}
 	
 	
 

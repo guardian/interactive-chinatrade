@@ -3,7 +3,7 @@ function Tooltip(options) {
 	var w=options.width || 200,
 		h=options.height || 110;
 
-	////////console.log("!!!!!!!!!!!",options)
+	//////////console.log("!!!!!!!!!!!",options)
 
 	var tooltip=d3.select(options.container)
 					.append("div")
@@ -12,6 +12,11 @@ function Tooltip(options) {
 	var arrowBox=tooltip.append("div")
 						.attr("class","arrow_box clearfix")
 						.style("width",w+"px")
+
+	if(options.padding) {
+		arrowBox.style("padding",options.padding)
+	}
+
 	var tooltipTitle;
 	if(options.title) {
 		tooltipTitle=arrowBox.append("h1")
@@ -58,7 +63,7 @@ function Tooltip(options) {
 		tooltip.classed("visible",false);
 	};
 	this.show=function(data,x,y,title,max_width) {
-		//console.log(x,y)
+		////console.log(x,y)
 		//percentage.text(data.percentage+"%");
 		//projection_value.text(data.total)
 
@@ -71,7 +76,7 @@ function Tooltip(options) {
 
 		indicator//.select("span.value")
 			.text(function(d){
-				//console.log("AAAHHHHHHHHHH",d,this)
+				////console.log("AAAHHHHHHHHHH",d,this)
 				return d.value;
 			})
 
@@ -83,6 +88,7 @@ function Tooltip(options) {
 				if(x+16+options.margins.left+w>max_width) {
 					return 1;
 				}
+				return 0;
 			})
 			/*.style({
 				left:(x+16+options.margins.left)+"px",
@@ -93,6 +99,7 @@ function Tooltip(options) {
 				return (x+options.margins.left)+"px";
 			})
 			.classed("visible",true)
+			
 		
 	};
 
