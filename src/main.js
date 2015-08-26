@@ -19,11 +19,11 @@ d3.selection.prototype.moveToFront = function() {
     };
 
 
-function populate(data) {
+function populate() {
 
 	var viewport=detect.getViewport();
 
-	console.log(data)
+	
 	var dateFormat=d3.time.format("%d/%m/%Y");
 
 	var regions_majorpartner=[
@@ -138,7 +138,7 @@ function populate(data) {
 			if(a.majorpartner) return -1;
 			if(b.majorpartner) return 1;
 			return b.chinaexportsovergdp - a.chinaexportsovergdp;
-		}).slice(0,viewport.width>320?10:8),{
+		}).slice(0,viewport.width>320?1000:8),{
 			container:"#regions",
 			region:region.c,
 			ratio:0.146

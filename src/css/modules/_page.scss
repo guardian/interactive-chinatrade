@@ -264,6 +264,7 @@
 	
 	.sourcesandcredits {
 		@include fs-header(1);
+		font-weight: normal;
 	    color: #767676;
 	    span {
 	    	font-weight: normal;

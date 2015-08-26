@@ -5,8 +5,8 @@ function BubbleChart(data,options) {
 
 	var o_data=data;
 
-	console.log("BubbleChart",data)
-	console.log(options)
+	//console.log("BubbleChart",data)
+	//console.log(options)
 
     var current={
     	beziers:[],
@@ -15,7 +15,7 @@ function BubbleChart(data,options) {
 
 
 	var MAX_GDP=d3.max(data.map(function(d){return d.gdp;}))
-	console.log(MAX_GDP)
+	//console.log(MAX_GDP)
 	MAX_GDP=17419000000000;
 	
 
@@ -41,7 +41,7 @@ function BubbleChart(data,options) {
 		return (+a.lng) - (+b.lng);
 	})
 
-	console.log("DATA",data)
+	//console.log("DATA",data)
 
 	var RATIO=0,
 		O_RATIO=RATIO;
@@ -57,7 +57,7 @@ function BubbleChart(data,options) {
     	WIDTH = size.width,
     	HEIGHT = size.height;
 
-   	console.log(WIDTH,HEIGHT)
+   	//console.log(WIDTH,HEIGHT)
    	
    	var SPLIT=0.5,
 		RADIUS=[0,WIDTH>768?WIDTH*0.125:50];
@@ -100,7 +100,7 @@ function BubbleChart(data,options) {
 	    });
     }
     updateData();
-    console.log(data);
+    //console.log(data);
     
 
     var filteredData=[],
@@ -181,7 +181,7 @@ function BubbleChart(data,options) {
 
 		})
 
-		console.log(yearlyData)
+		//console.log(yearlyData)
 
 	}
 
@@ -228,7 +228,7 @@ function BubbleChart(data,options) {
 	};
 
 	setExtents();
-	console.log(extents);
+	//console.log(extents);
 
 	var PERC_SCALE_MIN=0.035;
 
@@ -299,7 +299,7 @@ function BubbleChart(data,options) {
 		
 		var bezier=findBezier(MOUSE_MOVING.x,MOUSE_MOVING.y);
 		
-		//console.log(bezier.i)
+		////console.log(bezier.i)
 		
 
 		/*dot
@@ -585,11 +585,11 @@ function BubbleChart(data,options) {
 								return !d.majorpartner
 								return false;
 							}
-							//console.log(locations[d.iso].area," !== ",AREA)
+							////console.log(locations[d.iso].area," !== ",AREA)
 							return d.region !== AREA;
 						})
 						.attr("transform",function(d,i){
-							//console.log(d);
+							////console.log(d);
 							var domain=xscale.domain(),
 								x=domain.indexOf(d.index)>-1?xscale(d.index):0,
 								y=yscale_countries(d.percGDP);
@@ -611,7 +611,7 @@ function BubbleChart(data,options) {
 								return !d.majorpartner;
 								return false;
 							}
-							//console.log(locations[d.iso].area," !== ",AREA)
+							////console.log(locations[d.iso].area," !== ",AREA)
 							return d.region !== AREA;
 						})
 						.classed("visible",function(d){
@@ -627,7 +627,7 @@ function BubbleChart(data,options) {
 							return Math.pow(gdp_scale(d.chinaexports),2)+"/"+Math.pow(gdp_scale(d.gdp),2)+"="+(Math.pow(gdp_scale(d.chinaexports),2)/Math.pow(gdp_scale(d.gdp),2));
 						})
 						.attr("transform",function(d,i){
-							//console.log("!!!!!!!!!",d,xscale.domain())
+							////console.log("!!!!!!!!!",d,xscale.domain())
 							var domain=xscale.domain(),
 								x=domain.indexOf(d.index)>-1?xscale(d.index):0,
 								y=yscale_countries(d.percGDP);
@@ -646,7 +646,7 @@ function BubbleChart(data,options) {
 								x=domain.indexOf(d.index)>-1?xscale(d.index):0,
 								y=yscale_countries(d.percGDP)+30;
 
-							//console.log(d);
+							////console.log(d);
 
 							tooltip.show(
 								[
@@ -753,16 +753,16 @@ function BubbleChart(data,options) {
 			}
 		);
 
-		console.log(current.points)
+		//console.log(current.points)
 	}
 	function findClosestPoint(px,py) {
-		//console.log(p)
+		////console.log(p)
 		return d3.min(current.points,function(d){
 
 			var x=px - d.p.x,
 				y=py - d.p.y;
 
-			//console.log(p)
+			////console.log(p)
 			return Math.sqrt(x*x + y*y);
 
 		})
@@ -777,7 +777,7 @@ function BubbleChart(data,options) {
 		var p1=points[0];
 		var p2=points[1];
 
-		//console.log("!!!!",d)
+		////console.log("!!!!",d)
 
 		current.beziers.push(
 			{
@@ -806,7 +806,7 @@ function BubbleChart(data,options) {
 			}
 		);
 
-		//console.log("BEZIERS",current)
+		////console.log("BEZIERS",current)
 
 	}
 	var paths_space=RADIUS[1];
@@ -958,7 +958,7 @@ function BubbleChart(data,options) {
 		//alert(area)
 		if(AREA) {
 			var __area=findArea(AREA);
-			console.log(AREA,__area)
+			//console.log(AREA,__area)
 			d3.select("#regionNav h1").text(findArea(AREA).n);
 
 
@@ -987,7 +987,7 @@ function BubbleChart(data,options) {
 			current.beziers=[];
 
 			var val=projection_data.y1*RATIO;//projection_data.y1-projection_data.y1*__ratio;
-			//console.log(val)
+			////console.log(val)
 
 			if(resize) {
 				countries_g
@@ -1105,7 +1105,7 @@ function BubbleChart(data,options) {
 					var ratio=yscale_countries(d.percGDP)/yscale_countries.range()[1];
 					var delta=(x-mid)/mid;
 					//if(d.iso=="AUS" || d.iso=="ZAF" || d.iso=="SGP") {
-					//	console.log(d.iso,ratio,delta);
+					//	//console.log(d.iso,ratio,delta);
 						
 
 
@@ -1248,11 +1248,11 @@ function BubbleChart(data,options) {
 			tooltip.hide();
 		}
 		
-		//console.log(__Y,"!=",__LAST_Y)
+		////console.log(__Y,"!=",__LAST_Y)
 
 		if(__Y!=__LAST_Y) {
 
-			//console.log(__Y,"!=",__LAST_Y)
+			////console.log(__Y,"!=",__LAST_Y)
 
 			//scenario.select("button").classed("button--primary",false).classed("button--secondary",true)
 
@@ -1260,7 +1260,7 @@ function BubbleChart(data,options) {
 
 			var __ratio=yscale_china.invert(__Y);
 
-			//console.log(__ratio)
+			////console.log(__ratio)
 
 			if(__ratio < 0) {
 				__ratio=0;
@@ -1302,7 +1302,7 @@ function BubbleChart(data,options) {
 
 	window.requestAnimationFrame(dragChina);
 
-	console.log("YSCALE",yscale_countries.domain())
+	//console.log("YSCALE",yscale_countries.domain())
 
 	var yAxis = d3.svg.axis()
 				    .scale(yscale_countries)
@@ -1367,7 +1367,7 @@ function BubbleChart(data,options) {
 				.text("lost export income")
 	axis_title.append("text")
 				.attr("x",0)
-				.attr("y",20)
+				.attr("y",14)
 				.text("as % of GDP")
 
 	__THIS = chineseBubble.node();
@@ -1399,7 +1399,7 @@ function BubbleChart(data,options) {
 			if(bezier) {
 				point=jsBezier.pointOnCurve(bezier.b,1-location);
 
-				//console.log("BEZIER",bezier.info)
+				////console.log("BEZIER",bezier.info)
 			}
 			
 

@@ -1,6 +1,7 @@
+var Tooltip=require('../components/Tooltip');
 function BalloonsChart(data,options) {
 
-	console.log("BalloonsChart",data);
+	//console.log("BalloonsChart",data);
 
 	var numberFormat=options.numberFormat || function(d){
 			return d3.format("$.2f")(d3.round(d,0)/(1000*1000000))+"bn"
@@ -19,7 +20,7 @@ function BalloonsChart(data,options) {
 						.select(".subsection[data-region="+options.region+"] .sub-contents")
 						.append("div")
 							.attr("class","balloon-chart");	
-	console.log("subsection[data-region="+options.region+"]","-->",container.node())
+	//console.log("subsection[data-region="+options.region+"]","-->",container.node())
 
 	var viz=container.append("div")
 				.attr("class","countries");
@@ -28,7 +29,7 @@ function BalloonsChart(data,options) {
     	WIDTH = size.width,
     	HEIGHT = size.height;
 
-   	console.log(WIDTH,HEIGHT)
+   	//console.log(WIDTH,HEIGHT)
 
    	var SPLIT=1,
    		RADIUS=[0,WIDTH*0.125];
@@ -124,7 +125,7 @@ function BalloonsChart(data,options) {
 	};
 
 	setExtents();
-	console.log(extents);
+	//console.log(extents);
 
 	var PERC_SCALE_MIN=extents.percGDP[1];
 
@@ -150,6 +151,8 @@ function BalloonsChart(data,options) {
 	var color_countries=d3.scale.linear().domain(d3.range(0,PERC_SCALE_MIN+PERC_SCALE_MIN/7,PERC_SCALE_MIN/7)).range(colors);
 	var color_countries_axis=d3.scale.linear().domain(d3.range(0,0.035+0.035/7,0.035/7)).range(colors);
 
+	var tooltip;
+
 	var svg=viz
 				.append("svg")
 				.attr("width","100%")
@@ -172,10 +175,11 @@ function BalloonsChart(data,options) {
 					.attr("transform",function(d){
 						var x=xscale(d.b_index),
 							y=yscale(d.percGDP);
-						//console.log(d.iso,d.percGDP,y,yscale.range(),yscale.domain())
-						//console.log("--->",d.iso,d.b_index,x,xscale.range(),xscale.domain())
+						////console.log(d.iso,d.percGDP,y,yscale.range(),yscale.domain())
+						////console.log("--->",d.iso,d.b_index,x,xscale.range(),xscale.domain())
 						return "translate("+x+","+y+")";
-					});
+					})
+					
 
 	country.append("circle")
 				.attr("class","outer")
@@ -239,7 +243,7 @@ function BalloonsChart(data,options) {
 	
 
 
-	console.log("YSCALE",yscale.domain())
+	//console.log("YSCALE",yscale.domain())
 
 	var grad=defs.append("linearGradient")
 				.attr("id","gridGradient")
@@ -320,10 +324,31 @@ function BalloonsChart(data,options) {
 				.text("% of GDP")
 
 	var tags=container.append("div")
-				.attr("class","tags")
+				.attr("class","tags clearfix")
 				.style({
 					"margin-left":(margins.left - (xscale(2)-xscale(1))/2)+"px"
 				})
+
+	tooltip=new Tooltip({
+	    	container:tags.node(),
+	    	margins:{
+	    		top:0,
+	    		left:margins.left,
+	    		right:0,
+	    		bottom:0
+	    	},
+	    	padding:"10px 2px",
+	    	width:60,
+	    	html:"<p><span></span><br/><span></span></p>",
+	    	indicators:[
+	    		{
+	    			id:"comm-name",
+	    		},
+	    		{
+	    			id:"comm-value"
+	    		}
+	    	]
+	    });
 	
 	var tags_buckets=tags.selectAll("ul")
 			.data(data)
@@ -334,17 +359,41 @@ function BalloonsChart(data,options) {
 				//.style("margin-left","2px")//"calc( (100% / "+data.length+") / 10 )")
 
 	var tag=tags_buckets.selectAll("li.tag")
-			.data(function(d){
-				//console.log(d)
-				//console.log(d3.entries(d.trades))
+			.data(function(d,i){
+				////console.log(d)
+				////console.log(d3.entries(d.trades))
 				return d3.entries(d.trades).filter(function(t){
 					return t.value.commOnExports > 0.05;
-				});
+				}).map(function(t){
+					t.value.column=i;
+					return t;
+				})
 			})
 			.enter()
 			.append("li")
 				.attr("class",function(d){
 					return "tag "+d.value.rollup.replace(/\s/g,"");
+				})
+				.on("mousedown",function(d,i){
+					var mouse=[this.offsetLeft,this.offsetTop],
+						box=this.getBoundingClientRect();
+					//console.log(mouse,margins.left)
+					////console.log(d.value.shortdesc,d.value.dollarvalue,i,d.value.column)
+					tooltip.show([
+							{
+								id:"comm-name",
+								value:d.value.shortdesc
+							},
+							{
+								id:"comm-value",
+								value:numberFormat(d.value.dollarvalue)
+							}
+						],
+						mouse[0]-24/2,
+						mouse[1]+box.height/2,
+						null
+					);
+					
 				})
 				.html(function(d){
 					return "<span>"+d.value.shortdesc+"</span><span class=\"value\">"+ numberFormat(d.value.dollarvalue)+"</span>"
@@ -355,7 +404,7 @@ function BalloonsChart(data,options) {
 	    WIDTH = size.width;
 	    HEIGHT = size.height;
 
-	    console.log(WIDTH)
+	    //console.log(WIDTH)
 
 	    update();
 	}
@@ -367,7 +416,7 @@ function BalloonsChart(data,options) {
 		country.attr("transform",function(d){
 						var x=xscale(d.b_index),
 							y=yscale(d.percGDP);
-						//console.log(d.iso,d.b_index,x,xscale.range(),xscale.domain())
+						////console.log(d.iso,d.b_index,x,xscale.range(),xscale.domain())
 						return "translate("+x+","+y+")";
 					});
 
