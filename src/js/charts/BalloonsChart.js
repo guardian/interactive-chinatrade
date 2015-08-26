@@ -35,7 +35,7 @@ function BalloonsChart(data,options) {
    		RADIUS=[0,WIDTH*0.125];
 
     var margins={
-    	left:WIDTH>740?WIDTH*0.125:25,
+    	left:WIDTH>740?50:25,
     	right:WIDTH>740?WIDTH*0.125:12+55,
     	top:RADIUS[1],
     	bottom:50
@@ -321,12 +321,15 @@ function BalloonsChart(data,options) {
 	axis_title.append("text")
 				.attr("x",0)
 				.attr("y",30)
-				.text("% of GDP")
+				.text("% of GDP");
 
+	var __w=Math.min(xscale(1),100),
+		__delta=xscale(1)>100?__w/2:0;
+	
 	var tags=container.append("div")
 				.attr("class","tags clearfix")
 				.style({
-					"margin-left":(margins.left - (xscale(2)-xscale(1))/2)+"px"
+					"margin-left":(margins.left - Math.floor(__w/2)-__delta)+"px"
 				})
 
 	tooltip=new Tooltip({
@@ -354,7 +357,8 @@ function BalloonsChart(data,options) {
 			.data(data)
 			.enter()
 				.append("ul")
-				.style("width",(Math.floor(xscale(1)))+"px")
+				.style("width",(__w)+"px")
+				.style("margin-left",((xscale(1)-__w))+"px")
 				//.style("width","calc( (100% - "+margins.left+"px - "+margins.right+"px ) / ("+(data.length-1)+") )")
 				//.style("margin-left","2px")//"calc( (100% / "+data.length+") / 10 )")
 
@@ -419,14 +423,17 @@ function BalloonsChart(data,options) {
 						////console.log(d.iso,d.b_index,x,xscale.range(),xscale.domain())
 						return "translate("+x+","+y+")";
 					});
-
+		var __w=Math.min(xscale(1),100),
+			__delta=xscale(1)>100?__w/2:0;
+				
 		tags
 			.style({
-				"margin-left":(margins.left - (xscale(1))/2)+"px"
-			})
+					"margin-left":(margins.left - Math.floor(__w/2)-__delta)+"px"
+				})
 
 		tags_buckets
-			.style("width",(Math.floor(xscale(1)))+"px")
+			.style("width",(__w)+"px")
+				.style("margin-left",((xscale(1)-__w))+"px")
 	}
 }
 
